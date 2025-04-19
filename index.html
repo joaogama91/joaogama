@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfólio de Arte - João Gama</title>
   <style>
     body {
@@ -31,7 +31,7 @@
     .container {
       display: flex;
       padding-top: 130px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     nav {
@@ -45,6 +45,7 @@
       top: 0;
       left: 0;
       padding-top: 180px;
+      overflow-y: auto;
     }
 
     nav ul {
@@ -55,6 +56,7 @@
 
     nav ul li {
       margin: 10px 0;
+      cursor: pointer;
     }
 
     nav ul li.titulo {
@@ -78,6 +80,13 @@
 
     nav ul li a:hover {
       color: #e2f1e7;
+    }
+
+    #submenuProjetos {
+      padding-left: 15px;
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+      max-height: 1000px;
     }
 
     main {
@@ -259,10 +268,12 @@
     <nav>
       <ul>
         <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
-        <li class="titulo">Projetos</li>
-        <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
-        <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
-        <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
+        <li class="titulo" onclick="toggleSubmenu()">Projetos ▾</li>
+        <ul id="submenuProjetos">
+          <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
+          <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
+          <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
+        </ul>
       </ul>
     </nav>
 
@@ -378,6 +389,11 @@
         document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
       });
     });
+
+    function toggleSubmenu() {
+      const submenu = document.getElementById("submenuProjetos");
+      submenu.style.maxHeight = submenu.style.maxHeight === "0px" ? "1000px" : "0px";
+    }
   </script>
 </body>
 </html>
