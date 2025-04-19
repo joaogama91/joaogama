@@ -10,27 +10,28 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #F5E7DE;
       color: #333;
-      font-size: 16px;
     }
 
     header {
       position: fixed;
       top: 0;
-      left: 220px;
+      left: 0;
       right: 0;
       background-color: #F5E7DE;
-      padding: 10px;
+      padding: 30px 10px;
       z-index: 1000;
       text-align: center;
     }
 
     header img {
-      height: 80px; /* Assinatura maior */
+      height: 120px;
+      max-width: 90%;
     }
 
     .container {
       display: flex;
-      padding-top: 100px;
+      padding-top: 130px;
+      flex-wrap: wrap;
     }
 
     nav {
@@ -43,25 +44,28 @@
       position: fixed;
       top: 0;
       left: 0;
-    }
-
-    nav h3 {
-      margin-top: 60px;
-      color: white;
-      font-size: 1.3rem;
+      padding-top: 180px;
     }
 
     nav ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
 
     nav ul li {
-      margin: 8px 0;
+      margin: 10px 0;
     }
 
-    nav ul li:first-child {
+    nav ul li.titulo {
+      font-size: 1.1em;
+      color: white;
+      font-weight: bold;
       margin-top: 20px;
+    }
+
+    nav ul li.inicio a {
+      font-size: 1.2em;
     }
 
     nav ul li a {
@@ -70,7 +74,6 @@
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
-      font-size: 1rem;
     }
 
     nav ul li a:hover {
@@ -211,25 +214,19 @@
       color: #333;
     }
 
-    /* Responsivo para tablets e telemóveis */
-    @media (max-width: 1024px) {
-      .gallery {
-        column-count: 2;
-      }
-    }
-
-    @media (max-width: 600px) {
+    /* Responsividade */
+    @media (max-width: 768px) {
       nav {
-        display: none; /* esconder nav em ecrãs pequenos */
-      }
-
-      header {
-        left: 0;
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: block;
+        padding-top: 20px;
       }
 
       .container {
         flex-direction: column;
-        padding-top: 100px;
+        padding-top: 160px;
       }
 
       main {
@@ -238,11 +235,17 @@
       }
 
       .gallery {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
         column-count: 1;
       }
 
-      body {
-        font-size: 15px;
+      header img {
+        height: 80px;
       }
     }
   </style>
@@ -254,9 +257,9 @@
 
   <div class="container">
     <nav>
-      <h3>Projetos</h3>
       <ul>
-        <li><a onclick="mostrarSecao('home')">Início</a></li>
+        <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
+        <li class="titulo">Projetos</li>
         <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
         <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
         <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
@@ -319,7 +322,15 @@
       document.getElementById(id).classList.add('active');
     }
 
-    const imagensInterior = [/* lista completa dos nomes dos ficheiros como já tinhas antes */];
+    const imagensInterior = [
+      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
+      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
+      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
+      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
+      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
+      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
+      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+    ];
 
     const galeria = document.getElementById("galeriaInterior");
     imagensInterior.forEach((nome, i) => {
