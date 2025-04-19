@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfólio de Arte - João Gama</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Work+Sans:wght@300;500&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Work Sans', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #F5E7DE;
       color: #333;
     }
@@ -17,20 +16,17 @@
       padding: 20px;
       text-align: center;
       color: #333;
-      font-family: 'Playfair Display', serif;
     }
     .container {
       display: flex;
     }
     nav {
       width: 220px;
-      background-color: #7fa488; /* verde mockup */
+      background-color: #7fa488; /* verde do mockup */
       padding: 20px;
       box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-      height: 100vh;
+      height: calc(100vh - 90px);
       box-sizing: border-box;
-      position: sticky;
-      top: 0;
     }
     nav h3 {
       margin-top: 0;
@@ -147,7 +143,6 @@
     <h1>João Gama</h1>
     <p>Artista plástico - Pintura e Natureza</p>
   </header>
-
   <div class="container">
     <nav>
       <h3>Projetos</h3>
@@ -158,26 +153,22 @@
         <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
       </ul>
     </nav>
-
     <main>
       <section id="home" class="active">
         <h2>Bem-vindo ao meu portfólio</h2>
         <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
       </section>
-
       <section id="projeto1">
         <h2>Paisagem Interior</h2>
         <p>Este projeto explora a relação entre o espaço íntimo e a natureza envolvente. Através de transparências e camadas de cor, procura-se criar um ambiente que remeta à contemplação e ao refúgio.</p>
         <div class="gallery" id="galeriaInterior"></div>
       </section>
-
       <section id="projeto2">
         <h2>Formas do Silêncio</h2>
         <p>Inspirado pelo silêncio das formas naturais, este conjunto de pinturas trabalha volumes e superfícies que parecem emergir do vazio, convidando à escuta do que não se vê.</p>
         <img src="imagens/formas_silencio1.jpg" alt="Formas do Silêncio - Quadro 1">
         <img src="imagens/formas_silencio2.jpg" alt="Formas do Silêncio - Quadro 2">
       </section>
-
       <section id="projeto3">
         <h2>Luz e Matéria</h2>
         <p>Neste projeto, exploro a incidência da luz sobre diferentes materiais orgânicos. A técnica de veladura é usada para realçar a transparência e profundidade dos elementos retratados.</p>
@@ -186,7 +177,6 @@
       </section>
     </main>
   </div>
-
   <div id="lightbox">
     <div id="lightboxNav">
       <span onclick="navegar(-1)">&#10094;</span>
@@ -194,11 +184,9 @@
     </div>
     <img id="lightboxImg" src="" alt="Imagem ampliada">
   </div>
-
   <footer>
     <p>© 2025 João Gama | Contacto: joao@email.com</p>
   </footer>
-
   <script>
     const secoes = document.querySelectorAll('main section');
     function mostrarSecao(id) {
