@@ -12,25 +12,35 @@
       color: #333;
     }
     header {
-      background-color: #F2BFA4;
-      padding: 20px;
-      text-align: center;
-      color: #333;
+      position: fixed;
+      top: 0;
+      left: 220px;
+      right: 0;
+      background-color: #F5E7DE;
+      padding: 10px;
+      z-index: 1000;
+    }
+    header img {
+      height: 50px;
     }
     .container {
       display: flex;
+      padding-top: 70px;
     }
     nav {
       width: 220px;
-      background-color: #7fa488; /* verde do mockup */
+      background-color: #7fa488;
       padding: 20px;
       box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-      height: calc(100vh - 90px);
+      height: 100vh;
       box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
     }
     nav h3 {
-      margin-top: 0;
-      color: #ffffff;
+      margin-top: 60px;
+      color: white;
     }
     nav ul {
       list-style: none;
@@ -52,6 +62,7 @@
     main {
       flex: 1;
       padding: 30px;
+      margin-left: 220px;
       box-sizing: border-box;
     }
     section {
@@ -65,6 +76,50 @@
     section.active {
       display: block;
     }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      transition: transform 0.5s;
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+    .carousel-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .carousel-nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .carousel-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: #999;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .carousel-dot.active {
+      background-color: #333;
+    }
+
     .gallery {
       column-count: 4;
       column-gap: 16px;
@@ -82,6 +137,7 @@
     .gallery img:hover {
       transform: scale(1.03);
     }
+
     #lightbox {
       display: none;
       position: fixed;
@@ -114,6 +170,7 @@
       cursor: pointer;
       user-select: none;
     }
+
     footer {
       background-color: #F2BFA4;
       text-align: center;
@@ -121,28 +178,13 @@
       font-size: 0.9em;
       color: #333;
     }
-    @media (max-width: 1200px) {
-      .gallery {
-        column-count: 3;
-      }
-    }
-    @media (max-width: 800px) {
-      .gallery {
-        column-count: 2;
-      }
-    }
-    @media (max-width: 500px) {
-      .gallery {
-        column-count: 1;
-      }
-    }
   </style>
 </head>
 <body>
   <header>
-    <h1>João Gama</h1>
-    <p>Artista plástico - Pintura e Natureza</p>
+    <img src="assinatura_transparente.png" alt="Assinatura">
   </header>
+
   <div class="container">
     <nav>
       <h3>Projetos</h3>
@@ -153,30 +195,44 @@
         <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
       </ul>
     </nav>
+
     <main>
       <section id="home" class="active">
         <h2>Bem-vindo ao meu portfólio</h2>
         <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
+        <div class="carousel">
+          <div class="carousel-track">
+            <div class="carousel-slide active"><img src="https://source.unsplash.com/random/800x400?art1" alt="Imagem 1"></div>
+            <div class="carousel-slide"><img src="https://source.unsplash.com/random/800x400?art2" alt="Imagem 2"></div>
+            <div class="carousel-slide"><img src="https://source.unsplash.com/random/800x400?art3" alt="Imagem 3"></div>
+          </div>
+          <div class="carousel-nav">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
+        </div>
       </section>
+
       <section id="projeto1">
         <h2>Paisagem Interior</h2>
-        <p>Este projeto explora a relação entre o espaço íntimo e a natureza envolvente. Através de transparências e camadas de cor, procura-se criar um ambiente que remeta à contemplação e ao refúgio.</p>
         <div class="gallery" id="galeriaInterior"></div>
       </section>
+
       <section id="projeto2">
         <h2>Formas do Silêncio</h2>
-        <p>Inspirado pelo silêncio das formas naturais, este conjunto de pinturas trabalha volumes e superfícies que parecem emergir do vazio, convidando à escuta do que não se vê.</p>
-        <img src="imagens/formas_silencio1.jpg" alt="Formas do Silêncio - Quadro 1">
-        <img src="imagens/formas_silencio2.jpg" alt="Formas do Silêncio - Quadro 2">
+        <img src="imagens/formas_silencio1.jpg">
+        <img src="imagens/formas_silencio2.jpg">
       </section>
+
       <section id="projeto3">
         <h2>Luz e Matéria</h2>
-        <p>Neste projeto, exploro a incidência da luz sobre diferentes materiais orgânicos. A técnica de veladura é usada para realçar a transparência e profundidade dos elementos retratados.</p>
-        <img src="imagens/luz_materia1.jpg" alt="Luz e Matéria - Quadro 1">
-        <img src="imagens/luz_materia2.jpg" alt="Luz e Matéria - Quadro 2">
+        <img src="imagens/luz_materia1.jpg">
+        <img src="imagens/luz_materia2.jpg">
       </section>
     </main>
   </div>
+
   <div id="lightbox">
     <div id="lightboxNav">
       <span onclick="navegar(-1)">&#10094;</span>
@@ -184,9 +240,11 @@
     </div>
     <img id="lightboxImg" src="" alt="Imagem ampliada">
   </div>
+
   <footer>
     <p>© 2025 João Gama | Contacto: joao@email.com</p>
   </footer>
+
   <script>
     const secoes = document.querySelectorAll('main section');
     function mostrarSecao(id) {
@@ -194,16 +252,7 @@
       document.getElementById(id).classList.add('active');
     }
 
-    const imagensInterior = [
-      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
-      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
-      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
-      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
-      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
-      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
-      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
-    ];
-
+    const imagensInterior = ["1.JPG","10.JPG","11.JPG"];
     const galeria = document.getElementById("galeriaInterior");
     imagensInterior.forEach((nome, i) => {
       const img = document.createElement("img");
@@ -222,21 +271,30 @@
       lightboxImg.src = `interioridades/${imagensInterior[index]}`;
       lightbox.style.display = "flex";
     }
-
     function navegar(direcao) {
       indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
       lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
     }
-
     document.addEventListener("keydown", e => {
       if (!lightbox.style.display.includes("flex")) return;
       if (e.key === "Escape") lightbox.style.display = "none";
       else if (e.key === "ArrowLeft") navegar(-1);
       else if (e.key === "ArrowRight") navegar(1);
     });
-
     lightbox.addEventListener("click", e => {
       if (e.target === lightbox) lightbox.style.display = "none";
+    });
+
+    const dots = document.querySelectorAll(".carousel-dot");
+    const slides = document.querySelectorAll(".carousel-slide");
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        document.querySelector(".carousel-slide.active").classList.remove("active");
+        document.querySelector(".carousel-dot.active").classList.remove("active");
+        slides[i].classList.add("active");
+        dot.classList.add("active");
+        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
+      });
     });
   </script>
 </body>
