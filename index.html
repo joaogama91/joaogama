@@ -1,114 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>João Gama - Arte</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f7f5f2;
-      color: #333;
-    }
-
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: white;
-      z-index: 1000;
-      text-align: center;
-      padding: 0.5rem;
-      border-bottom: 1px solid #ccc;
-    }
-
-    header img {
-      max-height: 60px;
-    }
-
-    .container {
-      display: flex;
-      margin-top: 80px;
-    }
-
-    nav {
-      width: 250px;
-      background-color: #7fa488;
-      padding: 20px;
-      height: calc(100vh - 80px);
-      position: fixed;
-      top: 80px;
-      left: 0;
-      overflow-y: auto;
-    }
-
-    nav a {
-      display: block;
-      color: white;
-      text-decoration: none;
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    main {
-      margin-left: 270px;
-      padding: 20px;
-      flex: 1;
-    }
-
-    section {
-      display: none;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    /* Carrossel */
-    .carousel {
-      position: relative;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .carousel img {
-      max-height: 300px;
-      object-fit: contain;
-      margin: 10px 0;
-    }
-
-    .carousel .dots {
-      text-align: center;
-    }
-
-    .carousel .dot {
-      height: 10px;
-      width: 10px;
-      margin: 0 5px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .carousel .dot.active {
-      background-color: #333;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <img src="assinatura.png" alt="Assinatura João Gama" />
-  </header>
-  <div class="container">
-    <nav>
-      <a href="#" onclick="showSection('home')">Início</a>
-      <a href="#" onclick="showSection('projecto')">Projecto</a>
-      <div style="margin-left: 10px">
-        <a href="#" onclick="showSection('paisagem')">Paisagem Interi
+nav {
+  width: 220px;
+  background-color: #7fa488; /* verde do mockup */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  height: calc(100vh - 90px);
+  box-sizing: border-box;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+nav ul li a:hover {
+  color: #e2f1e7;
+}
