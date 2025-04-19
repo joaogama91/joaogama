@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio de Arte - João Gama</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #F5E7DE;
+      color: #333;
+    }
+    header {
+      background-color: #F2BFA4;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      display: flex;
+    }
+    nav {
+      width: 220px;
+      background-color: #f2e4d7;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      height: calc(100vh - 90px);
+      box-sizing: border-box;
+    }
+    nav h3 {
+      margin-top: 0;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav ul li {
+      margin: 10px 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    nav ul li a:hover {
+      color: #F2BFA4;
+    }
+    main {
+      flex: 1;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+    section {
+      display: none;
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    section.active {
+      display: block;
+    }
+    .gallery {
+	  column-count: 4;
+	  column-gap: 16px;
+	  padding: 1rem;
+	}
+
+	.gallery img {
+	  width: 100%;
+	  height: auto;
+	  margin-bottom: 16px;
+	  break-inside: avoid;
+	  border-radius: 6px;
+	  cursor: pointer;
+	  transition: transform 0.3s ease;
+	}
+
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 8px;
+    }
+    #lightboxNav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 30px;
+      box-sizing: border-box;
+    }
+    #lightboxNav span {
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      user-select: none;
+    }
+    footer {
+      background-color: #F2BFA4;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      color: #333;
+    }
+		
+		@media (max-width: 1200px) {
+	  .gallery {
+		column-count: 3;
+	  }
+	}
+
+	@media (max-width: 800px) {
+	  .gallery {
+		column-count: 2;
+	  }
+	}
+
+	@media (max-width: 500px) {
+	  .gallery {
+		column-count: 1;
+	  }
+	}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>João Gama</h1>
+    <p>Artista plástico - Pintura e Natureza</p>
+  </header>
+
+  <div class="container">
+    <nav>
+      <h3>Projetos</h3>
+      <ul>
+        <li><a onclick="mostrarSecao('home')">Início</a></li>
+        <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
+        <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
+        <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="home" class="active">
+        <h2>Bem-vindo ao meu portfólio</h2>
+        <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
+      </section>
+
+      <section id="projeto1">
+        <h2>Paisagem Interior</h2>
+        <p>Este projeto explora a relação entre o espaço íntimo e a natureza envolvente. Através de transparências e camadas de cor, procura-se criar um ambiente que remeta à contemplação e ao refúgio.</p>
+        <div class="gallery" id="galeriaInterior"></div>
+      </section>
+
+      <section id="projeto2">
+        <h2>Formas do Silêncio</h2>
+        <p>Inspirado pelo silêncio das formas naturais, este conjunto de pinturas trabalha volumes e superfícies que parecem emergir do vazio, convidando à escuta do que não se vê.</p>
+        <img src="imagens/formas_silencio1.jpg" alt="Formas do Silêncio - Quadro 1">
+        <img src="imagens/formas_silencio2.jpg" alt="Formas do Silêncio - Quadro 2">
+      </section>
+
+      <section id="projeto3">
+        <h2>Luz e Matéria</h2>
+        <p>Neste projeto, exploro a incidência da luz sobre diferentes materiais orgânicos. A técnica de veladura é usada para realçar a transparência e profundidade dos elementos retratados.</p>
+        <img src="imagens/luz_materia1.jpg" alt="Luz e Matéria - Quadro 1">
+        <img src="imagens/luz_materia2.jpg" alt="Luz e Matéria - Quadro 2">
+      </section>
+    </main>
+  </div>
+
+  <div id="lightbox">
+    <div id="lightboxNav">
+      <span onclick="navegar(-1)">&#10094;</span>
+      <span onclick="navegar(1)">&#10095;</span>
+    </div>
+    <img id="lightboxImg" src="" alt="Imagem ampliada">
+  </div>
+
+  <footer>
+    <p>© 2025 João Gama | Contacto: joao@email.com</p>
+  </footer>
+
+  <script>
+    const secoes = document.querySelectorAll('main section');
+    function mostrarSecao(id) {
+      secoes.forEach(secao => secao.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    const imagensInterior = [
+      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
+      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
+      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
+      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
+      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
+      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
+      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+    ];
+
+    const galeria = document.getElementById("galeriaInterior");
+    imagensInterior.forEach((nome, i) => {
+      const img = document.createElement("img");
+      img.src = `interioridades/${nome}`;
+      img.alt = `Paisagem Interior ${i + 1}`;
+      img.onclick = () => abrirLightbox(i);
+      galeria.appendChild(img);
+    });
+
+    let indexAtual = 0;
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    function abrirLightbox(index) {
+      indexAtual = index;
+      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
+      lightbox.style.display = "flex";
+    }
+
+    function navegar(direcao) {
+      indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
+      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
+    }
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.style.display.includes("flex")) return;
+      if (e.key === "Escape") lightbox.style.display = "none";
+      else if (e.key === "ArrowLeft") navegar(-1);
+      else if (e.key === "ArrowRight") navegar(1);
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) lightbox.style.display = "none";
+    });
+  </script>
+</body>
+</html>
