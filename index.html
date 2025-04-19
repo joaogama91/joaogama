@@ -17,11 +17,13 @@
       left: 220px;
       right: 0;
       background-color: #F5E7DE;
-      padding: 10px;
+      padding: 30px 10px;
       z-index: 1000;
+      text-align: center; /* centraliza a imagem */
     }
+    
     header img {
-      height: 50px;
+      height: 120px; /* aumenta o tamanho da assinatura */
     }
     .container {
       display: flex;
@@ -187,9 +189,11 @@
 
   <div class="container">
     <nav>
-      <h3>Projetos</h3>
       <ul>
         <li><a onclick="mostrarSecao('home')">Início</a></li>
+      </ul>
+  <h3>Projetos</h3>
+      <ul>
         <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
         <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
         <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
