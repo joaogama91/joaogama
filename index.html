@@ -1,77 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfólio de Arte - João Gama</title>
   <style>
-    body {
+    /* Reset leve */
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #F5E7DE;
       color: #333;
+      line-height: 1.6;
     }
 
     header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       background-color: #F5E7DE;
-      padding: 30px 10px;
+      padding: 20px 10px;
       z-index: 1000;
       text-align: center;
     }
 
     header img {
-      height: 120px;
+      max-height: 120px;
+      height: auto;
       max-width: 90%;
     }
 
     .container {
       display: flex;
-      padding-top: 130px;
-      flex-wrap: wrap;
+      padding-top: 160px;
     }
 
     nav {
       width: 220px;
       background-color: #7fa488;
       padding: 20px;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
       height: 100vh;
-      box-sizing: border-box;
       position: fixed;
       top: 0;
       left: 0;
-      padding-top: 180px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+
+    nav h3 {
+      margin-top: 60px;
+      color: white;
+      font-size: 1.2em;
     }
 
     nav ul {
       list-style: none;
-      padding: 0;
-      margin: 0;
+      padding: 10px 0;
     }
 
     nav ul li {
-      margin: 10px 0;
+      margin: 6px 0;
     }
 
-    nav ul li.titulo {
-      font-size: 1.1em;
-      color: white;
-      font-weight: bold;
+    nav ul li:first-child {
       margin-top: 20px;
     }
 
-    nav ul li.inicio a {
-      font-size: 1.2em;
-    }
-
     nav ul li a {
+      display: inline-block;
       text-decoration: none;
       color: #ffffff;
       font-weight: bold;
+      font-size: 1.05em;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -84,7 +93,6 @@
       flex: 1;
       padding: 30px;
       margin-left: 220px;
-      box-sizing: border-box;
     }
 
     section {
@@ -98,56 +106,6 @@
 
     section.active {
       display: block;
-    }
-
-    .carousel {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      overflow: hidden;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      transition: transform 0.5s;
-      opacity: 0.5;
-      transform: scale(0.9);
-    }
-
-    .carousel-slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .carousel-slide img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .carousel-nav {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .carousel-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin: 0 5px;
-      background-color: #999;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .carousel-dot.active {
-      background-color: #333;
     }
 
     .gallery {
@@ -196,7 +154,6 @@
       justify-content: space-between;
       transform: translateY(-50%);
       padding: 0 30px;
-      box-sizing: border-box;
     }
 
     #lightboxNav span {
@@ -204,6 +161,35 @@
       font-size: 2em;
       cursor: pointer;
       user-select: none;
+    }
+
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: #7fa488;
+      color: white;
+      border: none;
+      font-size: 1.5em;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #7fa488;
+      color: white;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2em;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
     }
 
     footer {
@@ -214,19 +200,23 @@
       color: #333;
     }
 
-    /* Responsividade */
+    /* Responsivo */
     @media (max-width: 768px) {
-      nav {
-        position: relative;
-        width: 100%;
-        height: auto;
-        display: block;
-        padding-top: 20px;
-      }
-
       .container {
         flex-direction: column;
-        padding-top: 160px;
+        padding-top: 140px;
+      }
+
+      nav {
+        display: none;
+        position: fixed;
+        width: 200px;
+        height: 100%;
+        z-index: 1000;
+      }
+
+      nav.show {
+        display: block;
       }
 
       main {
@@ -234,8 +224,16 @@
         padding: 20px;
       }
 
+      .menu-toggle {
+        display: block;
+      }
+
       .gallery {
         column-count: 2;
+      }
+
+      header img {
+        max-height: 80px;
       }
     }
 
@@ -244,22 +242,28 @@
         column-count: 1;
       }
 
-      header img {
-        height: 80px;
+      nav h3 {
+        font-size: 1.1em;
+      }
+
+      nav ul li a {
+        font-size: 1em;
       }
     }
   </style>
 </head>
 <body>
+  <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('show')">☰ Menu</button>
+
   <header>
-    <img src="assinatura_transparente.png" alt="Assinatura">
+    <img src="assinatura_transparente.png" alt="Assinatura João Gama" />
   </header>
 
   <div class="container">
     <nav>
+      <h3>Projetos</h3>
       <ul>
-        <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
-        <li class="titulo">Projetos</li>
+        <li><a onclick="mostrarSecao('home')">Início</a></li>
         <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
         <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
         <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
@@ -270,18 +274,6 @@
       <section id="home" class="active">
         <h2>Bem-vindo ao meu portfólio</h2>
         <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
-        <div class="carousel">
-          <div class="carousel-track">
-            <div class="carousel-slide active"><img src="https://source.unsplash.com/random/800x400?art1" alt="Imagem 1"></div>
-            <div class="carousel-slide"><img src="https://source.unsplash.com/random/800x400?art2" alt="Imagem 2"></div>
-            <div class="carousel-slide"><img src="https://source.unsplash.com/random/800x400?art3" alt="Imagem 3"></div>
-          </div>
-          <div class="carousel-nav">
-            <span class="carousel-dot active"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-          </div>
-        </div>
       </section>
 
       <section id="projeto1">
@@ -311,25 +303,22 @@
     <img id="lightboxImg" src="" alt="Imagem ampliada">
   </div>
 
+  <button id="scrollTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</button>
+
   <footer>
     <p>© 2025 João Gama | Contacto: joao@email.com</p>
   </footer>
 
   <script>
-    const secoes = document.querySelectorAll('main section');
+    const secoes = document.querySelectorAll("main section");
     function mostrarSecao(id) {
-      secoes.forEach(secao => secao.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      secoes.forEach(secao => secao.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
     }
 
     const imagensInterior = [
-      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
-      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
-      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
-      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
-      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
-      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
-      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+      "1.JPG", "2.JPG", "3.JPG", "4.JPG", "5.JPG"
+      // Adiciona os restantes conforme necessário
     ];
 
     const galeria = document.getElementById("galeriaInterior");
@@ -357,26 +346,20 @@
     }
 
     document.addEventListener("keydown", e => {
-      if (!lightbox.style.display.includes("flex")) return;
+      if (lightbox.style.display !== "flex") return;
       if (e.key === "Escape") lightbox.style.display = "none";
-      else if (e.key === "ArrowLeft") navegar(-1);
-      else if (e.key === "ArrowRight") navegar(1);
+      if (e.key === "ArrowLeft") navegar(-1);
+      if (e.key === "ArrowRight") navegar(1);
     });
 
     lightbox.addEventListener("click", e => {
       if (e.target === lightbox) lightbox.style.display = "none";
     });
 
-    const dots = document.querySelectorAll(".carousel-dot");
-    const slides = document.querySelectorAll(".carousel-slide");
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        document.querySelector(".carousel-slide.active").classList.remove("active");
-        document.querySelector(".carousel-dot.active").classList.remove("active");
-        slides[i].classList.add("active");
-        dot.classList.add("active");
-        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
-      });
+    // Mostrar botão "subir" ao fazer scroll
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll", () => {
+      scrollTopBtn.style.display = window.scrollY > 200 ? "block" : "none";
     });
   </script>
 </body>
