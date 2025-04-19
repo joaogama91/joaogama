@@ -1,170 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>João Gama - Artista</title>
+  <title>João Gama - Arte</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Georgia', serif;
-      background-color: #f4f1ec;
-      color: #3c2f2f;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f5f2;
+      color: #333;
     }
+
     header {
       position: fixed;
       top: 0;
-      left: 0;
       width: 100%;
-      background-color: #fff8f0;
+      background-color: white;
+      z-index: 1000;
       text-align: center;
       padding: 0.5rem;
-      z-index: 1000;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #ccc;
     }
+
     header img {
-      height: 60px;
+      max-height: 60px;
     }
+
+    .container {
+      display: flex;
+      margin-top: 80px;
+    }
+
     nav {
+      width: 250px;
+      background-color: #7fa488;
+      padding: 20px;
+      height: calc(100vh - 80px);
       position: fixed;
-      top: 100px;
+      top: 80px;
       left: 0;
-      width: 200px;
-      height: calc(100% - 100px);
-      background-color: #fff0e5;
-      padding: 1rem;
-      box-sizing: border-box;
+      overflow-y: auto;
     }
-    nav ul {
-      list-style: none;
-      padding: 0;
-    }
-    nav ul li {
-      margin-bottom: 1rem;
-    }
-    nav ul li a {
+
+    nav a {
+      display: block;
+      color: white;
       text-decoration: none;
-      color: #3c2f2f;
+      margin: 10px 0;
       font-weight: bold;
-      cursor: pointer;
     }
+
     main {
-      margin-left: 220px;
-      padding: 140px 2rem 2rem;
+      margin-left: 270px;
+      padding: 20px;
+      flex: 1;
     }
+
     section {
       display: none;
     }
+
     section.active {
       display: block;
     }
-    .carousel-container {
+
+    /* Carrossel */
+    .carousel {
       position: relative;
+      height: 400px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
-    .carousel-images {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 600px;
-      overflow: hidden;
-    }
-    .carousel-images img {
-      opacity: 0.5;
-      transition: all 0.4s ease-in-out;
+
+    .carousel img {
       max-height: 300px;
+      object-fit: contain;
+      margin: 10px 0;
     }
-    .carousel-images img.active {
-      opacity: 1;
-      transform: scale(1.1);
+
+    .carousel .dots {
+      text-align: center;
     }
-    .carousel-dots {
-      margin-top: 1rem;
-    }
-    .carousel-dots span {
-      display: inline-block;
-      width: 10px;
+
+    .carousel .dot {
       height: 10px;
+      width: 10px;
       margin: 0 5px;
       background-color: #bbb;
       border-radius: 50%;
+      display: inline-block;
       cursor: pointer;
     }
-    .carousel-dots span.active {
-      background-color: #3c2f2f;
+
+    .carousel .dot.active {
+      background-color: #333;
     }
   </style>
 </head>
+
 <body>
   <header>
     <img src="assinatura.png" alt="Assinatura João Gama" />
   </header>
-  <nav>
-    <ul>
-      <li><a onclick="showSection('inicio')">Início</a></li>
-      <li><a onclick="showSection('projeto')">Projecto</a></li>
-      <ul>
-        <li><a onclick="showSection('paisagem')">Paisagem Interior</a></li>
-        <li><a onclick="showSection('outra')">Outra Página</a></li>
-      </ul>
-    </ul>
-  </nav>
-  <main>
-    <section id="inicio" class="active">
-      <h1>Bem-vindo ao meu universo artístico</h1>
-      <p>O meu trabalho habita o natural, as camadas da paisagem e do gesto, entre a interioridade e a matéria que brota da terra.</p>
-      <div class="carousel-container">
-        <div class="carousel-images">
-          <img src="img1.jpg" class="active" alt="Arte 1">
-          <img src="img2.jpg" alt="Arte 2">
-          <img src="img3.jpg" alt="Arte 3">
-          <img src="img4.jpg" alt="Arte 4">
-        </div>
-        <div class="carousel-dots">
-          <span class="active" onclick="setSlide(0)"></span>
-          <span onclick="setSlide(1)"></span>
-          <span onclick="setSlide(2)"></span>
-          <span onclick="setSlide(3)"></span>
-        </div>
-      </div>
-    </section>
-    <section id="projeto">
-      <h2>Sobre o Projecto</h2>
-      <p>Exploração da relação entre arte, natureza e arquitetura, com uma prática centrada na matéria, gesto e paisagem.</p>
-    </section>
-    <section id="paisagem">
-      <h2>Paisagem Interior</h2>
-      <p>Galeria com trabalhos que brotam da terra.</p>
-    </section>
-    <section id="outra">
-      <h2>Outra Página</h2>
-      <p>Conteúdo adicional.</p>
-    </section>
-  </main>
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-images img');
-    const dots = document.querySelectorAll('.carousel-dots span');
-
-    function setSlide(index) {
-      slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
-      currentSlide = index;
-      slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
-    }
-
-    setInterval(() => {
-      let next = (currentSlide + 1) % slides.length;
-      setSlide(next);
-    }, 5000);
-  </script>
-</body>
-</html>
+  <div class="container">
+    <nav>
+      <a href="#" onclick="showSection('home')">Início</a>
+      <a href="#" onclick="showSection('projecto')">Projecto</a>
+      <div style="margin-left: 10px">
+        <a href="#" onclick="showSection('paisagem')">Paisagem Interi
