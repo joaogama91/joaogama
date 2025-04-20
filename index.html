@@ -112,55 +112,65 @@
       display: block;
     }
 
-    .carousel {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      overflow: hidden;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      transition: transform 0.5s;
-      opacity: 0.5;
-      transform: scale(0.9);
-    }
-
-    .carousel-slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .carousel-slide img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .carousel-nav {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .carousel-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin: 0 5px;
-      background-color: #999;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .carousel-dot.active {
-      background-color: #333;
-    }
+    /* Ajusta as imagens do carrossel para ter a mesma altura e largura */
+      .carousel-image {
+          width: 100%;
+          height: 400px;  /* Definindo uma altura fixa */
+          object-fit: cover;  /* Garantir que as imagens não sejam distorcidas */
+      }
+      
+      /* Ajusta a legenda para aparecer centralizada abaixo da imagem */
+      .carousel-caption {
+          position: absolute;
+          bottom: 10px;  /* Ajuste conforme necessário */
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+          color: white;
+          padding: 5px;
+          font-size: 16px; /* Tamanho da fonte */
+          text-align: center;
+      }
+      
+      /* Estilo das bolinhas de navegação */
+      .carousel-nav {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 10px;
+      }
+      
+      .carousel-dot {
+          width: 12px;
+          height: 12px;
+          background-color: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          transition: background-color 0.3s ease;
+      }
+      
+      .carousel-dot.active {
+          background-color: white;
+      }
+      
+      /* Estilos para o carrossel */
+      .carousel {
+          position: relative;
+          width: 100%;
+          max-width: 100%; /* Ajusta para o máximo de largura disponível */
+          overflow: hidden;
+      }
+      
+      .carousel-track {
+          display: flex;
+          transition: transform 0.3s ease-in-out;
+      }
+      
+      .carousel-slide {
+          position: relative;
+          flex: 0 0 100%; /* Garante que cada slide ocupe 100% da largura */
+      }
 
     .gallery {
       column-count: 4;
@@ -282,20 +292,38 @@
 
     <main>
       <section id="home" class="active">
-        <h2>Bem-vindo ao meu portfólio</h2>
-        <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
-        <div class="carousel">
-          <div class="carousel-track">
-            <div class="carousel-slide active"><img src="inicio/001_Inicio.jpg" alt="Imagem Início 1"></div>
-            <div class="carousel-slide"><img src="inicio/002_Inicio.jpg" alt="Imagem Início 2"></div>
-            <div class="carousel-slide"><img src="inicio/003_Inicio.jpg" alt="Imagem Início 3"></div>
+          <h2>Bem-vindo ao meu portfólio</h2>
+          <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
+          
+          <!-- Carrossel -->
+          <div class="carousel">
+              <div class="carousel-track">
+                  <!-- Slide 1 -->
+                  <div class="carousel-slide active">
+                      <img src="inicio/001_Inicio.jpg" alt="Barrocal de Castelo Branco" class="carousel-image">
+                      <div class="carousel-caption">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
+                  </div>
+                  
+                  <!-- Slide 2 -->
+                  <div class="carousel-slide">
+                      <img src="inicio/002_Inicio.jpg" alt="Contemplação" class="carousel-image">
+                      <div class="carousel-caption">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
+                  </div>
+      
+                  <!-- Slide 3 -->
+                  <div class="carousel-slide">
+                      <img src="inicio/003_Inicio.jpg" alt="Uma nova madrugada" class="carousel-image">
+                      <div class="carousel-caption">Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024).</div>
+                  </div>
+              </div>
+      
+              <!-- Bolinhas de navegação -->
+              <div class="carousel-nav">
+                  <span class="carousel-dot active"></span>
+                  <span class="carousel-dot"></span>
+                  <span class="carousel-dot"></span>
+              </div>
           </div>
-          <div class="carousel-nav">
-            <span class="carousel-dot active"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-          </div>
-        </div>
       </section>
 
       <section id="projeto1">
@@ -397,6 +425,40 @@
     const submenu = document.getElementById("submenuProjetos");
     submenu.classList.toggle("open");
   }
+
+    // JavaScript para controlar a navegação do carrossel
+      let currentIndex = 0;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      
+      // Função para mudar o slide
+      function changeSlide(index) {
+          // Remove a classe 'active' dos itens e bolinhas
+          slides[currentIndex].classList.remove('active');
+          dots[currentIndex].classList.remove('active');
+      
+          // Atualiza o índice
+          currentIndex = (index + slides.length) % slides.length; // Faz a navegação cíclica
+      
+          // Adiciona a classe 'active' ao novo item e bolinha
+          slides[currentIndex].classList.add('active');
+          dots[currentIndex].classList.add('active');
+      }
+      
+      // Navegar com as bolinhas
+      dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+              changeSlide(index);
+          });
+      });
+      
+      // Inicializar o carrossel e mostrar o primeiro slide
+      changeSlide(0);
+      
+      // Para navegação automática (opcional)
+      setInterval(() => {
+          changeSlide(currentIndex + 1);
+      }, 5000); // Troca a cada 5 segundos
   </script>
 </body>
 </html>
