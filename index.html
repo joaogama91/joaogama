@@ -83,11 +83,14 @@
     }
 
     #submenuProjetos {
-      padding-left: 15px;
-      transition: max-height 0.3s ease;
-      overflow: hidden;
-      max-height: 0; /* Mudar aqui para esconder inicialmente */
-    }
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      
+      #submenuProjetos.open {
+        max-height: 500px; /* valor suficientemente grande */
+      }
 
     main {
       flex: 1;
