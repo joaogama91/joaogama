@@ -86,7 +86,7 @@
       padding-left: 15px;
       transition: max-height 0.3s ease;
       overflow: hidden;
-      max-height: 0;
+      max-height: 0; /* Mudar aqui para esconder inicialmente */
     }
 
     main {
@@ -159,6 +159,25 @@
       background-color: #333;
     }
 
+    .gallery {
+      column-count: 4;
+      column-gap: 16px;
+      padding: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 16px;
+      break-inside: avoid;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
 
     #lightbox {
       display: none;
@@ -327,8 +346,8 @@
     const galeria = document.getElementById("galeriaInterior");
     imagensInterior.forEach((nome, i) => {
       const img = document.createElement("img");
-      img.src = `interioridades/${nome}`;
-      img.alt = `Paisagem Interior ${i + 1}`;
+      img.src = interioridades/${nome};
+      img.alt = Paisagem Interior ${i + 1};
       img.onclick = () => abrirLightbox(i);
       galeria.appendChild(img);
     });
@@ -339,13 +358,13 @@
 
     function abrirLightbox(index) {
       indexAtual = index;
-      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
+      lightboxImg.src = interioridades/${imagensInterior[index]};
       lightbox.style.display = "flex";
     }
 
     function navegar(direcao) {
       indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
-      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
+      lightboxImg.src = interioridades/${imagensInterior[indexAtual]};
     }
 
     document.addEventListener("keydown", e => {
@@ -367,7 +386,7 @@
         document.querySelector(".carousel-dot.active").classList.remove("active");
         slides[i].classList.add("active");
         dot.classList.add("active");
-        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
+        document.querySelector(".carousel-track").style.transform = translateX(-${i * 100}%);
       });
     });
 
