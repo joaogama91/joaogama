@@ -272,7 +272,7 @@
       <ul>
         <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
         <li class="titulo" onclick="toggleSubmenu()">Projetos ▾</li>
-        <ul id="submenuProjetos">
+        <ul id="submenuProjetos">  
           <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
           <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
           <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
@@ -394,9 +394,9 @@
     });
 
     function toggleSubmenu() {
-      const submenu = document.getElementById("submenuProjetos");
-      submenu.style.maxHeight = submenu.style.maxHeight === "0px" ? "1000px" : "0px";
-    }
+    const submenu = document.getElementById("submenuProjetos");
+    submenu.classList.toggle("open");
+  }
   </script>
 </body>
 </html>
