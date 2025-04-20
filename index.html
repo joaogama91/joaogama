@@ -520,51 +520,51 @@
     submenu.classList.toggle("open");
   }
 
-        let currentIndex = 0;
-
-        // Função para mudar o slide
-        function changeSlide(index) {
-            const slides = document.querySelectorAll(".carousel-slide");
-            const dots = document.querySelectorAll(".carousel-dot");
-
-            // Remover a classe 'active' do slide e do ponto ativo atual
-            slides[currentIndex].classList.remove("active");
-            dots[currentIndex].classList.remove("active");
-
-            // Atualizar o índice
-            currentIndex = (index + slides.length) % slides.length;
-
-            // Adicionar a classe 'active' no novo slide e ponto
-            slides[currentIndex].classList.add("active");
-            dots[currentIndex].classList.add("active");
-        }
-
-        // Navegação automática (opcional)
-        setInterval(() => {
-            changeSlide(currentIndex + 1);
-        }, 5000);
-
-        // Abrir imagem em full screen
-        function openFullScreen(index) {
-            const slides = document.querySelectorAll(".carousel-slide");
-            const modal = document.getElementById("fullScreenModal");
-            const fullScreenImage = document.getElementById("fullScreenImage");
-            const fullScreenText = document.getElementById("fullScreenText");
-
-            // Definir a imagem e o texto
-            fullScreenImage.src = slides[index].querySelector("img").src;
-            fullScreenText.textContent = slides[index].querySelector(".carousel-text").textContent;
-
-            // Mostrar o modal
-            modal.classList.add("active");
-            currentIndex = index; // Atualiza o índice para navegação no full screen
-        }
-
-        // Navegar no full screen
-        function navigateFullScreen(direction) {
-            const newIndex = (currentIndex + direction + 3) % 3; // Considerando que temos 3 imagens
-            openFullScreen(newIndex);
-        }
+  let currentIndex = 0;
+  
+  // Função para mudar o slide
+  function changeSlide(index) {
+      const slides = document.querySelectorAll(".carousel-slide");
+      const dots = document.querySelectorAll(".carousel-dot");
+  
+      // Remover a classe 'active' do slide e do ponto ativo atual
+      slides[currentIndex].classList.remove("active");
+      dots[currentIndex].classList.remove("active");
+  
+      // Atualizar o índice
+      currentIndex = (index + slides.length) % slides.length;
+  
+      // Adicionar a classe 'active' no novo slide e ponto
+      slides[currentIndex].classList.add("active");
+      dots[currentIndex].classList.add("active");
+  }
+  
+  // Função para abrir imagem em full screen
+  function openFullScreen(index) {
+      const slides = document.querySelectorAll(".carousel-slide");
+      const modal = document.getElementById("fullScreenModal");
+      const fullScreenImage = document.getElementById("fullScreenImage");
+      const fullScreenText = document.getElementById("fullScreenText");
+  
+      // Definir a imagem e o texto
+      fullScreenImage.src = slides[index].querySelector("img").src;
+      fullScreenText.textContent = slides[index].querySelector(".carousel-caption").textContent;
+  
+      // Mostrar o modal
+      modal.classList.add("active");
+      currentIndex = index; // Atualiza o índice para navegação no full screen
+  }
+  
+  // Função para navegar no full screen
+  function navigateFullScreen(direction) {
+      const newIndex = (currentIndex + direction + 3) % 3; // Considerando 3 slides
+      openFullScreen(newIndex);
+  }
+  
+  // Navegação automática (opcional)
+  setInterval(() => {
+      changeSlide(currentIndex + 1);
+  }, 5000);
 
     
   </script>
