@@ -561,6 +561,14 @@
       openFullScreen(newIndex);
   }
   
+  // Adiciona os eventos de clique nas bolinhas
+  const dots = document.querySelectorAll(".carousel-dot");
+  dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+          changeSlide(index);
+      });
+  });
+  
   // Navegação automática (opcional)
   setInterval(() => {
       changeSlide(currentIndex + 1);
