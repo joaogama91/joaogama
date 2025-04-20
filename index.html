@@ -426,42 +426,34 @@
     submenu.classList.toggle("open");
   }
 
-    // JavaScript para controlar a navegação do carrossel
-      let currentIndex = 0;
-      const slides = document.querySelectorAll('.carousel-slide');
-      const dots = document.querySelectorAll('.carousel-dot');
-      
-      // Função para mudar o slide
-      function changeSlide(index) {
-          // Remove a classe 'active' dos itens e bolinhas
-          slides[currentIndex].classList.remove('active');
-          dots[currentIndex].classList.remove('active');
-      
-          // Atualiza o índice
-          currentIndex = (index + slides.length) % slides.length; // Faz a navegação cíclica
-      
-          // Adiciona a classe 'active' ao novo item e bolinha
-          slides[currentIndex].classList.add('active');
-          dots[currentIndex].classList.add('active');
-      }
-      
-      // Navegar com as bolinhas
-      dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        document.querySelector(".carousel-slide.active").classList.remove("active");
-        document.querySelector(".carousel-dot.active").classList.remove("active");
-        slides[i].classList.add("active");
-        dot.classList.add("active");
-      });
-    });
-      
-      // Inicializar o carrossel e mostrar o primeiro slide
-      changeSlide(0);
-      
-      // Para navegação automática (opcional)
-      setInterval(() => {
-          changeSlide(currentIndex + 1);
-      }, 5000); // Troca a cada 5 segundos
+        let currentIndex = 0;  // Variável para armazenar o índice do slide atual
+
+        // Função para mudar o slide
+        function changeSlide(index) {
+            const slides = document.querySelectorAll(".carousel-slide");
+            const dots = document.querySelectorAll(".carousel-dot");
+
+            // Remover a classe 'active' do slide e do ponto ativo atual
+            slides[currentIndex].classList.remove("active");
+            dots[currentIndex].classList.remove("active");
+
+            // Atualizar o índice
+            currentIndex = (index + slides.length) % slides.length;  // Garante que o índice nunca ultrapasse o número de slides
+
+            // Adicionar a classe 'active' no novo slide e ponto
+            slides[currentIndex].classList.add("active");
+            dots[currentIndex].classList.add("active");
+        }
+
+        // Inicializar o carrossel e mostrar o primeiro slide
+        changeSlide(0);
+
+        // Navegação automática (opcional)
+        setInterval(() => {
+            changeSlide(currentIndex + 1);  // Avança para o próximo slide
+        }, 5000);  // Troca a cada 5 segundos
+
+    
   </script>
 </body>
 </html>
