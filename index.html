@@ -452,12 +452,26 @@
   </footer>
 
   <script>
+      document.addEventListener("DOMContentLoaded", () => {
+    // Função para mostrar ou esconder o submenu de projetos
+    function toggleSubmenu() {
+      const submenu = document.getElementById("submenuProjetos");
+      submenu.classList.toggle("open"); // Abre/fecha o submenu ao adicionar/remover a classe 'open'
+    }
+  
+    // Garantir que a função de toggleSubmenu é chamada quando o botão for clicado
+    const menuButton = document.getElementById("menuProjetos");
+    if (menuButton) {
+      menuButton.addEventListener("click", toggleSubmenu);
+    }
+  
+    // Resto do código relacionado ao carrossel e lightbox (já fornecido anteriormente)
     const secoes = document.querySelectorAll('main section');
     function mostrarSecao(id) {
       secoes.forEach(secao => secao.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
-
+  
     const imagensInterior = [
       "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
       "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
@@ -467,7 +481,7 @@
       "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
       "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
     ];
-
+  
     const galeria = document.getElementById("galeriaInterior");
     imagensInterior.forEach((nome, i) => {
       const img = document.createElement("img");
@@ -476,33 +490,33 @@
       img.onclick = () => abrirLightbox(i);
       galeria.appendChild(img);
     });
-
+  
     let indexAtual = 0;
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightboxImg");
-
+  
     function abrirLightbox(index) {
       indexAtual = index;
       lightboxImg.src = `interioridades/${imagensInterior[index]}`;
       lightbox.style.display = "flex";
     }
-
+  
     function navegar(direcao) {
       indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
       lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
     }
-
+  
     document.addEventListener("keydown", e => {
       if (!lightbox.style.display.includes("flex")) return;
       if (e.key === "Escape") lightbox.style.display = "none";
       else if (e.key === "ArrowLeft") navegar(-1);
       else if (e.key === "ArrowRight") navegar(1);
     });
-
+  
     lightbox.addEventListener("click", e => {
       if (e.target === lightbox) lightbox.style.display = "none";
     });
-
+  
     const dots = document.querySelectorAll(".carousel-dot");
     const slides = document.querySelectorAll(".carousel-slide");
     dots.forEach((dot, i) => {
@@ -514,65 +528,62 @@
         document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
       });
     });
-
-    function toggleSubmenu() {
-    const submenu = document.getElementById("submenuProjetos");
-    submenu.classList.toggle("open");
-  }
-
-  let currentIndex = 0;
   
-  // Função para mudar o slide
-  function changeSlide(index) {
-      const slides = document.querySelectorAll(".carousel-slide");
-      const dots = document.querySelectorAll(".carousel-dot");
-  
-      // Remover a classe 'active' do slide e do ponto ativo atual
-      slides[currentIndex].classList.remove("active");
-      dots[currentIndex].classList.remove("active");
-  
-      // Atualizar o índice
-      currentIndex = (index + slides.length) % slides.length;
-  
-      // Adicionar a classe 'active' no novo slide e ponto
-      slides[currentIndex].classList.add("active");
-      dots[currentIndex].classList.add("active");
-  }
-  
-  // Função para abrir imagem em full screen
-  function openFullScreen(index) {
-      const slides = document.querySelectorAll(".carousel-slide");
-      const modal = document.getElementById("fullScreenModal");
-      const fullScreenImage = document.getElementById("fullScreenImage");
-      const fullScreenText = document.getElementById("fullScreenText");
-  
-      // Definir a imagem e o texto
-      fullScreenImage.src = slides[index].querySelector("img").src;
-      fullScreenText.textContent = slides[index].querySelector(".carousel-caption").textContent;
-  
-      // Mostrar o modal
-      modal.classList.add("active");
-      currentIndex = index; // Atualiza o índice para navegação no full screen
-  }
-  
-  // Função para navegar no full screen
-  function navigateFullScreen(direction) {
-      const newIndex = (currentIndex + direction + 3) % 3; // Considerando 3 slides
-      openFullScreen(newIndex);
-  }
-  
-  // Adiciona os eventos de clique nas bolinhas
-  const dots = document.querySelectorAll(".carousel-dot");
-  dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => {
-          changeSlide(index);
-      });
+    let currentIndex = 0;
+    
+    // Função para mudar o slide
+    function changeSlide(index) {
+        const slides = document.querySelectorAll(".carousel-slide");
+        const dots = document.querySelectorAll(".carousel-dot");
+    
+        // Remover a classe 'active' do slide e do ponto ativo atual
+        slides[currentIndex].classList.remove("active");
+        dots[currentIndex].classList.remove("active");
+    
+        // Atualizar o índice
+        currentIndex = (index + slides.length) % slides.length;
+    
+        // Adicionar a classe 'active' no novo slide e ponto
+        slides[currentIndex].classList.add("active");
+        dots[currentIndex].classList.add("active");
+    }
+    
+    // Função para abrir imagem em full screen
+    function openFullScreen(index) {
+        const slides = document.querySelectorAll(".carousel-slide");
+        const modal = document.getElementById("fullScreenModal");
+        const fullScreenImage = document.getElementById("fullScreenImage");
+        const fullScreenText = document.getElementById("fullScreenText");
+    
+        // Definir a imagem e o texto
+        fullScreenImage.src = slides[index].querySelector("img").src;
+        fullScreenText.textContent = slides[index].querySelector(".carousel-caption").textContent;
+    
+        // Mostrar o modal
+        modal.classList.add("active");
+        currentIndex = index; // Atualiza o índice para navegação no full screen
+    }
+    
+    // Função para navegar no full screen
+    function navigateFullScreen(direction) {
+        const newIndex = (currentIndex + direction + 3) % 3; // Considerando 3 slides
+        openFullScreen(newIndex);
+    }
+    
+    // Adiciona os eventos de clique nas bolinhas
+    const dots = document.querySelectorAll(".carousel-dot");
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            changeSlide(index);
+        });
+    });
+    
+    // Navegação automática (opcional)
+    setInterval(() => {
+        changeSlide(currentIndex + 1);
+    }, 5000);
   });
-  
-  // Navegação automática (opcional)
-  setInterval(() => {
-      changeSlide(currentIndex + 1);
-  }, 5000);
+
 
     
   </script>
