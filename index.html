@@ -13,7 +13,7 @@
     }
 
     header {
-      position: fixed;
+      position: fixed;carr
       top: 0;
       left: 0;
       right: 0;
@@ -113,64 +113,87 @@
     }
 
     /* Ajusta as imagens do carrossel para ter a mesma altura e largura */
-      .carousel-image {
-          width: 100%;
-          height: 400px;  /* Definindo uma altura fixa */
-          object-fit: cover;  /* Garantir que as imagens não sejam distorcidas */
-      }
-      
-      /* Ajusta a legenda para aparecer centralizada abaixo da imagem */
-      .carousel-caption {
-          position: absolute;
-          bottom: 10px;  /* Ajuste conforme necessário */
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
-          color: white;
-          padding: 5px;
-          font-size: 16px; /* Tamanho da fonte */
-          text-align: center;
-      }
-      
-      /* Estilo das bolinhas de navegação */
-      .carousel-nav {
-          position: absolute;
-          bottom: 10px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 10px;
-      }
-      
-      .carousel-dot {
-          width: 12px;
-          height: 12px;
-          background-color: rgba(255, 255, 255, 0.5);
-          border-radius: 50%;
-          transition: background-color 0.3s ease;
-      }
-      
-      .carousel-dot.active {
-          background-color: white;
-      }
-      
-      /* Estilos para o carrossel */
-      .carousel {
-          position: relative;
-          width: 100%;
-          max-width: 100%; /* Ajusta para o máximo de largura disponível */
-          overflow: hidden;
-      }
-      
-      .carousel-track {
-          display: flex;
-          transition: transform 0.3s ease-in-out;
-      }
-      
-      .carousel-slide {
-          position: relative;
-          flex: 0 0 100%; /* Garante que cada slide ocupe 100% da largura */
-      }
+       /* Estilos para o carrossel */
+        .carousel-container {
+            position: relative;
+            width: 80%; /* Ajuste a largura conforme necessário */
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            transition: transform 1s ease-in-out;
+            object-fit: cover; /* Mantém a proporção original das imagens */
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        /* Ajuste para controlar o tamanho das imagens */
+        .carousel-slide img {
+            width: 100%;
+            height: auto; /* Mantém a proporção original da imagem */
+        }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 20px; /* Aumenta o espaço entre as imagens e os pontos */
+        }
+
+        .carousel-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            background-color: #717171;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Novos estilos para o slide lateral */
+        .carousel-buttons-left,
+        .carousel-buttons-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .carousel-buttons-left {
+            left: 10px;
+        }
+
+        .carousel-buttons-right {
+            right: 10px;
+        }
 
     .gallery {
       column-count: 4;
