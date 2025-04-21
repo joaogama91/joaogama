@@ -234,6 +234,9 @@ footer {
 }
 
 @media (max-width: 768px) {
+  header {
+    padding: 10px 10px; /* Adjusted padding for mobile */
+  }
 
    header img {
     max-width: 100%; /* Let it take the full width on smaller screens */
@@ -242,9 +245,9 @@ footer {
   
   .container {
     flex-direction: column;
-    padding-top: 230px; /* Adjusted padding */
+    padding-top: 200px; /* Reduced padding for smaller screens */
   }
-
+  
   nav {
     position: relative;
     width: 100%;
@@ -259,6 +262,7 @@ footer {
   main {
     margin-left: 0;
     padding: 20px;
+    margin-top: 0; /* Remove extra margin-top */
   }
 
   .gallery {
