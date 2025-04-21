@@ -15,23 +15,25 @@ header {
   left: 0;
   right: 0;
   background-color: #F5E7DE;
-  padding: 30px 10px;
+  padding: 15px 10px; /* Reduced padding */
   z-index: 1000;
   text-align: center;
+  width: 100%; /* Ensure header spans full width */
+  box-sizing: border-box;
 }
 
 header img {
   width: 100%;
-  max-width: 500px; /* Limit the max width for larger screens */
+  max-width: 500px;
   height: auto;
-  margin: 0 auto; /* Center the image */
+  margin: 0 auto;
   display: block;
-  padding: 0 20px; /* Add some padding to avoid touching the edges */
+  padding: 0 20px;
 }
 
 .container {
   display: flex;
-  padding-top: 130px;
+  padding-top: 120px; /* Reduced padding-top to reduce space below header */
 }
 
 nav {
@@ -240,7 +242,7 @@ footer {
   
   .container {
     flex-direction: column;
-    padding-top: 260px;
+    padding-top: 230px; /* Adjusted padding */
   }
 
   nav {
