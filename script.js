@@ -99,9 +99,30 @@ function enableCarouselZoom() {
   const zoomableImages = document.querySelectorAll("#home .carousel-slide img");
 
   zoomableImages.forEach(img => {
-    img.classList.add("zoomable"); // Optional: for styling or future use
+    img.classList.add("zoomable");
+
     img.addEventListener("click", () => {
-      openFullscreen(img.src); // Chama a função para abrir a imagem em fullscreen
+      let overlay = document.querySelector(".fullscreen-overlay");
+
+      if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.classList.add("fullscreen-overlay");
+
+        const fullImg = document.createElement("img");
+        overlay.appendChild(fullImg);
+
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) {
+            overlay.remove();
+          }
+        });
+
+        document.body.appendChild(overlay);
+      }
+
+      const fullImg = overlay.querySelector("img");
+      fullImg.src = img.src;
+      overlay.style.display = "flex";
     });
   });
 }
