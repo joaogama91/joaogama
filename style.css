@@ -271,11 +271,26 @@ footer {
 }
 
 @media (max-width: 480px) {
+  header {
+    padding: 10px 10px; /* Adjusted padding for mobile */
+  }
+  
   .gallery {
     column-count: 1;
   }
 
+  .container {
+    flex-direction: column;
+    padding-top: 200px; /* Reduced padding for smaller screens */
+  }
+  
   header img {
     max-height: 80px;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 20px;
+    margin-top: 0; /* Remove extra margin-top */
   }
 }
