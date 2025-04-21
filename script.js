@@ -110,8 +110,8 @@ function enableCarouselZoom() {
       document.body.appendChild(overlay);
 
       overlay.addEventListener("click", (e) => {
-        if (e.target === overlay || e.target === fullImg) {
-          overlay.remove();
+      if (e.target === overlay) {
+        overlay.remove(); // Removes the overlay and image when clicking outside the image
         }
       });
     });
