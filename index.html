@@ -499,12 +499,15 @@
     });
   }
 
-  // Initial language setting based on browser settings (if preferred language is Portuguese)
+  // Initial language setting (default to Portuguese)
   const userLang = navigator.language || navigator.userLanguage;
+  
+  // If the user's browser language is Portuguese, set it to PT, otherwise default to PT
   if (userLang.includes('pt')) {
     changeLanguage('pt');
   } else {
-    changeLanguage('en');
+    // Default to Portuguese even if the browser language is not PT
+    changeLanguage('pt');
   }
 </script>
 </body>
