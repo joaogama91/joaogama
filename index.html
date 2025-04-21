@@ -391,9 +391,17 @@
     });
 
     function toggleSubmenu() {
-    const submenu = document.getElementById("submenuProjetos");
-    submenu.classList.toggle("open");
-  }
+      const submenu = document.getElementById("submenuProjetos");
+      submenu.classList.toggle("open");
+      
+      const titulo = document.querySelector("nav ul li.titulo");
+      if (submenu.classList.contains("open")) {
+        titulo.innerHTML = "Projetos ▴";
+      } else {
+        titulo.innerHTML = "Projetos ▾";
+      }
+    }
+    
   </script>
 </body>
 </html>
