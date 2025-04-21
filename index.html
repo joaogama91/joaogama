@@ -112,151 +112,66 @@
       display: block;
     }
 
-           /* Estilos para o carrossel */
         .carousel-container {
-            position: relative;
-            width: 80%; /* Ajuste a largura conforme necessário */
-            margin: auto;
-            overflow: hidden;
-        }
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-        .carousel-slide {
-            display: none;
-            width: 100%;
-            transition: transform 1s ease-in-out;
-            object-fit: cover; /* Mantém a proporção original das imagens */
-        }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
 
-        .carousel-slide.active {
-            display: block;
-        }
+    .carousel-slide {
+      min-width: 80%;
+      margin: 0 10px;
+      flex-shrink: 0;
+    }
 
-        /* Ajuste para controlar o tamanho das imagens */
-        .carousel-slide img {
-            width: 100%;
-            height: auto; /* Mantém a proporção original da imagem */
-        }
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      max-height: 400px;
+      object-fit: cover;
+    }
 
-        /* Texto nas imagens */
-        .carousel-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
-            padding: 10px;
-        }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      z-index: 10;
+    }
 
-        .carousel-dots {
-            text-align: center;
-            margin-top: 20px; /* Aumenta o espaço entre as imagens e os pontos */
-        }
+    .carousel-button.left {
+      left: 10px;
+    }
 
-        .carousel-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            margin: 0 5px;
-            background-color: #bbb;
-            border-radius: 50%;
-            cursor: pointer;
-        }
+    .carousel-button.right {
+      right: 10px;
+    }
 
-        .carousel-dot.active {
-            background-color: #717171;
-        }
+    @media (max-width: 768px) {
+      .carousel-slide {
+        min-width: 90%;
+      }
 
-        .carousel-buttons {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-        }
+      .carousel-button {
+        font-size: 1.5rem;
+      }
 
-        .carousel-button {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .carousel-button:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Novos estilos para o slide lateral */
-        .carousel-buttons-left,
-        .carousel-buttons-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-        }
-
-        .carousel-buttons-left {
-            left: 10px;
-        }
-
-        .carousel-buttons-right {
-            right: 10px;
-        }
-
-        /* Estilos para o modal de full screen */
-        .full-screen-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); /* Fundo preto semitransparente */
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .full-screen-modal img {
-            width: 80%;
-            height: auto;
-        }
-
-        .full-screen-modal .carousel-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-        }
-
-        .full-screen-modal.active {
-            display: flex;
-        }
-
-        .full-screen-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 101;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-        }
-
-        .full-screen-button.left {
-            left: 10px;
-        }
-
-        .full-screen-button.right {
-            right: 10px;
-        }
+      .carousel-slide img {
+        max-height: 250px;
+      }
+    }
 
     .gallery {
       column-count: 4;
@@ -378,45 +293,22 @@
 
     <main>
       <section id="home" class="active">
-          <h2>Bem-vindo ao meu portfólio</h2>
-          <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
-          
-          <!-- Carrossel -->
-        <div class="carousel">
-            <div class="carousel-track">
-                <!-- Slide 1 -->
-                <div class="carousel-slide active" onclick="openFullScreen(0)">
-                    <img src="inicio/001_Inicio.jpg" alt="Barrocal de Castelo Branco" class="carousel-image">
-                    <div class="carousel-caption">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
-                </div>
-                
-                <!-- Slide 2 -->
-                <div class="carousel-slide" onclick="openFullScreen(1)">
-                    <img src="inicio/002_Inicio.jpg" alt="Contemplação" class="carousel-image">
-                    <div class="carousel-caption">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
-                </div>
-        
-                <!-- Slide 3 -->
-                <div class="carousel-slide" onclick="openFullScreen(2)">
-                    <img src="inicio/003_Inicio.jpg" alt="Uma nova madrugada" class="carousel-image">
-                    <div class="carousel-caption">Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024).</div>
-                </div>
+        <h2>Bem-vindo ao meu portfólio</h2>
+        <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
+        <div class="carousel-container">
+            <button class="carousel-button left" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide"><img src="inicio/001_Inicio.jpg" alt="Slide 1"></div>
+              <div class="carousel-slide"><img src="inicio/002_Inicio.jpg" alt="Slide 2"></div>
+              <div class="carousel-slide"><img src="inicio/003_Inicio.jpg" alt="Slide 3"></div>
             </div>
-        
-            <!-- Bolinhas de navegação -->
-            <div class="carousel-nav">
-                <span class="carousel-dot active" onclick="changeSlide(0)"></span>
-                <span class="carousel-dot" onclick="changeSlide(1)"></span>
-                <span class="carousel-dot" onclick="changeSlide(2)"></span>
-            </div>
-        </div>
-        
-        <!-- Modal de Full Screen -->
-        <div class="full-screen-modal" id="fullScreenModal">
-            <img id="fullScreenImage" src="" alt="Imagem em Full Screen">
-            <div class="carousel-caption" id="fullScreenText"></div>
-            <button class="full-screen-button left" onclick="navigateFullScreen(-1)">&#10094;</button>
-            <button class="full-screen-button right" onclick="navigateFullScreen(1)">&#10095;</button>
+            <button class="carousel-button right" onclick="moveSlide(1)">&#10095;</button>
+          </div>
+          <div class="carousel-nav">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
         </div>
       </section>
 
@@ -448,7 +340,7 @@
   </div>
 
   <footer>
-    <p>© 2025 João Gama | Contacto: joao@email.com</p>
+    <p>© 2025 João Gama | Contacto: 19joaogama91@gmail.com</p>
   </footer>
 
   <script>
@@ -520,53 +412,16 @@
     submenu.classList.toggle("open");
   }
 
-        let currentIndex = 0;
+    let currentIndex = 0;
+    const track = document.getElementById('carouselTrack');
+    const slides = document.querySelectorAll('.carousel-slide');
 
-        // Função para mudar o slide
-        function changeSlide(index) {
-            const slides = document.querySelectorAll(".carousel-slide");
-            const dots = document.querySelectorAll(".carousel-dot");
-
-            // Remover a classe 'active' do slide e do ponto ativo atual
-            slides[currentIndex].classList.remove("active");
-            dots[currentIndex].classList.remove("active");
-
-            // Atualizar o índice
-            currentIndex = (index + slides.length) % slides.length;
-
-            // Adicionar a classe 'active' no novo slide e ponto
-            slides[currentIndex].classList.add("active");
-            dots[currentIndex].classList.add("active");
-        }
-
-        // Navegação automática (opcional)
-        setInterval(() => {
-            changeSlide(currentIndex + 1);
-        }, 5000);
-
-        // Abrir imagem em full screen
-        function openFullScreen(index) {
-            const slides = document.querySelectorAll(".carousel-slide");
-            const modal = document.getElementById("fullScreenModal");
-            const fullScreenImage = document.getElementById("fullScreenImage");
-            const fullScreenText = document.getElementById("fullScreenText");
-
-            // Definir a imagem e o texto
-            fullScreenImage.src = slides[index].querySelector("img").src;
-            fullScreenText.textContent = slides[index].querySelector(".carousel-text").textContent;
-
-            // Mostrar o modal
-            modal.classList.add("active");
-            currentIndex = index; // Atualiza o índice para navegação no full screen
-        }
-
-        // Navegar no full screen
-        function navigateFullScreen(direction) {
-            const newIndex = (currentIndex + direction + 3) % 3; // Considerando que temos 3 imagens
-            openFullScreen(newIndex);
-        }
-
-    
+    function moveSlide(direction) {
+      const totalSlides = slides.length;
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      const offset = slides[0].offsetWidth + 20; // slide width + margin
+      track.style.transform = `translateX(-${offset * currentIndex}px)`;
+    }
   </script>
 </body>
 </html>
