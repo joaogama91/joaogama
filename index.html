@@ -351,9 +351,8 @@
 
   <footer>
     <p data-pt="© 2025 João Gama - Todos os direitos reservados" data-en="© 2025 João Gama - All rights reserved">© 2025 João Gama - All rights reserved</p>
-    <p data-pt="🔢 Este site já teve <span id='visit-count-pt'>...</span> visitas suas." 
-       data-en="🔢 This site has had <span id='visit-count-en'>...</span> visits from you.">
-       🔢 This site has had <span id="visit-count-en">...</span> visits from you.
+    <p data-pt="🔢 Este site já teve <span id='visit-count'>...</span> visitas suas." data-en="🔢 This site has had <span id='visit-count'>...</span> visits from you.">
+      🔢 Este site já teve <span id="visit-count">...</span> visitas suas.
     </p>
   </footer>
 
@@ -454,32 +453,28 @@
 </script>
 
 <script>
-  // Define URLs for API requests (replace 'joaogama-site' with a unique namespace if needed)
+  // Substituir com um namespace exclusivo para ti (podes trocar "joaogama-site" por outro qualquer)
   const countUrl = "https://api.countapi.xyz/update/joaogama-site/inicio/?amount=1";
   const getUrl = "https://api.countapi.xyz/get/joaogama-site/inicio/";
 
-  // Fetch the count from the API and update both PT and EN
   fetch(countUrl)
     .then(() => fetch(getUrl))
     .then(res => res.json())
     .then(data => {
-      // Format count for both languages
-      document.getElementById("visit-count-pt").textContent = data.value.toLocaleString("pt-PT");
-      document.getElementById("visit-count-en").textContent = data.value.toLocaleString("en-US");
+      document.getElementById("visit-count").textContent = data.value.toLocaleString("pt-PT");
     });
 
-  // Use LocalStorage as a fallback if API fails
+  // Recupera o número de visitas armazenado localmente ou inicia em 0
   let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
   
-  // Increment the visit count
+  // Incrementa o contador de visitas
   visitCount++;
   
-  // Store updated count in LocalStorage
+  // Armazena o novo número de visitas no armazenamento local
   localStorage.setItem('visitCount', visitCount);
   
-  // Update the count in both languages (PT and EN)
-  document.getElementById('visit-count-pt').textContent = visitCount.toLocaleString("pt-PT");
-  document.getElementById('visit-count-en').textContent = visitCount.toLocaleString("en-US");
+  // Atualiza o contador na página
+  document.getElementById('visit-count').textContent = visitCount;
 </script>
 
   <script>
@@ -499,15 +494,12 @@
     });
   }
 
-  // Initial language setting (default to Portuguese)
+  // Initial language setting based on browser settings (if preferred language is Portuguese)
   const userLang = navigator.language || navigator.userLanguage;
-  
-  // If the user's browser language is Portuguese, set it to PT, otherwise default to PT
   if (userLang.includes('pt')) {
     changeLanguage('pt');
   } else {
-    // Default to Portuguese even if the browser language is not PT
-    changeLanguage('pt');
+    changeLanguage('en');
   }
 </script>
 </body>
