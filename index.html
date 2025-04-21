@@ -46,7 +46,6 @@
       left: 0;
       padding-top: 180px;
       overflow-y: auto;
-      z-index: 999;
     }
 
     nav ul {
@@ -84,14 +83,14 @@
     }
 
     #submenuProjetos {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    #submenuProjetos.open {
-      max-height: 500px;
-    }
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      
+      #submenuProjetos.open {
+        max-height: 500px; /* valor suficientemente grande */
+      }
 
     main {
       flex: 1;
@@ -113,7 +112,7 @@
       display: block;
     }
 
-    .carousel-container {
+        .carousel-container {
       position: relative;
       width: 100%;
       overflow: hidden;
@@ -161,26 +160,16 @@
     }
 
     @media (max-width: 768px) {
-      nav {
-        position: relative;
-        width: 100%;
-        height: auto;
-        display: block;
-        padding-top: 20px;
+      .carousel-slide {
+        min-width: 90%;
       }
 
-      .container {
-        flex-direction: column;
-        padding-top: 160px;
+      .carousel-button {
+        font-size: 1.5rem;
       }
 
-      main {
-        margin-left: 0;
-        padding: 20px;
-      }
-
-      .gallery {
-        column-count: 2;
+      .carousel-slide img {
+        max-height: 250px;
       }
     }
 
@@ -246,6 +235,31 @@
       padding: 15px;
       font-size: 0.9em;
       color: #333;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      nav {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: block;
+        padding-top: 20px;
+      }
+
+      .container {
+        flex-direction: column;
+        padding-top: 160px;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .gallery {
+        column-count: 2;
+      }
     }
 
     @media (max-width: 480px) {
@@ -349,8 +363,8 @@
     const galeria = document.getElementById("galeriaInterior");
     imagensInterior.forEach((nome, i) => {
       const img = document.createElement("img");
-      img.src = interioridades/${nome};
-      img.alt = Paisagem Interior ${i + 1};
+      img.src = `interioridades/${nome}`;
+      img.alt = `Paisagem Interior ${i + 1}`;
       img.onclick = () => abrirLightbox(i);
       galeria.appendChild(img);
     });
@@ -361,13 +375,13 @@
 
     function abrirLightbox(index) {
       indexAtual = index;
-      lightboxImg.src = interioridades/${imagensInterior[index]};
+      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
       lightbox.style.display = "flex";
     }
 
     function navegar(direcao) {
       indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
-      lightboxImg.src = interioridades/${imagensInterior[indexAtual]};
+      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
     }
 
     document.addEventListener("keydown", e => {
@@ -389,23 +403,24 @@
         document.querySelector(".carousel-dot.active").classList.remove("active");
         slides[i].classList.add("active");
         dot.classList.add("active");
-        document.querySelector(".carousel-track").style.transform = translateX(-${i * 100}%);
+        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
       });
     });
 
     function toggleSubmenu() {
     const submenu = document.getElementById("submenuProjetos");
-    submenu.classList.toggle("open");  
+    submenu.classList.toggle("open");
   }
-	let currentSlide = 0;
+
+    let currentIndex = 0;
+    const track = document.getElementById('carouselTrack');
+    const slides = document.querySelectorAll('.carousel-slide');
 
     function moveSlide(direction) {
-      const track = document.getElementById('carouselTrack');
-      const slides = track.children;
       const totalSlides = slides.length;
-      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-      const slideWidth = slides[0].offsetWidth + 20; // 80% + margin
-      track.style.transform = translateX(-${currentSlide * slideWidth}px);
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      const offset = slides[0].offsetWidth + 20; // slide width + margin
+      track.style.transform = `translateX(-${offset * currentIndex}px)`;
     }
   </script>
 </body>
