@@ -366,13 +366,27 @@
   </div>
 
 <script>
-  const secoes = document.querySelectorAll('main section');
-  function mostrarSecao(id) {
-    secoes.forEach(secao => secao.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    // Função para abrir a imagem em tela cheia
+  function openFullscreen(imgElement) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    
+    lightbox.style.display = 'flex';
+    lightboxImg.src = imgElement.src;  // Define o src da imagem para a imagem clicada
+
+    // Ajustar a largura e altura para a imagem ocupar 90% da tela
+    lightboxImg.style.maxWidth = '90vw';
+    lightboxImg.style.maxHeight = '90vh';
   }
 
-  const imagensInterior = [
+  // Função para fechar a tela cheia
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+  // Navegação das imagens no lightbox
+  let currentImageIndex = 0;
+  const imagens = [
     "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
     "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
     "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
@@ -382,12 +396,33 @@
     "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
   ];
 
+  // Função para ir para a imagem anterior
+  function prevImage() {
+    if (currentImageIndex > 0) {
+      currentImageIndex--;
+    } else {
+      currentImageIndex = imagens.length - 1; // Vai para a última imagem se estiver na primeira
+    }
+    document.querySelector('#lightbox img').src = imagens[currentImageIndex];
+  }
+
+  // Função para ir para a imagem seguinte
+  function nextImage() {
+    if (currentImageIndex < imagens.length - 1) {
+      currentImageIndex++;
+    } else {
+      currentImageIndex = 0; // Volta para a primeira imagem se estiver na última
+    }
+    document.querySelector('#lightbox img').src = imagens[currentImageIndex];
+  }
+
+  // Criar as imagens na galeria
   const galeria = document.getElementById("galeriaInterior");
-  imagensInterior.forEach((nome, i) => {
-    const img = document.createElement("img");
-    img.src = `interioridades/${nome}`;
-    img.alt = `Paisagem Interior ${i + 1}`;
-    img.onclick = () => abrirLightbox(i);
+  imagens.forEach((nome, i) => {
+    const img = document.createElement('img');
+    img.src = `imagens/${nome}`;
+    img.alt = `Imagem ${i + 1}`;
+    img.onclick = () => openFullscreen(img);
     galeria.appendChild(img);
   });
 
