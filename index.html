@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfólio de Arte - João Gama</title>
+  <title>Art Portfolio - João Gama</title>
   <style>
     body {
       margin: 0;
@@ -26,6 +26,18 @@
     header img {
       height: 120px;
       max-width: 90%;
+    }
+
+    .language-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .language-toggle img {
+      height: 30px;
+      width: 30px;
     }
 
     .container {
@@ -86,11 +98,11 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
-      }
+    }
       
-      #submenuProjetos.open {
-        max-height: 500px; /* valor suficientemente grande */
-      }
+    #submenuProjetos.open {
+        max-height: 500px; /* value large enough */
+    }
 
     main {
       flex: 1;
@@ -226,7 +238,7 @@
       color: #333;
     }
 
-    /* Responsividade */
+    /* Responsiveness */
     @media (max-width: 768px) {
       nav {
         position: relative;
@@ -264,193 +276,120 @@
 </head>
 <body>
   <header>
-    <img src="assinatura_transparente.png" alt="Assinatura">
+    <img src="assinatura_transparente.png" alt="Signature">
+    <div class="language-toggle">
+      <img id="flag-pt" src="pt-flag.png" alt="Portuguese" onclick="changeLanguage('pt')">
+      <img id="flag-en" src="en-flag.png" alt="English" onclick="changeLanguage('en')">
+    </div>
   </header>
 
   <div class="container">
     <nav>
       <ul>
-        <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
-        <li class="titulo" onclick="toggleSubmenu()">Projetos ▾</li>
+        <li class="inicio"><a onclick="mostrarSecao('home')" data-pt="Início" data-en="Home">Home</a></li>
+        <li class="titulo" onclick="toggleSubmenu()" data-pt="Projetos ▾" data-en="Projects ▾">Projects ▾</li>
         <ul id="submenuProjetos">  
-          <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
-          <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
-          <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
+          <li><a onclick="mostrarSecao('projeto1')" data-pt="Paisagem Interior" data-en="Interior Landscape">Interior Landscape</a></li>
+          <li><a onclick="mostrarSecao('projeto2')" data-pt="Formas de Silêncio" data-en="Forms of Silence">Forms of Silence</a></li>
+          <li><a onclick="mostrarSecao('projeto3')" data-pt="Luz e Matéria" data-en="Light and Matter">Light and Matter</a></li>
         </ul>
       </ul>
     </nav>
 
     <main>
       <section id="home" class="active">
-          <h2>Bem-vindo ao meu portfólio</h2>
-          <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
-          <div class="carousel">
-            <div class="carousel-track">
-              <div class="carousel-slide active">
-                <img src="inicio/001_Inicio.jpg" alt="Imagem Início 1" onclick="openFullscreen(this)">
-                <div class="caption">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
-              </div>
-              <div class="carousel-slide">
-                <img src="inicio/002_Inicio.jpg" alt="Imagem Início 2" onclick="openFullscreen(this)">
-                <div class="caption">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
-              </div>
-              <div class="carousel-slide">
-                <img src="inicio/003_Inicio.jpg" alt="Imagem Início 3" onclick="openFullscreen(this)">
-                <div class="caption">Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024)</div>
-              </div>
+        <h2 data-pt="Bem-vindo ao meu portfólio" data-en="Welcome to My Portfolio">Welcome to My Portfolio</h2>
+        <p data-pt="Descubra meus projetos de pintura, onde a natureza e a matéria se encontram em camadas de cor e silêncio." data-en="Discover my painting projects, where nature and matter meet in layers of color and silence.">Discover my painting projects, where nature and matter meet in layers of color and silence.</p>
+        <div class="carousel">
+          <div class="carousel-track">
+            <div class="carousel-slide active">
+              <img src="inicio/001_Inicio.jpg" alt="Home Image 1" onclick="openFullscreen(this)">
+              <div class="caption" data-pt="Barrocal de Castelo Branco, 20x30cm, acrílica sobre tela, 2017." data-en="Barrocal de Castelo Branco, 20x30cm, acrylic on canvas, 2017.">Barrocal de Castelo Branco, 20x30cm, acrylic on canvas, 2017.</div>
             </div>
-            <div class="carousel-nav">
-              <span class="carousel-dot active"></span>
-              <span class="carousel-dot"></span>
-              <span class="carousel-dot"></span>
+            <div class="carousel-slide">
+              <img src="inicio/002_Inicio.jpg" alt="Home Image 2" onclick="openFullscreen(this)">
+              <div class="caption" data-pt="Contemplação, 50x60cm, acrílica sobre tela, 2025." data-en="Contemplation, 50x60cm, acrylic on canvas, 2025.">Contemplation, 50x60cm, acrylic on canvas, 2025.</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="inicio/003_Inicio.jpg" alt="Home Image 3" onclick="openFullscreen(this)">
+              <div class="caption" data-pt="A Nova Aurora – Mural comemorativo dos 50 anos do 25 de Abril (2024)" data-en="A New Dawn – Commemorative mural for the 50th anniversary of the 25th of April (2024)">A New Dawn – Commemorative mural for the 50th anniversary of the 25th of April (2024)</div>
             </div>
           </div>
-        </section>
+          <div class="carousel-nav">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
+        </div>
+      </section>
 
       <section id="projeto1">
-        <h2>Paisagem Interior</h2>
+        <h2 data-pt="Paisagem Interior" data-en="Interior Landscape">Interior Landscape</h2>
         <div class="gallery" id="galeriaInterior"></div>
       </section>
 
       <section id="projeto2">
-        <h2>Formas do Silêncio</h2>
+        <h2 data-pt="Formas de Silêncio" data-en="Forms of Silence">Forms of Silence</h2>
         <img src="imagens/formas_silencio1.jpg">
         <img src="imagens/formas_silencio2.jpg">
       </section>
 
       <section id="projeto3">
-        <h2>Luz e Matéria</h2>
+        <h2 data-pt="Luz e Matéria" data-en="Light and Matter">Light and Matter</h2>
         <img src="imagens/luz_materia1.jpg">
         <img src="imagens/luz_materia2.jpg">
       </section>
     </main>
   </div>
 
-  <div id="lightbox">
-    <div id="lightboxNav">
-      <span onclick="navegar(-1)">&#10094;</span>
-      <span onclick="navegar(1)">&#10095;</span>
-    </div>
-    <img id="lightboxImg" src="" alt="Imagem ampliada">
-  </div>
-
   <footer>
-    <p>© 2025 João Gama | Contacto: 19joaogama91@gmail.com</p>
-    <p id="view-counter">🔢 Este site já teve <span id="visit-count">...</span> visitas suas.</p>
+    <p data-pt="© 2025 João Gama - Todos os direitos reservados" data-en="© 2025 João Gama - All rights reserved">© 2025 João Gama - All rights reserved</p>
   </footer>
 
+  <div id="lightbox" onclick="closeLightbox()">
+    <img src="" alt="Expanded Image">
+    <div id="lightboxNav">
+      <span onclick="prevImage()">❮</span>
+      <span onclick="nextImage()">❯</span>
+    </div>
+  </div>
+
   <script>
-    const secoes = document.querySelectorAll('main section');
-    function mostrarSecao(id) {
-      secoes.forEach(secao => secao.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+    // Javascript to handle language toggle
+    const elementsToTranslate = document.querySelectorAll('[data-pt], [data-en]');
 
-    const imagensInterior = [
-      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
-      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
-      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
-      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
-      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
-      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
-      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
-    ];
-
-    const galeria = document.getElementById("galeriaInterior");
-    imagensInterior.forEach((nome, i) => {
-      const img = document.createElement("img");
-      img.src = `interioridades/${nome}`;
-      img.alt = `Paisagem Interior ${i + 1}`;
-      img.onclick = () => abrirLightbox(i);
-      galeria.appendChild(img);
-    });
-
-    let indexAtual = 0;
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightboxImg");
-
-    function abrirLightbox(index) {
-      indexAtual = index;
-      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
-      lightbox.style.display = "flex";
-    }
-
-    function navegar(direcao) {
-      indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
-      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
-    }
-
-    document.addEventListener("keydown", e => {
-      if (!lightbox.style.display.includes("flex")) return;
-      if (e.key === "Escape") lightbox.style.display = "none";
-      else if (e.key === "ArrowLeft") navegar(-1);
-      else if (e.key === "ArrowRight") navegar(1);
-    });
-
-    lightbox.addEventListener("click", e => {
-      if (e.target === lightbox) lightbox.style.display = "none";
-    });
-
-    const dots = document.querySelectorAll(".carousel-dot");
-    const slides = document.querySelectorAll(".carousel-slide");
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        document.querySelector(".carousel-slide.active").classList.remove("active");
-        document.querySelector(".carousel-dot.active").classList.remove("active");
-        slides[i].classList.add("active");
-        dot.classList.add("active");
-        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
+    function changeLanguage(lang) {
+      elementsToTranslate.forEach(element => {
+        element.innerText = element.getAttribute(`data-${lang}`);
       });
-    });
+
+      document.getElementById('flag-pt').style.display = lang === 'pt' ? 'none' : 'inline';
+      document.getElementById('flag-en').style.display = lang === 'en' ? 'none' : 'inline';
+    }
+
+    // Javascript to handle the carousel and section toggling
+    function mostrarSecao(secaoId) {
+      const secao = document.getElementById(secaoId);
+      const secoes = document.querySelectorAll('section');
+      secoes.forEach(s => s.classList.remove('active'));
+      secao.classList.add('active');
+    }
 
     function toggleSubmenu() {
-    const submenu = document.getElementById("submenuProjetos");
-    submenu.classList.toggle("open");
-  }
+      const submenu = document.getElementById('submenuProjetos');
+      submenu.classList.toggle('open');
+    }
+
+    function openFullscreen(imgElement) {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.style.display = 'flex';
+      const lightboxImg = lightbox.querySelector('img');
+      lightboxImg.src = imgElement.src;
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
   </script>
-
-  <!-- Modal de Fullscreen -->
-<div id="fullscreenModal" onclick="closeFullscreen()" style="display:none; position:fixed; z-index:1000; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
-  <img id="fullscreenImage" src="" style="max-width:90%; max-height:90%; object-fit:contain; box-shadow:0 0 20px #000;">
-</div>
-
-<script>
-  function openFullscreen(img) {
-    const modal = document.getElementById("fullscreenModal");
-    const fullImg = document.getElementById("fullscreenImage");
-    fullImg.src = img.src;
-    modal.style.display = "flex";
-  }
-
-  function closeFullscreen() {
-    document.getElementById("fullscreenModal").style.display = "none";
-  }
-</script>
-
-<script>
-  // Substituir com um namespace exclusivo para ti (podes trocar "joaogama-site" por outro qualquer)
-  const countUrl = "https://api.countapi.xyz/update/joaogama-site/inicio/?amount=1";
-  const getUrl = "https://api.countapi.xyz/get/joaogama-site/inicio/";
-
-  fetch(countUrl)
-    .then(() => fetch(getUrl))
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("visit-count").textContent = data.value.toLocaleString("pt-PT");
-    });
-
-  // Recupera o número de visitas armazenado localmente ou inicia em 0
-  let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
-  
-  // Incrementa o contador de visitas
-  visitCount++;
-  
-  // Armazena o novo número de visitas no armazenamento local
-  localStorage.setItem('visitCount', visitCount);
-  
-  // Atualiza o contador na página
-  document.getElementById('visit-count').textContent = visitCount;
-</script>
-  
 </body>
 </html>
