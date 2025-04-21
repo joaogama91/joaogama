@@ -119,17 +119,22 @@ mostrarSecao = function (id) {
 };
 
 // =============================
-// 7. Fullscreen Image View (New Code)
+// 7. Fullscreen Image View (Novas Funções)
 // =============================
-function openFullscreen(imageSrc) {
-  const overlay = document.querySelector('.fullscreen-overlay');
-  const img = overlay.querySelector('img');
-  
-  img.src = imageSrc;  // Set the source of the image clicked
-  overlay.style.display = 'flex';  // Show the overlay
-}
 
-function closeFullscreen() {
-  const overlay = document.querySelector('.fullscreen-overlay');
-  overlay.style.display = 'none';  // Hide the overlay
+function openFullscreen(imageSrc) {
+  const overlay = document.createElement("div");
+  overlay.classList.add("fullscreen-overlay");
+
+  const fullImg = document.createElement("img");
+  fullImg.src = imageSrc;
+  overlay.appendChild(fullImg);
+  document.body.appendChild(overlay);
+
+  // Fechar fullscreen ao clicar fora da imagem
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.remove(); // Remove o overlay e a imagem ao clicar fora
+    }
+  });
 }
