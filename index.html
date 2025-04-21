@@ -281,7 +281,21 @@
       <section id="home" class="active">
         <h2>Bem-vindo ao meu portfólio</h2>
         <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
-        <!-- Carousel aqui -->
+        <div class="carousel-container">
+            <button class="carousel-button left" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide"><img src="inicio/001_Inicio.jpg" alt="Slide 1"></div>
+              <div class="carousel-slide"><img src="inicio/002_Inicio.jpg" alt="Slide 2"></div>
+              <div class="carousel-slide"><img src="inicio/003_Inicio.jpg" alt="Slide 3"></div>
+            </div>
+            <button class="carousel-button right" onclick="moveSlide(1)">&#10095;</button>
+          </div>
+          <div class="carousel-nav">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
+        </div>
       </section>
 
       <section id="projeto1">
@@ -322,9 +336,76 @@
       document.getElementById(id).classList.add('active');
     }
 
+    const imagensInterior = [
+      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
+      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
+      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
+      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
+      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
+      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
+      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+    ];
+
+    const galeria = document.getElementById("galeriaInterior");
+    imagensInterior.forEach((nome, i) => {
+      const img = document.createElement("img");
+      img.src = interioridades/${nome};
+      img.alt = Paisagem Interior ${i + 1};
+      img.onclick = () => abrirLightbox(i);
+      galeria.appendChild(img);
+    });
+
+    let indexAtual = 0;
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    function abrirLightbox(index) {
+      indexAtual = index;
+      lightboxImg.src = interioridades/${imagensInterior[index]};
+      lightbox.style.display = "flex";
+    }
+
+    function navegar(direcao) {
+      indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
+      lightboxImg.src = interioridades/${imagensInterior[indexAtual]};
+    }
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.style.display.includes("flex")) return;
+      if (e.key === "Escape") lightbox.style.display = "none";
+      else if (e.key === "ArrowLeft") navegar(-1);
+      else if (e.key === "ArrowRight") navegar(1);
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) lightbox.style.display = "none";
+    });
+
+    const dots = document.querySelectorAll(".carousel-dot");
+    const slides = document.querySelectorAll(".carousel-slide");
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        document.querySelector(".carousel-slide.active").classList.remove("active");
+        document.querySelector(".carousel-dot.active").classList.remove("active");
+        slides[i].classList.add("active");
+        dot.classList.add("active");
+        document.querySelector(".carousel-track").style.transform = translateX(-${i * 100}%);
+      });
+    });
+
     function toggleSubmenu() {
-      const submenu = document.getElementById('submenuProjetos');
-      submenu.classList.toggle('open');
+    const submenu = document.getElementById("submenuProjetos");
+    submenu.classList.toggle("open");  
+  }
+	let currentSlide = 0;
+
+    function moveSlide(direction) {
+      const track = document.getElementById('carouselTrack');
+      const slides = track.children;
+      const totalSlides = slides.length;
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      const slideWidth = slides[0].offsetWidth + 20; // 80% + margin
+      track.style.transform = translateX(-${currentSlide * slideWidth}px);
     }
   </script>
 </body>
