@@ -69,7 +69,8 @@
 
   // Fechar lightbox ao clicar fora da imagem
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox || e.target === lightboxImg) {
+    // Close lightbox if the click target is the background (not the image itself)
+    if (e.target === lightbox) {
       lightbox.style.display = "none";
     }
   });
