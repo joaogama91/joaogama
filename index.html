@@ -355,41 +355,116 @@
   </div>
 
   <script>
-    // Javascript to handle language toggle
-    const elementsToTranslate = document.querySelectorAll('[data-pt], [data-en]');
+    const secoes = document.querySelectorAll('main section');
+    function mostrarSecao(id) {
+      secoes.forEach(secao => secao.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
 
-    function changeLanguage(lang) {
-      elementsToTranslate.forEach(element => {
-        element.innerText = element.getAttribute(`data-${lang}`);
+    const imagensInterior = [
+      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
+      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
+      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
+      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
+      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
+      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
+      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+    ];
+
+    const galeria = document.getElementById("galeriaInterior");
+    imagensInterior.forEach((nome, i) => {
+      const img = document.createElement("img");
+      img.src = `interioridades/${nome}`;
+      img.alt = `Paisagem Interior ${i + 1}`;
+      img.onclick = () => abrirLightbox(i);
+      galeria.appendChild(img);
+    });
+
+    let indexAtual = 0;
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    function abrirLightbox(index) {
+      indexAtual = index;
+      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
+      lightbox.style.display = "flex";
+    }
+
+    function navegar(direcao) {
+      indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
+      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
+    }
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.style.display.includes("flex")) return;
+      if (e.key === "Escape") lightbox.style.display = "none";
+      else if (e.key === "ArrowLeft") navegar(-1);
+      else if (e.key === "ArrowRight") navegar(1);
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) lightbox.style.display = "none";
+    });
+
+    const dots = document.querySelectorAll(".carousel-dot");
+    const slides = document.querySelectorAll(".carousel-slide");
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        document.querySelector(".carousel-slide.active").classList.remove("active");
+        document.querySelector(".carousel-dot.active").classList.remove("active");
+        slides[i].classList.add("active");
+        dot.classList.add("active");
+        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
       });
-
-      document.getElementById('flag-pt').style.display = lang === 'pt' ? 'none' : 'inline';
-      document.getElementById('flag-en').style.display = lang === 'en' ? 'none' : 'inline';
-    }
-
-    // Javascript to handle the carousel and section toggling
-    function mostrarSecao(secaoId) {
-      const secao = document.getElementById(secaoId);
-      const secoes = document.querySelectorAll('section');
-      secoes.forEach(s => s.classList.remove('active'));
-      secao.classList.add('active');
-    }
+    });
 
     function toggleSubmenu() {
-      const submenu = document.getElementById('submenuProjetos');
-      submenu.classList.toggle('open');
-    }
-
-    function openFullscreen(imgElement) {
-      const lightbox = document.getElementById('lightbox');
-      lightbox.style.display = 'flex';
-      const lightboxImg = lightbox.querySelector('img');
-      lightboxImg.src = imgElement.src;
-    }
-
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
+    const submenu = document.getElementById("submenuProjetos");
+    submenu.classList.toggle("open");
+  }
   </script>
+
+  <!-- Modal de Fullscreen -->
+<div id="fullscreenModal" onclick="closeFullscreen()" style="display:none; position:fixed; z-index:1000; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
+  <img id="fullscreenImage" src="" style="max-width:90%; max-height:90%; object-fit:contain; box-shadow:0 0 20px #000;">
+</div>
+
+<script>
+  function openFullscreen(img) {
+    const modal = document.getElementById("fullscreenModal");
+    const fullImg = document.getElementById("fullscreenImage");
+    fullImg.src = img.src;
+    modal.style.display = "flex";
+  }
+
+  function closeFullscreen() {
+    document.getElementById("fullscreenModal").style.display = "none";
+  }
+</script>
+
+<script>
+  // Substituir com um namespace exclusivo para ti (podes trocar "joaogama-site" por outro qualquer)
+  const countUrl = "https://api.countapi.xyz/update/joaogama-site/inicio/?amount=1";
+  const getUrl = "https://api.countapi.xyz/get/joaogama-site/inicio/";
+
+  fetch(countUrl)
+    .then(() => fetch(getUrl))
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visit-count").textContent = data.value.toLocaleString("pt-PT");
+    });
+
+  // Recupera o número de visitas armazenado localmente ou inicia em 0
+  let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
+  
+  // Incrementa o contador de visitas
+  visitCount++;
+  
+  // Armazena o novo número de visitas no armazenamento local
+  localStorage.setItem('visitCount', visitCount);
+  
+  // Atualiza o contador na página
+  document.getElementById('visit-count').textContent = visitCount;
+</script>
 </body>
 </html>
