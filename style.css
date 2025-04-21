@@ -21,8 +21,12 @@ header {
 }
 
 header img {
+  width: 100%;
+  max-width: 500px; /* Limit the max width for larger screens */
   height: auto;
-  max-height: 120px;
+  margin: 0 auto; /* Center the image */
+  display: block;
+  padding: 0 20px; /* Add some padding to avoid touching the edges */
 }
 
 .container {
@@ -228,6 +232,12 @@ footer {
 }
 
 @media (max-width: 768px) {
+
+   header img {
+    max-width: 100%; /* Let it take the full width on smaller screens */
+    padding: 0 10px; /* Reduce padding for smaller screens */
+  }
+  
   .container {
     flex-direction: column;
     padding-top: 260px;
