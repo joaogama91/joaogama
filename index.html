@@ -438,6 +438,18 @@
     .then(data => {
       document.getElementById("visit-count").textContent = data.value.toLocaleString("pt-PT");
     });
+
+  // Recupera o número de visitas armazenado localmente ou inicia em 0
+  let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
+  
+  // Incrementa o contador de visitas
+  visitCount++;
+  
+  // Armazena o novo número de visitas no armazenamento local
+  localStorage.setItem('visitCount', visitCount);
+  
+  // Atualiza o contador na página
+  document.getElementById('visit-count').textContent = visitCount;
 </script>
   
 </body>
