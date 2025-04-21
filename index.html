@@ -282,21 +282,30 @@
 
     <main>
       <section id="home" class="active">
-        <h2>Bem-vindo ao meu portfólio</h2>
-        <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
-        <div class="carousel">
-          <div class="carousel-track">
-            <div class="carousel-slide active"><img src="inicio/001_Inicio.jpg" alt="Imagem Início 1"></div>
-            <div class="carousel-slide"><img src="inicio/002_Inicio.jpg" alt="Imagem Início 2"></div>
-            <div class="carousel-slide"><img src="inicio/003_Inicio.jpg" alt="Imagem Início 3"></div>
+          <h2>Bem-vindo ao meu portfólio</h2>
+          <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
+          <div class="carousel">
+            <div class="carousel-track">
+              <div class="carousel-slide active">
+                <img src="inicio/001_Inicio.jpg" alt="Imagem Início 1" onclick="openFullscreen(this)">
+                <div class="caption">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
+              </div>
+              <div class="carousel-slide">
+                <img src="inicio/002_Inicio.jpg" alt="Imagem Início 2" onclick="openFullscreen(this)">
+                <div class="caption">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
+              </div>
+              <div class="carousel-slide">
+                <img src="inicio/003_Inicio.jpg" alt="Imagem Início 3" onclick="openFullscreen(this)">
+                <div class="caption">Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024)</div>
+              </div>
+            </div>
+            <div class="carousel-nav">
+              <span class="carousel-dot active"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+            </div>
           </div>
-          <div class="carousel-nav">
-            <span class="carousel-dot active"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-          </div>
-        </div>
-      </section>
+        </section>
 
       <section id="projeto1">
         <h2>Paisagem Interior</h2>
@@ -398,5 +407,24 @@
     submenu.classList.toggle("open");
   }
   </script>
+
+  <!-- Modal de Fullscreen -->
+<div id="fullscreenModal" onclick="closeFullscreen()" style="display:none; position:fixed; z-index:1000; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
+  <img id="fullscreenImage" src="" style="max-width:90%; max-height:90%; object-fit:contain; box-shadow:0 0 20px #000;">
+</div>
+
+<script>
+  function openFullscreen(img) {
+    const modal = document.getElementById("fullscreenModal");
+    const fullImg = document.getElementById("fullscreenImage");
+    fullImg.src = img.src;
+    modal.style.display = "flex";
+  }
+
+  function closeFullscreen() {
+    document.getElementById("fullscreenModal").style.display = "none";
+  }
+</script>
+  
 </body>
 </html>
