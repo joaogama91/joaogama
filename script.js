@@ -91,3 +91,41 @@
       track.style.transform = `translateX(-${index * 100}%)`;
     });
   });
+
+// =============================
+// 6. Zoom nas imagens do carrossel (página inicial)
+// =============================
+function enableCarouselZoom() {
+  const zoomableImages = document.querySelectorAll("#home .carousel-slide img");
+
+  zoomableImages.forEach(img => {
+    img.classList.add("zoomable"); // Optional: for styling or future use
+    img.addEventListener("click", () => {
+      const overlay = document.createElement("div");
+      overlay.classList.add("fullscreen-overlay");
+
+      const fullImg = document.createElement("img");
+      fullImg.src = img.src;
+      overlay.appendChild(fullImg);
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay || e.target === fullImg) {
+          overlay.remove();
+        }
+      });
+    });
+  });
+}
+
+// Run on page load
+enableCarouselZoom();
+
+// Patch mostrarSecao to re-run zoom logic if the home section is shown again
+const originalMostrarSecao = mostrarSecao;
+mostrarSecao = function (id) {
+  originalMostrarSecao(id);
+  if (id === "home") {
+    setTimeout(enableCarouselZoom, 100); // Rebind in case DOM is refreshed
+  }
+};
