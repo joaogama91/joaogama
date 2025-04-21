@@ -134,15 +134,28 @@
       overflow: hidden;
     }
 
+ .carousel-image-wrapper {
+   position: relative;
+ }
+ 
+ .carousel-image-wrapper img {
+   width: 100%;
+   display: block;
+ }
+
  .carousel-caption {
-    margin-top: 10px;
-    font-size: 1rem;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
     font-style: italic;
-    color: #444;
     text-align: center;
     max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
     line-height: 1.4;
   }
 
