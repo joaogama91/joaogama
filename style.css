@@ -60,6 +60,16 @@ nav ul li {
   margin: 10px 0;
 }
 
+nav ul li ul {
+  display: none;
+  list-style: none;
+  padding-left: 0;
+}
+
+nav ul li ul.open {
+  display: block;
+}
+
 nav ul li.titulo {
   font-size: 1.1em;
   color: white;
