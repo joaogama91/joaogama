@@ -346,11 +346,11 @@ const imagensInterior = [
 
     const galeria = document.getElementById("galeriaInterior");
     imagensInterior.forEach((nome, i) => {
-      const img = document.createElement("img");
-      img.src = 'interioridades/${nome}';
-      img.alt = 'Paisagem Interior ${i + 1}';
-      img.onclick = () => abrirLightbox(i);
-      galeria.appendChild(img);
+    const img = document.createElement("img");
+    img.src = `interioridades/${nome}`;
+    img.alt = `Paisagem Interior ${i + 1}`;
+    img.onclick = () => abrirLightbox(i);
+    galeria.appendChild(img);
     });
 
     let indexAtual = 0;
@@ -359,13 +359,13 @@ const imagensInterior = [
 
     function abrirLightbox(index) {
       indexAtual = index;
-      lightboxImg.src = 'interioridades/${imagensInterior[index]}';
+      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
       lightbox.style.display = "flex";
     }
 
     function navegar(direcao) {
       indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
-      lightboxImg.src = 'interioridades/${imagensInterior[indexAtual]}';
+      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
     }
 
     document.addEventListener("keydown", e => {
