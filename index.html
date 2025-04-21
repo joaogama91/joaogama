@@ -465,6 +465,35 @@
   
   // Atualiza o contador na página
   document.getElementById('visit-count').textContent = visitCount;
+
+  function changeLanguage(language) {
+  // Select all elements with data-pt or data-en attributes
+  const elements = document.querySelectorAll('[data-pt], [data-en]');
+  
+  // Loop through each element and change its text content based on the selected language
+  elements.forEach(element => {
+    if (language === 'pt') {
+      element.textContent = element.getAttribute('data-pt') || element.textContent;
+    } else if (language === 'en') {
+      element.textContent = element.getAttribute('data-en') || element.textContent;
+    }
+  });
+
+  // Show the correct flag as selected
+  const flagPT = document.getElementById('flag-pt');
+  const flagEN = document.getElementById('flag-en');
+  
+  if (language === 'pt') {
+    flagPT.style.opacity = 1;
+    flagEN.style.opacity = 0.5;
+  } else if (language === 'en') {
+    flagEN.style.opacity = 1;
+    flagPT.style.opacity = 0.5;
+  }
+}
+
+// Initially set the language to Portuguese (or any default language you prefer)
+changeLanguage('pt');
 </script>
 </body>
 </html>
