@@ -129,3 +129,19 @@ mostrarSecao = function (id) {
     setTimeout(enableCarouselZoom, 100); // Rebind in case DOM is refreshed
   }
 };
+
+// =============================
+// 7. Fullscreen Image View (New Code)
+// =============================
+function openFullscreen(imageSrc) {
+  const overlay = document.querySelector('.fullscreen-overlay');
+  const img = overlay.querySelector('img');
+  
+  img.src = imageSrc;  // Set the source of the image clicked
+  overlay.style.display = 'flex';  // Show the overlay
+}
+
+function closeFullscreen() {
+  const overlay = document.querySelector('.fullscreen-overlay');
+  overlay.style.display = 'none';  // Hide the overlay
+}
