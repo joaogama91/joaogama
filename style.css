@@ -245,29 +245,32 @@ footer {
   
   .container {
     flex-direction: column;
-    padding-top: 200px; /* Reduced padding for smaller screens */
+    padding-top: 120px; /* Reduced padding for smaller screens */
   }
   
   nav {
-    position: relative;
+    position: relative; /* Change to relative for mobile */
     width: 100%;
-    height: auto;
-    padding: 10px 20px;
-    box-shadow: none;
     top: 0;
-    left: 0;
-    overflow: visible;
+    box-sizing: border-box;
+    height: auto;
+    padding: 15px 10px;
   }
 
   main {
     margin-left: 0;
     padding: 20px;
-    margin-top: 0; /* Remove extra margin-top */
+    margin-top: 20px; /* Prevent content from being pushed down */
   }
 
   .gallery {
     column-count: 2;
   }
+
+    .carousel-track {
+    width: 100%;
+  }
+  
 }
 
 @media (max-width: 480px) {
