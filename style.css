@@ -234,11 +234,14 @@ footer {
   }
 
   nav {
-    position: static;
+    position: relative;
     width: 100%;
     height: auto;
     padding: 10px 20px;
     box-shadow: none;
+    top: 0;
+    left: 0;
+    overflow: visible;
   }
 
   main {
