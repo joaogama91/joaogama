@@ -112,166 +112,55 @@
       display: block;
     }
 
-        /* Estilos para o carrossel */
-        .carousel-container {
-          position: relative;
-          width: 60%;
-          max-width: 700px;
-          margin: auto;
-          overflow: hidden;
-        }
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
 
-    .carousel-caption {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        color: white;
-        font-size: 18px;
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 6px 10px;
-        border-radius: 5px;
-        max-width: 90%;
-      }
-        .carousel-slide {
-            display: none;
-            width: 100%;
-            transition: transform 1s ease-in-out;
-            object-fit: cover; /* Mantém a proporção original das imagens */
-        }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
 
-        .carousel-slide.active {
-            display: block;
-        }
+    .carousel-slide {
+      min-width: 100%;
+      transition: transform 0.5s;
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
 
-        /* Ajuste para controlar o tamanho das imagens */
-        .carousel-slide img {
-            width: 100%;
-            height: auto; /* Mantém a proporção original da imagem */
-        }
+    .carousel-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
 
-        /* Texto nas imagens */
-        .carousel-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
-            padding: 10px;
-        }
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
 
-        .carousel-dots {
-            text-align: center;
-            margin-top: 20px; /* Aumenta o espaço entre as imagens e os pontos */
-        }
+    .carousel-nav {
+      text-align: center;
+      margin-top: 10px;
+    }
 
-        .carousel-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            margin: 0 5px;
-            background-color: #bbb;
-            border-radius: 50%;
-            cursor: pointer;
-        }
+    .carousel-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: #999;
+      border-radius: 50%;
+      cursor: pointer;
+    }
 
-        .carousel-dot.active {
-            background-color: #717171;
-        }
-
-        .carousel-buttons {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-        }
-
-        .carousel-button {
-          background-color: rgba(0, 0, 0, 0.5);
-          color: white;
-          padding: 10px 14px;
-          border: none;
-          cursor: pointer;
-          font-size: 18px;
-          position: relative;
-          z-index: 10;
-        }
-
-        .carousel-button:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Novos estilos para o slide lateral */
-        .carousel-buttons-left,
-        .carousel-buttons-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-        }
-
-        .carousel-buttons-left {
-            left: 10px;
-        }
-
-        .carousel-buttons-right {
-            right: 10px;
-        }
-
-        /* Estilos para o modal de full screen */
-        .full-screen-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); /* Fundo preto semitransparente */
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .full-screen-modal img {
-            width: 80%;
-            height: auto;
-        }
-
-        .full-screen-modal .carousel-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-        }
-
-        .full-screen-modal.active {
-            display: flex;
-        }
-
-        .full-screen-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 101;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-        }
-
-        .full-screen-button.left {
-            left: 10px;
-        }
-
-        .full-screen-button.right {
-            right: 10px;
-        }
+    .carousel-dot.active {
+      background-color: #333;
+    }
 
     .gallery {
       column-count: 4;
@@ -362,24 +251,15 @@
       }
     }
 
-    @media (max-width: 768px) {
-        .carousel-container {
-          width: 95%;
-        }
-      
-        .carousel-button {
-          padding: 8px 12px;
-          font-size: 16px;
-        }
-      
-        .carousel-buttons-left {
-          left: 5px;
-        }
-      
-        .carousel-buttons-right {
-          right: 5px;
-        }
+    @media (max-width: 480px) {
+      .gallery {
+        column-count: 1;
       }
+
+      header img {
+        height: 80px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -402,185 +282,121 @@
 
     <main>
       <section id="home" class="active">
-          <h2>Bem-vindo ao meu portfólio</h2>
-          <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
-          
-          <!-- Carrossel -->
+        <h2>Bem-vindo ao meu portfólio</h2>
+        <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
         <div class="carousel">
-            <div class="carousel-track">
-                <!-- Slide 1 -->
-                <div class="carousel-slide active" onclick="openFullScreen(0)">
-                    <img src="inicio/001_Inicio.jpg" alt="Barrocal de Castelo Branco" class="carousel-image">
-                    <div class="carousel-caption">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
-                </div>
-                
-                <!-- Slide 2 -->
-                <div class="carousel-slide" onclick="openFullScreen(1)">
-                    <img src="inicio/002_Inicio.jpg" alt="Contemplação" class="carousel-image">
-                    <div class="carousel-caption">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
-                </div>
-      
-                <!-- Slide 3 -->
-                <div class="carousel-slide" onclick="openFullScreen(2)">
-                    <img src="inicio/003_Inicio.jpg" alt="Horizonte Interior" class="carousel-image">
-                    <div class="carousel-caption">Horizonte Interior, 40x50cm, acrílico sobre tela, 2023.</div>
-                </div>
-            </div>
-
-            <!-- Botões de navegação -->
-            <div class="carousel-buttons">
-                <button class="carousel-button left" onclick="mudarSlide(-1)">❮</button>
-                <button class="carousel-button right" onclick="mudarSlide(1)">❯</button>
-            </div>
-
-            <!-- Dots -->
-            <div class="carousel-dots">
-                <span class="carousel-dot active" onclick="irParaSlide(0)"></span>
-                <span class="carousel-dot" onclick="irParaSlide(1)"></span>
-                <span class="carousel-dot" onclick="irParaSlide(2)"></span>
-            </div>
-        </div>
-
-        <!-- Modal full screen -->
-        <div class="full-screen-modal" id="modalFullScreen">
-            <button class="full-screen-button left" onclick="mudarSlideModal(-1)">❮</button>
-            <img src="" id="modalImage" alt="">
-            <div class="carousel-text" id="modalCaption"></div>
-            <button class="full-screen-button right" onclick="mudarSlideModal(1)">❯</button>
+          <div class="carousel-track">
+            <div class="carousel-slide active"><img src="inicio/001_Inicio.jpg" alt="Imagem Início 1"></div>
+            <div class="carousel-slide"><img src="inicio/002_Inicio.jpg" alt="Imagem Início 2"></div>
+            <div class="carousel-slide"><img src="inicio/003_Inicio.jpg" alt="Imagem Início 3"></div>
+          </div>
+          <div class="carousel-nav">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
         </div>
       </section>
 
       <section id="projeto1">
         <h2>Paisagem Interior</h2>
-        <div class="gallery">
-          <img src="projetos/paisagem/001.jpg" alt="Obra 1" onclick="abrirLightbox(0, 'projeto1')">
-          <img src="projetos/paisagem/002.jpg" alt="Obra 2" onclick="abrirLightbox(1, 'projeto1')">
-          <img src="projetos/paisagem/003.jpg" alt="Obra 3" onclick="abrirLightbox(2, 'projeto1')">
-        </div>
+        <div class="gallery" id="galeriaInterior"></div>
       </section>
 
       <section id="projeto2">
         <h2>Formas do Silêncio</h2>
-        <div class="gallery">
-          <img src="projetos/silencio/001.jpg" alt="Obra 1" onclick="abrirLightbox(0, 'projeto2')">
-          <img src="projetos/silencio/002.jpg" alt="Obra 2" onclick="abrirLightbox(1, 'projeto2')">
-        </div>
+        <img src="imagens/formas_silencio1.jpg">
+        <img src="imagens/formas_silencio2.jpg">
       </section>
 
       <section id="projeto3">
         <h2>Luz e Matéria</h2>
-        <div class="gallery">
-          <img src="projetos/luz/001.jpg" alt="Obra 1" onclick="abrirLightbox(0, 'projeto3')">
-          <img src="projetos/luz/002.jpg" alt="Obra 2" onclick="abrirLightbox(1, 'projeto3')">
-          <img src="projetos/luz/003.jpg" alt="Obra 3" onclick="abrirLightbox(2, 'projeto3')">
-          <img src="projetos/luz/004.jpg" alt="Obra 4" onclick="abrirLightbox(3, 'projeto3')">
-        </div>
+        <img src="imagens/luz_materia1.jpg">
+        <img src="imagens/luz_materia2.jpg">
       </section>
     </main>
   </div>
 
-  <!-- Lightbox -->
   <div id="lightbox">
     <div id="lightboxNav">
-      <span onclick="navegarLightbox(-1)">❮</span>
-      <span onclick="navegarLightbox(1)">❯</span>
+      <span onclick="navegar(-1)">&#10094;</span>
+      <span onclick="navegar(1)">&#10095;</span>
     </div>
-    <img src="" alt="Obra ampliada" id="lightboxImg">
+    <img id="lightboxImg" src="" alt="Imagem ampliada">
   </div>
 
   <footer>
-    © 2025 João Gama. Todos os direitos reservados.
+    <p>© 2025 João Gama | Contacto: 19joaogama91@gmail.com</p>
   </footer>
 
   <script>
-    let secaoAtual = 'home';
-
+    const secoes = document.querySelectorAll('main section');
     function mostrarSecao(id) {
-      document.querySelectorAll('section').forEach(secao => {
-        secao.classList.remove('active');
-      });
+      secoes.forEach(secao => secao.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      secaoAtual = id;
     }
+
+    const imagensInterior = [
+      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
+      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
+      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
+      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
+      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
+      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
+      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+    ];
+
+    const galeria = document.getElementById("galeriaInterior");
+    imagensInterior.forEach((nome, i) => {
+      const img = document.createElement("img");
+      img.src = `interioridades/${nome}`;
+      img.alt = `Paisagem Interior ${i + 1}`;
+      img.onclick = () => abrirLightbox(i);
+      galeria.appendChild(img);
+    });
+
+    let indexAtual = 0;
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    function abrirLightbox(index) {
+      indexAtual = index;
+      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
+      lightbox.style.display = "flex";
+    }
+
+    function navegar(direcao) {
+      indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
+      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
+    }
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.style.display.includes("flex")) return;
+      if (e.key === "Escape") lightbox.style.display = "none";
+      else if (e.key === "ArrowLeft") navegar(-1);
+      else if (e.key === "ArrowRight") navegar(1);
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) lightbox.style.display = "none";
+    });
+
+    const dots = document.querySelectorAll(".carousel-dot");
+    const slides = document.querySelectorAll(".carousel-slide");
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        document.querySelector(".carousel-slide.active").classList.remove("active");
+        document.querySelector(".carousel-dot.active").classList.remove("active");
+        slides[i].classList.add("active");
+        dot.classList.add("active");
+        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
+      });
+    });
 
     function toggleSubmenu() {
-      const submenu = document.getElementById('submenuProjetos');
-      submenu.classList.toggle('open');
-    }
-
-    // Carrossel
-    let slideAtual = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-
-    function atualizarCarrossel() {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === slideAtual);
-        dots[i].classList.toggle('active', i === slideAtual);
-      });
-    }
-
-    function mudarSlide(n) {
-      slideAtual = (slideAtual + n + slides.length) % slides.length;
-      atualizarCarrossel();
-    }
-
-    function irParaSlide(n) {
-      slideAtual = n;
-      atualizarCarrossel();
-    }
-
-    // Modal Full Screen
-    const modal = document.getElementById('modalFullScreen');
-    const modalImg = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
-
-    function openFullScreen(index) {
-      slideAtual = index;
-      atualizarModal();
-      modal.classList.add('active');
-    }
-
-    function atualizarModal() {
-      const slide = slides[slideAtual];
-      const img = slide.querySelector('img');
-      const caption = slide.querySelector('.carousel-caption');
-      modalImg.src = img.src;
-      modalCaption.innerText = caption.innerText;
-    }
-
-    function mudarSlideModal(n) {
-      slideAtual = (slideAtual + n + slides.length) % slides.length;
-      atualizarModal();
-    }
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-      }
-    });
-
-    // Lightbox Galeria
-    let galeriaAtual = [];
-    let imgAtual = 0;
-
-    function abrirLightbox(index, secaoId) {
-      galeriaAtual = Array.from(document.querySelector(`#${secaoId} .gallery`).querySelectorAll('img'));
-      imgAtual = index;
-      document.getElementById('lightboxImg').src = galeriaAtual[imgAtual].src;
-      document.getElementById('lightbox').style.display = 'flex';
-    }
-
-    function navegarLightbox(dir) {
-      imgAtual = (imgAtual + dir + galeriaAtual.length) % galeriaAtual.length;
-      document.getElementById('lightboxImg').src = galeriaAtual[imgAtual].src;
-    }
-
-    document.getElementById('lightbox').addEventListener('click', (e) => {
-      if (e.target.id === 'lightbox' || e.target.tagName === 'SPAN') {
-        document.getElementById('lightbox').style.display = 'none';
-      }
-    });
+    const submenu = document.getElementById("submenuProjetos");
+    submenu.classList.toggle("open");
+  }
   </script>
 </body>
 </html>
