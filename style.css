@@ -273,6 +273,16 @@ body {
 
     /* Responsividade */
     @media (max-width: 768px) {
+     .carousel {
+        max-width: 90%;  /* Adjust carousel width to fit smaller screens */
+      }
+    
+      .carousel-caption {
+        font-size: 0.85rem;  /* Smaller text for better readability */
+        padding: 8px 12px;   /* Adjust padding */
+        max-width: 80%;      /* Ensure text doesn't overflow on smaller screens */
+      }
+      
       nav {
         position: relative;
         width: 100%;
