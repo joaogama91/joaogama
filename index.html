@@ -365,82 +365,79 @@
     </div>
   </div>
 
-  <script>
-    const secoes = document.querySelectorAll('main section');
-    function mostrarSecao(id) {
-      secoes.forEach(secao => secao.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+<script>
+  const secoes = document.querySelectorAll('main section');
+  function mostrarSecao(id) {
+    secoes.forEach(secao => secao.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
 
-    const imagensInterior = [
-      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
-      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
-      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
-      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
-      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
-      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
-      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
-    ];
+  const imagensInterior = [
+    "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
+    "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
+    "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
+    "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
+    "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
+    "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
+    "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+  ];
 
-    const galeria = document.getElementById("galeriaInterior");
-    imagensInterior.forEach((nome, i) => {
-      const img = document.createElement("img");
-      img.src = `interioridades/${nome}`;
-      img.alt = `Paisagem Interior ${i + 1}`;
-      img.onclick = () => abrirLightbox(i);
-      galeria.appendChild(img);
+  const galeria = document.getElementById("galeriaInterior");
+  imagensInterior.forEach((nome, i) => {
+    const img = document.createElement("img");
+    img.src = `interioridades/${nome}`;
+    img.alt = `Paisagem Interior ${i + 1}`;
+    img.onclick = () => abrirLightbox(i);
+    galeria.appendChild(img);
+  });
+
+  let indexAtual = 0;
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+
+  function abrirLightbox(index) {
+    indexAtual = index;
+    lightboxImg.src = `interioridades/${imagensInterior[index]}`;
+    lightbox.style.display = "flex";
+  }
+
+  function navegar(direcao) {
+    indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
+    lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
+  }
+
+  document.addEventListener("keydown", e => {
+    if (!lightbox.style.display.includes("flex")) return;
+    if (e.key === "Escape") lightbox.style.display = "none";
+    else if (e.key === "ArrowLeft") navegar(-1);
+    else if (e.key === "ArrowRight") navegar(1);
+  });
+
+  lightbox.addEventListener("click", e => {
+    if (e.target === lightbox) lightbox.style.display = "none";
+  });
+
+  const dots = document.querySelectorAll(".carousel-dot");
+  const slides = document.querySelectorAll(".carousel-slide");
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      document.querySelector(".carousel-slide.active").classList.remove("active");
+      document.querySelector(".carousel-dot.active").classList.remove("active");
+      slides[i].classList.add("active");
+      dot.classList.add("active");
+      document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
     });
+  });
 
-    let indexAtual = 0;
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightboxImg");
-
-    function abrirLightbox(index) {
-      indexAtual = index;
-      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
-      lightbox.style.display = "flex";
-    }
-
-    function navegar(direcao) {
-      indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
-      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
-    }
-
-    document.addEventListener("keydown", e => {
-      if (!lightbox.style.display.includes("flex")) return;
-      if (e.key === "Escape") lightbox.style.display = "none";
-      else if (e.key === "ArrowLeft") navegar(-1);
-      else if (e.key === "ArrowRight") navegar(1);
-    });
-
-    lightbox.addEventListener("click", e => {
-      if (e.target === lightbox) lightbox.style.display = "none";
-    });
-
-    const dots = document.querySelectorAll(".carousel-dot");
-    const slides = document.querySelectorAll(".carousel-slide");
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        document.querySelector(".carousel-slide.active").classList.remove("active");
-        document.querySelector(".carousel-dot.active").classList.remove("active");
-        slides[i].classList.add("active");
-        dot.classList.add("active");
-        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
-      });
-    });
-
-    function toggleSubmenu() {
+  function toggleSubmenu() {
     const submenu = document.getElementById("submenuProjetos");
     submenu.classList.toggle("open");
   }
-  </script>
 
-  <!-- Modal de Fullscreen -->
-<div id="fullscreenModal" onclick="closeFullscreen()" style="display:none; position:fixed; z-index:1000; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
-  <img id="fullscreenImage" src="" style="max-width:90%; max-height:90%; object-fit:contain; box-shadow:0 0 20px #000;">
-</div>
+  // Fullscreen Modal (Lightbox) Script
+  const fullscreenModal = document.getElementById("fullscreenModal");
+  const fullscreenImage = document.getElementById("fullscreenImage");
 
-<script>
   function openFullscreen(img) {
     const modal = document.getElementById("fullscreenModal");
     const fullImg = document.getElementById("fullscreenImage");
@@ -451,46 +448,31 @@
   function closeFullscreen() {
     document.getElementById("fullscreenModal").style.display = "none";
   }
-</script>
 
-<script>
-  // Define URLs for API requests (replace 'joaogama-site' with a unique namespace if needed)
+  // API for counting visits
   const countUrl = "https://api.countapi.xyz/update/joaogama-site/inicio/?amount=1";
   const getUrl = "https://api.countapi.xyz/get/joaogama-site/inicio/";
 
-  // Fetch the count from the API and update both PT and EN
   fetch(countUrl)
     .then(() => fetch(getUrl))
     .then(res => res.json())
     .then(data => {
-      // Format count for both languages
       document.getElementById("visit-count-pt").textContent = data.value.toLocaleString("pt-PT");
       document.getElementById("visit-count-en").textContent = data.value.toLocaleString("en-US");
     });
 
-  // Use LocalStorage as a fallback if API fails
   let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
-  
-  // Increment the visit count
   visitCount++;
-  
-  // Store updated count in LocalStorage
   localStorage.setItem('visitCount', visitCount);
-  
-  // Update the count in both languages (PT and EN)
   document.getElementById('visit-count-pt').textContent = visitCount.toLocaleString("pt-PT");
   document.getElementById('visit-count-en').textContent = visitCount.toLocaleString("en-US");
-</script>
 
-  <script>
-  // Function to change the language
+  // Language Change Functionality
   function changeLanguage(language) {
     const elements = document.querySelectorAll('[data-pt], [data-en]');
-
     elements.forEach(element => {
       const ptText = element.getAttribute('data-pt');
       const enText = element.getAttribute('data-en');
-
       if (language === 'pt') {
         element.textContent = ptText;
       } else if (language === 'en') {
@@ -499,7 +481,6 @@
     });
   }
 
-  // Initial language setting based on browser settings (if preferred language is Portuguese)
   const userLang = navigator.language || navigator.userLanguage;
   if (userLang.includes('pt')) {
     changeLanguage('pt');
@@ -507,5 +488,11 @@
     changeLanguage('en');
   }
 </script>
+
+<!-- Modal de Fullscreen -->
+<div id="fullscreenModal" onclick="closeFullscreen()" style="display:none; position:fixed; z-index:1000; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
+  <img id="fullscreenImage" src="" style="max-width:90%; max-height:90%; object-fit:contain; box-shadow:0 0 20px #000;">
+</div>
+
 </body>
 </html>
