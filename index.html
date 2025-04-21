@@ -239,8 +239,8 @@
     }
 
     .language-toggle img {
-      width: 20px;  /* Adjust the size of the flags */
-      height: 15px; /* Adjust the size of the flags */
+      width: 30px;  /* Adjust the size of the flags */
+      height: 20px; /* Adjust the size of the flags */
       margin: 0 5px; /* Add spacing between flags */
       display: inline-block; /* Align them horizontally */
     }
@@ -472,32 +472,35 @@
   
   // Atualiza o contador na página
   document.getElementById('visit-count').textContent = visitCount;
-</script>
 
-  <script>
-  // Function to change the language
   function changeLanguage(language) {
-    const elements = document.querySelectorAll('[data-pt], [data-en]');
+  // Select all elements with data-pt or data-en attributes
+  const elements = document.querySelectorAll('[data-pt], [data-en]');
+  
+  // Loop through each element and change its text content based on the selected language
+  elements.forEach(element => {
+    if (language === 'pt') {
+      element.textContent = element.getAttribute('data-pt') || element.textContent;
+    } else if (language === 'en') {
+      element.textContent = element.getAttribute('data-en') || element.textContent;
+    }
+  });
 
-    elements.forEach(element => {
-      const ptText = element.getAttribute('data-pt');
-      const enText = element.getAttribute('data-en');
-
-      if (language === 'pt') {
-        element.textContent = ptText;
-      } else if (language === 'en') {
-        element.textContent = enText;
-      }
-    });
+  // Show the correct flag as selected
+  const flagPT = document.getElementById('flag-pt');
+  const flagEN = document.getElementById('flag-en');
+  
+  if (language === 'pt') {
+    flagPT.style.opacity = 1;
+    flagEN.style.opacity = 0.5;
+  } else if (language === 'en') {
+    flagEN.style.opacity = 1;
+    flagPT.style.opacity = 0.5;
   }
+}
 
-  // Initial language setting based on browser settings (if preferred language is Portuguese)
-  const userLang = navigator.language || navigator.userLanguage;
-  if (userLang.includes('pt')) {
-    changeLanguage('pt');
-  } else {
-    changeLanguage('en');
-  }
+// Initially set the language to Portuguese (or any default language you prefer)
+changeLanguage('pt');
 </script>
 </body>
 </html>
