@@ -282,12 +282,13 @@
     <nav>
       <ul>
         <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
-        <li class="titulo" onclick="toggleSubmenu()">Projetos ▾</li>
-        <ul id="submenuProjetos">  
-          <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
-          <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
-          <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
-        </ul>
+        <li class="titulo" onclick="toggleSubmenu()">Projetos ▾
+          <ul id="submenuProjetos">  
+            <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
+            <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
+            <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
 
@@ -409,18 +410,17 @@
 
     function toggleSubmenu() {
     const submenu = document.getElementById("submenuProjetos");
-    submenu.classList.toggle("open");
+    submenu.classList.toggle("open");  
   }
-
-    let currentIndex = 0;
-    const track = document.getElementById('carouselTrack');
-    const slides = document.querySelectorAll('.carousel-slide');
+    let currentSlide = 0;
 
     function moveSlide(direction) {
+      const track = document.getElementById('carouselTrack');
+      const slides = track.children;
       const totalSlides = slides.length;
-      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-      const offset = slides[0].offsetWidth + 20; // slide width + margin
-      track.style.transform = `translateX(-${offset * currentIndex}px)`;
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      const slideWidth = slides[0].offsetWidth + 20; // 80% + margin
+      track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
     }
   </script>
 </body>
