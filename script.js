@@ -101,19 +101,7 @@ function enableCarouselZoom() {
   zoomableImages.forEach(img => {
     img.classList.add("zoomable"); // Optional: for styling or future use
     img.addEventListener("click", () => {
-      const overlay = document.createElement("div");
-      overlay.classList.add("fullscreen-overlay");
-
-      const fullImg = document.createElement("img");
-      fullImg.src = img.src;
-      overlay.appendChild(fullImg);
-      document.body.appendChild(overlay);
-
-      overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) {
-        overlay.remove(); // Removes the overlay and image when clicking outside the image
-        }
-      });
+      openFullscreen(img.src); // Chama a função para abrir a imagem em fullscreen
     });
   });
 }
