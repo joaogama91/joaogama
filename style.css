@@ -80,24 +80,6 @@ body {
       color: #e2f1e7;
     }
 
-.fullscreen-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8); /* Dark background */
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.fullscreen-overlay img {
-  max-width: 90%;
-  max-height: 90%;
-}
-
     #submenuProjetos {
         max-height: 0;
         overflow: hidden;
@@ -317,3 +299,23 @@ body {
          padding: 8px 12px;  /* Optional: Adjust padding */
        }
     }
+
+  .fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: zoom-out;
+  }
+
+  .fullscreen-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
