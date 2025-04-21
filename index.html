@@ -472,31 +472,32 @@
   
   // Atualiza o contador na página
   document.getElementById('visit-count').textContent = visitCount;
+</script>
 
+  <script>
   // Function to change the language
-function changeLanguage(language) {
-  // Store the user's language choice in localStorage
-  localStorage.setItem('preferredLanguage', language);
-  // Reload the page to apply the language change
-  window.location.reload();
-}
+  function changeLanguage(language) {
+    const elements = document.querySelectorAll('[data-pt], [data-en]');
 
-// Function to set the initial language based on browser settings or saved preference
-function setInitialLanguage() {
-  const userLanguage = localStorage.getItem('preferredLanguage') || navigator.language || 'pt'; // Default to 'pt' if nothing is saved or detected
-  if (userLanguage.startsWith('pt')) {
-    // Set Portuguese
-    document.documentElement.lang = 'pt';
-    // You can add code here to switch text/content to Portuguese if needed
-  } else {
-    // Set English
-    document.documentElement.lang = 'en';
-    // You can add code here to switch text/content to English if needed
+    elements.forEach(element => {
+      const ptText = element.getAttribute('data-pt');
+      const enText = element.getAttribute('data-en');
+
+      if (language === 'pt') {
+        element.textContent = ptText;
+      } else if (language === 'en') {
+        element.textContent = enText;
+      }
+    });
   }
-}
 
-// Call the function to set the language when the page loads
-setInitialLanguage();
+  // Initial language setting based on browser settings (if preferred language is Portuguese)
+  const userLang = navigator.language || navigator.userLanguage;
+  if (userLang.includes('pt')) {
+    changeLanguage('pt');
+  } else {
+    changeLanguage('en');
+  }
 </script>
 </body>
 </html>
