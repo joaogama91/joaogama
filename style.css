@@ -1,4 +1,9 @@
- body {
+/* Apply box-sizing globally */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #F5E7DE;
@@ -157,6 +162,7 @@
     text-align: center;
     max-width: 90%;
     line-height: 1.4;
+    font-family: inherit;  /* Add this line */
   }
 
     .carousel-track {
@@ -298,4 +304,9 @@
       header img {
         height: 80px;
       }
+
+       .carousel-caption {
+         font-size: 0.8rem;  /* Add this line */
+         padding: 8px 12px;  /* Optional: Adjust padding */
+       }
     }
