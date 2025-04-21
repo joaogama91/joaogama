@@ -336,6 +336,7 @@
 
   <footer>
     <p>© 2025 João Gama | Contacto: 19joaogama91@gmail.com</p>
+    <p id="view-counter">🔢 Este site já teve <span id="visit-count">...</span> visitas.</p>
   </footer>
 
   <script>
@@ -424,6 +425,19 @@
   function closeFullscreen() {
     document.getElementById("fullscreenModal").style.display = "none";
   }
+</script>
+
+<script>
+  // Substituir com um namespace exclusivo para ti (podes trocar "joaogama-site" por outro qualquer)
+  const countUrl = "https://api.countapi.xyz/update/joaogama-site/inicio/?amount=3287";
+  const getUrl = "https://api.countapi.xyz/get/joaogama-site/inicio/";
+
+  fetch(countUrl)
+    .then(() => fetch(getUrl))
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visit-count").textContent = data.value.toLocaleString("pt-PT");
+    });
 </script>
   
 </body>
