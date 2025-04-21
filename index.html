@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Art Portfolio - João Gama</title>
+  <title>Portfólio de Arte - João Gama</title>
   <style>
     body {
       margin: 0;
@@ -26,18 +26,6 @@
     header img {
       height: 120px;
       max-width: 90%;
-    }
-
-    .language-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      cursor: pointer;
-    }
-
-    .language-toggle img {
-      height: 30px;
-      width: 30px;
     }
 
     .container {
@@ -98,11 +86,11 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
-    }
+      }
       
-    #submenuProjetos.open {
-        max-height: 500px; /* value large enough */
-    }
+      #submenuProjetos.open {
+        max-height: 500px; /* valor suficientemente grande */
+      }
 
     main {
       flex: 1;
@@ -124,55 +112,151 @@
       display: block;
     }
 
-    .carousel {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      overflow: hidden;
-    }
+           /* Estilos para o carrossel */
+        .carousel-container {
+            position: relative;
+            width: 80%; /* Ajuste a largura conforme necessário */
+            margin: auto;
+            overflow: hidden;
+        }
 
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            transition: transform 1s ease-in-out;
+            object-fit: cover; /* Mantém a proporção original das imagens */
+        }
 
-    .carousel-slide {
-      min-width: 100%;
-      transition: transform 0.5s;
-      opacity: 0.5;
-      transform: scale(0.9);
-    }
+        .carousel-slide.active {
+            display: block;
+        }
 
-    .carousel-slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
+        /* Ajuste para controlar o tamanho das imagens */
+        .carousel-slide img {
+            width: 100%;
+            height: auto; /* Mantém a proporção original da imagem */
+        }
 
-    .carousel-slide img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
+        /* Texto nas imagens */
+        .carousel-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+            padding: 10px;
+        }
 
-    .carousel-nav {
-      text-align: center;
-      margin-top: 10px;
-    }
+        .carousel-dots {
+            text-align: center;
+            margin-top: 20px; /* Aumenta o espaço entre as imagens e os pontos */
+        }
 
-    .carousel-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin: 0 5px;
-      background-color: #999;
-      border-radius: 50%;
-      cursor: pointer;
-    }
+        .carousel-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
 
-    .carousel-dot.active {
-      background-color: #333;
-    }
+        .carousel-dot.active {
+            background-color: #717171;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Novos estilos para o slide lateral */
+        .carousel-buttons-left,
+        .carousel-buttons-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .carousel-buttons-left {
+            left: 10px;
+        }
+
+        .carousel-buttons-right {
+            right: 10px;
+        }
+
+        /* Estilos para o modal de full screen */
+        .full-screen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Fundo preto semitransparente */
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .full-screen-modal img {
+            width: 80%;
+            height: auto;
+        }
+
+        .full-screen-modal .carousel-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+
+        .full-screen-modal.active {
+            display: flex;
+        }
+
+        .full-screen-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 101;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+        }
+
+        .full-screen-button.left {
+            left: 10px;
+        }
+
+        .full-screen-button.right {
+            right: 10px;
+        }
 
     .gallery {
       column-count: 4;
@@ -238,14 +322,7 @@
       color: #333;
     }
 
-    .language-toggle img {
-      width: 20px;  /* Adjust the size of the flags */
-      height: 15px; /* Adjust the size of the flags */
-      margin: 0 5px; /* Add spacing between flags */
-      display: inline-block; /* Align them horizontally */
-    }
-
-    /* Responsiveness */
+    /* Responsividade */
     @media (max-width: 768px) {
       nav {
         position: relative;
@@ -283,251 +360,213 @@
 </head>
 <body>
   <header>
-    <img src="assinatura_transparente.png" alt="Signature">
-    <div class="language-toggle">
-      <img id="flag-pt" src="pt-flag.png" alt="Portuguese" onclick="changeLanguage('pt')">
-      <img id="flag-en" src="en-flag.png" alt="English" onclick="changeLanguage('en')">
-    </div>
+    <img src="assinatura_transparente.png" alt="Assinatura">
   </header>
 
   <div class="container">
     <nav>
       <ul>
-        <li class="inicio"><a onclick="mostrarSecao('home')" data-pt="Início" data-en="Home">Home</a></li>
-        <li class="titulo" onclick="toggleSubmenu()" data-pt="Projetos ▾" data-en="Projects ▾">Projects ▾</li>
+        <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
+        <li class="titulo" onclick="toggleSubmenu()">Projetos ▾</li>
         <ul id="submenuProjetos">  
-          <li><a onclick="mostrarSecao('projeto1')" data-pt="Paisagem Interior" data-en="Interior Landscape">Interior Landscape</a></li>
-          <li><a onclick="mostrarSecao('projeto2')" data-pt="Formas de Silêncio" data-en="Forms of Silence">Forms of Silence</a></li>
-          <li><a onclick="mostrarSecao('projeto3')" data-pt="Luz e Matéria" data-en="Light and Matter">Light and Matter</a></li>
+          <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
+          <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
+          <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
         </ul>
       </ul>
     </nav>
 
     <main>
       <section id="home" class="active">
-        <h2 data-pt="Bem-vindo ao meu portfólio" data-en="Welcome to My Portfolio">Welcome to My Portfolio</h2>
-        <p data-pt="Descubra meus projetos de pintura, onde a natureza e a matéria se encontram em camadas de cor e silêncio." data-en="Discover my painting projects, where nature and matter meet in layers of color and silence.">Discover my painting projects, where nature and matter meet in layers of color and silence.</p>
+          <h2>Bem-vindo ao meu portfólio</h2>
+          <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
+          
+          <!-- Carrossel -->
         <div class="carousel">
-          <div class="carousel-track">
-            <div class="carousel-slide active">
-              <img src="inicio/001_Inicio.jpg" alt="Home Image 1" onclick="openFullscreen(this)">
-              <div class="caption" data-pt="Barrocal de Castelo Branco, 20x30cm, acrílica sobre tela, 2017." data-en="Barrocal de Castelo Branco, 20x30cm, acrylic on canvas, 2017.">Barrocal de Castelo Branco, 20x30cm, acrylic on canvas, 2017.</div>
+            <div class="carousel-track">
+                <!-- Slide 1 -->
+                <div class="carousel-slide active" onclick="openFullScreen(0)">
+                    <img src="inicio/001_Inicio.jpg" alt="Barrocal de Castelo Branco" class="carousel-image">
+                    <div class="carousel-caption">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-slide" onclick="openFullScreen(1)">
+                    <img src="inicio/002_Inicio.jpg" alt="Contemplação" class="carousel-image">
+                    <div class="carousel-caption">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
+                </div>
+        
+                <!-- Slide 3 -->
+                <div class="carousel-slide" onclick="openFullScreen(2)">
+                    <img src="inicio/003_Inicio.jpg" alt="Uma nova madrugada" class="carousel-image">
+                    <div class="carousel-caption">Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024).</div>
+                </div>
             </div>
-            <div class="carousel-slide">
-              <img src="inicio/002_Inicio.jpg" alt="Home Image 2" onclick="openFullscreen(this)">
-              <div class="caption" data-pt="Contemplação, 50x60cm, acrílica sobre tela, 2025." data-en="Contemplation, 50x60cm, acrylic on canvas, 2025.">Contemplation, 50x60cm, acrylic on canvas, 2025.</div>
+        
+            <!-- Bolinhas de navegação -->
+            <div class="carousel-nav">
+                <span class="carousel-dot active" onclick="changeSlide(0)"></span>
+                <span class="carousel-dot" onclick="changeSlide(1)"></span>
+                <span class="carousel-dot" onclick="changeSlide(2)"></span>
             </div>
-            <div class="carousel-slide">
-              <img src="inicio/003_Inicio.jpg" alt="Home Image 3" onclick="openFullscreen(this)">
-              <div class="caption" data-pt="A Nova Aurora – Mural comemorativo dos 50 anos do 25 de Abril (2024)" data-en="A New Dawn – Commemorative mural for the 50th anniversary of the 25th of April (2024)">A New Dawn – Commemorative mural for the 50th anniversary of the 25th of April (2024)</div>
-            </div>
-          </div>
-          <div class="carousel-nav">
-            <span class="carousel-dot active"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-          </div>
+        </div>
+        
+        <!-- Modal de Full Screen -->
+        <div class="full-screen-modal" id="fullScreenModal">
+            <img id="fullScreenImage" src="" alt="Imagem em Full Screen">
+            <div class="carousel-caption" id="fullScreenText"></div>
+            <button class="full-screen-button left" onclick="navigateFullScreen(-1)">&#10094;</button>
+            <button class="full-screen-button right" onclick="navigateFullScreen(1)">&#10095;</button>
         </div>
       </section>
 
       <section id="projeto1">
-        <h2 data-pt="Paisagem Interior" data-en="Interior Landscape">Interior Landscape</h2>
+        <h2>Paisagem Interior</h2>
         <div class="gallery" id="galeriaInterior"></div>
       </section>
 
       <section id="projeto2">
-        <h2 data-pt="Formas de Silêncio" data-en="Forms of Silence">Forms of Silence</h2>
+        <h2>Formas do Silêncio</h2>
         <img src="imagens/formas_silencio1.jpg">
         <img src="imagens/formas_silencio2.jpg">
       </section>
 
       <section id="projeto3">
-        <h2 data-pt="Luz e Matéria" data-en="Light and Matter">Light and Matter</h2>
+        <h2>Luz e Matéria</h2>
         <img src="imagens/luz_materia1.jpg">
         <img src="imagens/luz_materia2.jpg">
       </section>
     </main>
   </div>
 
-  <footer>
-    <p data-pt="© 2025 João Gama - Todos os direitos reservados" data-en="© 2025 João Gama - All rights reserved">© 2025 João Gama - All rights reserved</p>
-    <p data-pt="🔢 Este site já teve <span id='visit-count-pt'>...</span> visitas suas." 
-       data-en="🔢 This site has had <span id='visit-count-en'>...</span> visits from you.">
-       🔢 This site has had <span id="visit-count-en">...</span> visits from you.
-    </p>
-  </footer>
-
-  <div id="lightbox" onclick="closeLightbox()">
-    <img src="" alt="Expanded Image">
+  <div id="lightbox">
     <div id="lightboxNav">
-      <span onclick="prevImage()">❮</span>
-      <span onclick="nextImage()">❯</span>
+      <span onclick="navegar(-1)">&#10094;</span>
+      <span onclick="navegar(1)">&#10095;</span>
     </div>
+    <img id="lightboxImg" src="" alt="Imagem ampliada">
   </div>
 
-<script>
-    // Função para abrir a imagem em tela cheia
-  function openFullscreen(imgElement) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    
-    lightbox.style.display = 'flex';
-    lightboxImg.src = imgElement.src;  // Define o src da imagem para a imagem clicada
+  <footer>
+    <p>© 2025 João Gama | Contacto: joao@email.com</p>
+  </footer>
 
-    // Ajustar a largura e altura para a imagem ocupar 90% da tela
-    lightboxImg.style.maxWidth = '90vw';
-    lightboxImg.style.maxHeight = '90vh';
-  }
-
-  // Função para fechar a tela cheia
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-  }
-
-  // Navegação das imagens no lightbox
-  let currentImageIndex = 0;
-  const imagens = [
-    "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
-    "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
-    "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
-    "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
-    "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
-    "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
-    "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
-  ];
-
-  // Função para ir para a imagem anterior
-  function prevImage() {
-    if (currentImageIndex > 0) {
-      currentImageIndex--;
-    } else {
-      currentImageIndex = imagens.length - 1; // Vai para a última imagem se estiver na primeira
+  <script>
+    const secoes = document.querySelectorAll('main section');
+    function mostrarSecao(id) {
+      secoes.forEach(secao => secao.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
-    document.querySelector('#lightbox img').src = imagens[currentImageIndex];
-  }
 
-  // Função para ir para a imagem seguinte
-  function nextImage() {
-    if (currentImageIndex < imagens.length - 1) {
-      currentImageIndex++;
-    } else {
-      currentImageIndex = 0; // Volta para a primeira imagem se estiver na última
-    }
-    document.querySelector('#lightbox img').src = imagens[currentImageIndex];
-  }
+    const imagensInterior = [
+      "1.JPG","10.JPG","11.JPG","12.JPG","13.JPG","2.JPG","20190613165946750.jpg",
+      "20190613165956779.jpg","20190613170006203.jpg","20200207_174233.jpg",
+      "20200714131704846_0001.jpg","20200714131704846_0002.jpg","20200714131704846_0003.jpg",
+      "20200714131704846_0006.jpg","3.JPG","4.JPG","5.JPG","6.JPG","7.JPG","8.JPG","9.JPG",
+      "i1.JPG","i12.JPG","i15.JPG","i17.JPG","i18.JPG","i19.JPG","i19a.JPG","i19b.JPG",
+      "i2.JPG","i3.JPG","i4.JPG","i6.JPG","IMG_20190129_162858.jpg","IMG_20190129_163103-2.jpg",
+      "IMG_20190129_163147 (1).jpg","_MG_1556_1.JPG"
+    ];
 
-  // Criar as imagens na galeria
-  const galeria = document.getElementById("galeriaInterior");
-  imagens.forEach((nome, i) => {
-    const img = document.createElement('img');
-    img.src = `imagens/${nome}`;
-    img.alt = `Imagem ${i + 1}`;
-    img.onclick = () => openFullscreen(img);
-    galeria.appendChild(img);
-  });
-
-  let indexAtual = 0;
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-
-  function abrirLightbox(index) {
-    indexAtual = index;
-    lightboxImg.src = `interioridades/${imagensInterior[index]}`;
-    lightbox.style.display = "flex";
-  }
-
-  function navegar(direcao) {
-    indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
-    lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
-  }
-
-  document.addEventListener("keydown", e => {
-    if (!lightbox.style.display.includes("flex")) return;
-    if (e.key === "Escape") lightbox.style.display = "none";
-    else if (e.key === "ArrowLeft") navegar(-1);
-    else if (e.key === "ArrowRight") navegar(1);
-  });
-
-  lightbox.addEventListener("click", e => {
-    if (e.target === lightbox) lightbox.style.display = "none";
-  });
-
-  const dots = document.querySelectorAll(".carousel-dot");
-  const slides = document.querySelectorAll(".carousel-slide");
-  dots.forEach((dot, i) => {
-    dot.addEventListener("click", () => {
-      document.querySelector(".carousel-slide.active").classList.remove("active");
-      document.querySelector(".carousel-dot.active").classList.remove("active");
-      slides[i].classList.add("active");
-      dot.classList.add("active");
-      document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
+    const galeria = document.getElementById("galeriaInterior");
+    imagensInterior.forEach((nome, i) => {
+      const img = document.createElement("img");
+      img.src = `interioridades/${nome}`;
+      img.alt = `Paisagem Interior ${i + 1}`;
+      img.onclick = () => abrirLightbox(i);
+      galeria.appendChild(img);
     });
-  });
 
-  function toggleSubmenu() {
+    let indexAtual = 0;
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    function abrirLightbox(index) {
+      indexAtual = index;
+      lightboxImg.src = `interioridades/${imagensInterior[index]}`;
+      lightbox.style.display = "flex";
+    }
+
+    function navegar(direcao) {
+      indexAtual = (indexAtual + direcao + imagensInterior.length) % imagensInterior.length;
+      lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
+    }
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.style.display.includes("flex")) return;
+      if (e.key === "Escape") lightbox.style.display = "none";
+      else if (e.key === "ArrowLeft") navegar(-1);
+      else if (e.key === "ArrowRight") navegar(1);
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) lightbox.style.display = "none";
+    });
+
+    const dots = document.querySelectorAll(".carousel-dot");
+    const slides = document.querySelectorAll(".carousel-slide");
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        document.querySelector(".carousel-slide.active").classList.remove("active");
+        document.querySelector(".carousel-dot.active").classList.remove("active");
+        slides[i].classList.add("active");
+        dot.classList.add("active");
+        document.querySelector(".carousel-track").style.transform = `translateX(-${i * 100}%)`;
+      });
+    });
+
+    function toggleSubmenu() {
     const submenu = document.getElementById("submenuProjetos");
     submenu.classList.toggle("open");
   }
 
-  // Fullscreen Modal (Lightbox) Script
-  const fullscreenModal = document.getElementById("fullscreenModal");
-  const fullscreenImage = document.getElementById("fullscreenImage");
+        let currentIndex = 0;
 
-  function openFullscreen(img) {
-    const modal = document.getElementById("fullscreenModal");
-    const fullImg = document.getElementById("fullscreenImage");
-    fullImg.src = img.src;
-    modal.style.display = "flex";
-  }
+        // Função para mudar o slide
+        function changeSlide(index) {
+            const slides = document.querySelectorAll(".carousel-slide");
+            const dots = document.querySelectorAll(".carousel-dot");
 
-  function closeFullscreen() {
-    document.getElementById("fullscreenModal").style.display = "none";
-  }
+            // Remover a classe 'active' do slide e do ponto ativo atual
+            slides[currentIndex].classList.remove("active");
+            dots[currentIndex].classList.remove("active");
 
-  // API for counting visits
-  const countUrl = "https://api.countapi.xyz/update/joaogama-site/inicio/?amount=1";
-  const getUrl = "https://api.countapi.xyz/get/joaogama-site/inicio/";
+            // Atualizar o índice
+            currentIndex = (index + slides.length) % slides.length;
 
-  fetch(countUrl)
-    .then(() => fetch(getUrl))
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("visit-count-pt").textContent = data.value.toLocaleString("pt-PT");
-      document.getElementById("visit-count-en").textContent = data.value.toLocaleString("en-US");
-    });
+            // Adicionar a classe 'active' no novo slide e ponto
+            slides[currentIndex].classList.add("active");
+            dots[currentIndex].classList.add("active");
+        }
 
-  let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
-  visitCount++;
-  localStorage.setItem('visitCount', visitCount);
-  document.getElementById('visit-count-pt').textContent = visitCount.toLocaleString("pt-PT");
-  document.getElementById('visit-count-en').textContent = visitCount.toLocaleString("en-US");
+        // Navegação automática (opcional)
+        setInterval(() => {
+            changeSlide(currentIndex + 1);
+        }, 5000);
 
-  // Language Change Functionality
-  function changeLanguage(language) {
-    const elements = document.querySelectorAll('[data-pt], [data-en]');
-    elements.forEach(element => {
-      const ptText = element.getAttribute('data-pt');
-      const enText = element.getAttribute('data-en');
-      if (language === 'pt') {
-        element.textContent = ptText;
-      } else if (language === 'en') {
-        element.textContent = enText;
-      }
-    });
-  }
+        // Abrir imagem em full screen
+        function openFullScreen(index) {
+            const slides = document.querySelectorAll(".carousel-slide");
+            const modal = document.getElementById("fullScreenModal");
+            const fullScreenImage = document.getElementById("fullScreenImage");
+            const fullScreenText = document.getElementById("fullScreenText");
 
-  const userLang = navigator.language || navigator.userLanguage;
-  if (userLang.includes('pt')) {
-    changeLanguage('pt');
-  } else {
-    changeLanguage('en');
-  }
-</script>
+            // Definir a imagem e o texto
+            fullScreenImage.src = slides[index].querySelector("img").src;
+            fullScreenText.textContent = slides[index].querySelector(".carousel-text").textContent;
 
-<!-- Modal de Fullscreen -->
-<div id="fullscreenModal" onclick="closeFullscreen()" style="display:none; position:fixed; z-index:1000; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
-  <img id="fullscreenImage" src="" style="max-width:90%; max-height:90%; object-fit:contain; box-shadow:0 0 20px #000;">
-</div>
+            // Mostrar o modal
+            modal.classList.add("active");
+            currentIndex = index; // Atualiza o índice para navegação no full screen
+        }
 
+        // Navegar no full screen
+        function navigateFullScreen(direction) {
+            const newIndex = (currentIndex + direction + 3) % 3; // Considerando que temos 3 imagens
+            openFullScreen(newIndex);
+        }
+
+    
+  </script>
 </body>
 </html>
