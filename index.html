@@ -351,8 +351,9 @@
 
   <footer>
     <p data-pt="© 2025 João Gama - Todos os direitos reservados" data-en="© 2025 João Gama - All rights reserved">© 2025 João Gama - All rights reserved</p>
-    <p data-pt="🔢 Este site já teve <span id='visit-count-pt'>...</span> visitas suas." data-en="🔢 This site has had <span id='visit-count-en'>...</span> visits from you.">
-      🔢 This site has had <span id="visit-count-en">...</span> visits from you.
+    <p data-pt="🔢 Este site já teve <span id='visit-count-pt'>...</span> visitas suas." 
+       data-en="🔢 This site has had <span id='visit-count-en'>...</span> visits from you.">
+       🔢 This site has had <span id="visit-count-en">...</span> visits from you.
     </p>
   </footer>
 
@@ -453,52 +454,32 @@
 </script>
 
 <script>
-  // Substituir com um namespace exclusivo para ti (podes trocar "joaogama-site" por outro qualquer)
+  // Define URLs for API requests (replace 'joaogama-site' with a unique namespace if needed)
   const countUrl = "https://api.countapi.xyz/update/joaogama-site/inicio/?amount=1";
   const getUrl = "https://api.countapi.xyz/get/joaogama-site/inicio/";
 
-  // Atualiza o contador de visitas com a API externa
+  // Fetch the count from the API and update both PT and EN
   fetch(countUrl)
     .then(() => fetch(getUrl))
     .then(res => res.json())
     .then(data => {
-      // Atualiza os atributos 'data-pt' e 'data-en' para o texto correspondente
-      const visitCount = data.value;
-
-      const ptText = `🔢 Este site já teve ${visitCount.toLocaleString("pt-PT")} visitas suas.`;
-      const enText = `🔢 This site has had ${visitCount.toLocaleString("en-US")} visits from you.`;
-
-      // Atualiza o conteúdo para português
-      document.querySelector('[data-pt]').setAttribute('data-pt', ptText);
-      // Atualiza o conteúdo para inglês
-      document.querySelector('[data-en]').setAttribute('data-en', enText);
-      
-      // Atualiza os spans de visita com o número de visitas
-      document.getElementById("visit-count-pt").textContent = visitCount.toLocaleString("pt-PT");
-      document.getElementById("visit-count-en").textContent = visitCount.toLocaleString("en-US");
-
-      // Armazena o novo número de visitas no armazenamento local
-      localStorage.setItem('visitCount', visitCount);
-    })
-    .catch(() => {
-      // Se a API falhar, usa o localStorage como fallback
-      let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
-      visitCount++;
-      localStorage.setItem('visitCount', visitCount);
-
-      // Atualiza os atributos 'data-pt' e 'data-en' para o texto correspondente
-      const ptText = `🔢 Este site já teve ${visitCount.toLocaleString("pt-PT")} visitas suas.`;
-      const enText = `🔢 This site has had ${visitCount.toLocaleString("en-US")} visits from you.`;
-
-      // Atualiza o conteúdo para português
-      document.querySelector('[data-pt]').setAttribute('data-pt', ptText);
-      // Atualiza o conteúdo para inglês
-      document.querySelector('[data-en]').setAttribute('data-en', enText);
-      
-      // Atualiza os spans de visita com o número de visitas
-      document.getElementById("visit-count-pt").textContent = visitCount.toLocaleString("pt-PT");
-      document.getElementById("visit-count-en").textContent = visitCount.toLocaleString("en-US");
+      // Format count for both languages
+      document.getElementById("visit-count-pt").textContent = data.value.toLocaleString("pt-PT");
+      document.getElementById("visit-count-en").textContent = data.value.toLocaleString("en-US");
     });
+
+  // Use LocalStorage as a fallback if API fails
+  let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
+  
+  // Increment the visit count
+  visitCount++;
+  
+  // Store updated count in LocalStorage
+  localStorage.setItem('visitCount', visitCount);
+  
+  // Update the count in both languages (PT and EN)
+  document.getElementById('visit-count-pt').textContent = visitCount.toLocaleString("pt-PT");
+  document.getElementById('visit-count-en').textContent = visitCount.toLocaleString("en-US");
 </script>
 
   <script>
