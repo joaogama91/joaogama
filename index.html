@@ -473,34 +473,30 @@
   // Atualiza o contador na página
   document.getElementById('visit-count').textContent = visitCount;
 
-  function changeLanguage(language) {
-  // Select all elements with data-pt or data-en attributes
-  const elements = document.querySelectorAll('[data-pt], [data-en]');
-  
-  // Loop through each element and change its text content based on the selected language
-  elements.forEach(element => {
-    if (language === 'pt') {
-      element.textContent = element.getAttribute('data-pt') || element.textContent;
-    } else if (language === 'en') {
-      element.textContent = element.getAttribute('data-en') || element.textContent;
-    }
-  });
+  // Function to change the language
+function changeLanguage(language) {
+  // Store the user's language choice in localStorage
+  localStorage.setItem('preferredLanguage', language);
+  // Reload the page to apply the language change
+  window.location.reload();
+}
 
-  // Show the correct flag as selected
-  const flagPT = document.getElementById('flag-pt');
-  const flagEN = document.getElementById('flag-en');
-  
-  if (language === 'pt') {
-    flagPT.style.opacity = 1;
-    flagEN.style.opacity = 0.5;
-  } else if (language === 'en') {
-    flagEN.style.opacity = 1;
-    flagPT.style.opacity = 0.5;
+// Function to set the initial language based on browser settings or saved preference
+function setInitialLanguage() {
+  const userLanguage = localStorage.getItem('preferredLanguage') || navigator.language || 'pt'; // Default to 'pt' if nothing is saved or detected
+  if (userLanguage.startsWith('pt')) {
+    // Set Portuguese
+    document.documentElement.lang = 'pt';
+    // You can add code here to switch text/content to Portuguese if needed
+  } else {
+    // Set English
+    document.documentElement.lang = 'en';
+    // You can add code here to switch text/content to English if needed
   }
 }
 
-// Initially set the language to Portuguese (or any default language you prefer)
-changeLanguage('pt');
+// Call the function to set the language when the page loads
+setInitialLanguage();
 </script>
 </body>
 </html>
