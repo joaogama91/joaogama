@@ -334,6 +334,7 @@
     function mostrarSecao(id) {
       secoes.forEach(secao => secao.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     const imagensInterior = [
