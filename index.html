@@ -112,14 +112,26 @@
       display: block;
     }
 
-           /* Estilos para o carrossel */
+        /* Estilos para o carrossel */
         .carousel-container {
-            position: relative;
-            width: 80%; /* Ajuste a largura conforme necessário */
-            margin: auto;
-            overflow: hidden;
+          position: relative;
+          width: 60%;
+          max-width: 700px;
+          margin: auto;
+          overflow: hidden;
         }
 
+    .carousel-caption {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        font-size: 18px;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 6px 10px;
+        border-radius: 5px;
+        max-width: 90%;
+      }
         .carousel-slide {
             display: none;
             width: 100%;
@@ -177,11 +189,14 @@
         }
 
         .carousel-button {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.5);
+          color: white;
+          padding: 10px 14px;
+          border: none;
+          cursor: pointer;
+          font-size: 18px;
+          position: relative;
+          z-index: 10;
         }
 
         .carousel-button:hover {
@@ -347,15 +362,24 @@
       }
     }
 
-    @media (max-width: 480px) {
-      .gallery {
-        column-count: 1;
+    @media (max-width: 768px) {
+        .carousel-container {
+          width: 95%;
+        }
+      
+        .carousel-button {
+          padding: 8px 12px;
+          font-size: 16px;
+        }
+      
+        .carousel-buttons-left {
+          left: 5px;
+        }
+      
+        .carousel-buttons-right {
+          right: 5px;
+        }
       }
-
-      header img {
-        height: 80px;
-      }
-    }
   </style>
 </head>
 <body>
