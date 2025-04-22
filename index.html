@@ -9,43 +9,49 @@
 <body>
   <header>
     <img src="assinatura_transparente.png" alt="Assinatura">
+    <div class="language-switcher">
+      <a href="#" id="pt-lang"><img src="pt-flag.png" alt="Português" /></a>
+      <a href="#" id="en-lang"><img src="en-flag.png" alt="English" /></a>
+    </div>
   </header>
 
   <div class="container">
     <nav>
       <ul>
-        <li class="inicio"><a onclick="mostrarSecao('home')">Início</a></li>
-        <li class="titulo" onclick="toggleSubmenu()">Projetos ▴</li>
+        <li class="inicio"><a onclick="mostrarSecao('home')" class="lang" data-pt="Início" data-en="Home">Início</a></li>
+        <li class="titulo"><a onclick="toggleSubmenu()" class="lang" data-pt="Projetos ▴" data-en="Projects ▴">Projetos ▴</a></li>
         <ul id="submenuProjetos">  
-          <li><a onclick="mostrarSecao('projeto1')">Paisagem Interior</a></li>
-          <li><a onclick="mostrarSecao('projeto2')">Formas do Silêncio</a></li>
-          <li><a onclick="mostrarSecao('projeto3')">Luz e Matéria</a></li>
+          <li><a onclick="mostrarSecao('projeto1')" class="lang" data-pt="Paisagem Interior" data-en="Interior Landscape">Paisagem Interior</a></li>
+          <li><a onclick="mostrarSecao('projeto2')" class="lang" data-pt="Formas do Silêncio" data-en="Forms of Silence">Formas do Silêncio</a></li>
+          <li><a onclick="mostrarSecao('projeto3')" class="lang" data-pt="Luz e Matéria" data-en="Light and Matter">Luz e Matéria</a></li>
         </ul>
       </ul>
     </nav>
 
     <main>
       <section id="home" class="active">
-        <h2>Bem-vindo ao meu portfólio</h2>
-        <p>Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.</p>
+        <h2 class="lang" data-pt="Bem-vindo ao meu portfólio" data-en="Welcome to my portfolio">Bem-vindo ao meu portfólio</h2>
+        <p class="lang" data-pt="Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio." data-en="Discover my painting projects, where nature and matter meet in layers of color and silence.">
+          Descobre os meus projetos de pintura, onde natureza e matéria se encontram em camadas de cor e silêncio.
+        </p>
         <div class="carousel">
           <div class="carousel-track">
             <div class="carousel-slide active">
               <div class="carousel-image-wrapper">
                 <img src="inicio/001_Inicio.jpg" alt="Imagem Início 1">
-                <div class="carousel-caption">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
+                <div class="carousel-caption lang" data-pt="Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017." data-en="Barrocal de Castelo Branco, 20x30cm, acrylic on canvas, 2017.">Barrocal de Castelo Branco, 20x30cm, acrílico sobre tela, 2017.</div>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="carousel-image-wrapper">
                 <img src="inicio/002_Inicio.jpg" alt="Imagem Início 2">
-                <div class="carousel-caption">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
+                <div class="carousel-caption lang" data-pt="Contemplação, 50x60cm, acrílico sobre tela, 2025." data-en="Contemplation, 50x60cm, acrylic on canvas, 2025.">Contemplação, 50x60cm, acrílico sobre tela, 2025.</div>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="carousel-image-wrapper">
                 <img src="inicio/003_Inicio.jpg" alt="Imagem Início 3">
-                <div class="carousel-caption">Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024)</div>
+                <div class="carousel-caption lang" data-pt="Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024)" data-en="A new dawn – Commemorative mural for the 50th anniversary of April 25th (2024)">Uma nova madrugada – Mural comemorativo para os 50 anos do 25 de Abril (2024)</div>
               </div>
             </div>
           </div>
@@ -58,37 +64,68 @@
       </section>
 
       <section id="projeto1">
-        <h2>Paisagem Interior</h2>
+        <h2 class="lang" data-pt="Paisagem Interior" data-en="Interior Landscape">Paisagem Interior</h2>
         <div class="gallery" id="galeriaInterior"></div>
       </section>
 
       <section id="projeto2">
-        <h2>Formas do Silêncio</h2>
+        <h2 class="lang" data-pt="Formas do Silêncio" data-en="Forms of Silence">Formas do Silêncio</h2>
         <img src="imagens/formas_silencio1.jpg">
         <img src="imagens/formas_silencio2.jpg">
       </section>
 
       <section id="projeto3">
-        <h2>Luz e Matéria</h2>
+        <h2 class="lang" data-pt="Luz e Matéria" data-en="Light and Matter">Luz e Matéria</h2>
         <img src="imagens/luz_materia1.jpg">
         <img src="imagens/luz_materia2.jpg">
       </section>
     </main>
   </div>
 
-<div id="lightbox">
-  <div id="lightboxNav">
-    <span onclick="navegar(-1)">&#10094;</span>
-    <span onclick="navegar(1)">&#10095;</span>
+  <div id="lightbox">
+    <div id="lightboxNav">
+      <span onclick="navegar(-1)">&#10094;</span>
+      <span onclick="navegar(1)">&#10095;</span>
+    </div>
+    <img id="lightboxImg" src="" alt="Imagem ampliada">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
   </div>
-  <img id="lightboxImg" src="" alt="Imagem ampliada">
-  <div id="lightboxCaption" class="lightbox-caption"></div>
-</div>
 
   <footer>
-    <p>© 2025 João Gama | Contacto: 19joaogama91@gmail.com</p>
+    <p class="lang" data-pt="© 2025 João Gama | Contacto: 19joaogama91@gmail.com" data-en="© 2025 João Gama | Contact: 19joaogama91@gmail.com">© 2025 João Gama | Contacto: 19joaogama91@gmail.com</p>
   </footer>
   
   <script src="script.js"></script>
+	<script>
+	  document.getElementById('pt-lang').addEventListener('click', function() {
+		localStorage.setItem('language', 'pt');
+		window.location.reload();
+	  });
+
+	  document.getElementById('en-lang').addEventListener('click', function() {
+		localStorage.setItem('language', 'en');
+		window.location.reload();
+	  });
+
+	  window.onload = function() {
+		var language = localStorage.getItem('language');
+		localStorage.setItem('language', 'pt');
+		if (!language) {
+		  language = 'pt'; // Default to Portuguese if no preference is stored
+		  localStorage.setItem('language', 'pt');
+		}
+		
+		document.documentElement.lang = language; // Set the HTML lang attribute
+		switchLanguage(language); // Switch the language of text
+	  };
+
+	  function switchLanguage(lang) {
+		const elements = document.querySelectorAll('.lang');
+		elements.forEach(element => {
+		  const text = element.getAttribute(`data-${lang}`);
+		  element.textContent = text;
+		});
+	  }
+	</script>
 </body>
 </html>
