@@ -15,7 +15,7 @@
       const submenu = document.getElementById("submenuProjetos");
       submenu.classList.toggle("open");
       
-      const titulo = document.querySelector("nav ul li.titulo");
+      const titulo = document.querySelector("nav ul a li.titulo");
       if (submenu.classList.contains("open")) {
         titulo.innerHTML = "Projetos ▾";
       } else {
