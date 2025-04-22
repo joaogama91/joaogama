@@ -25,6 +25,23 @@ body {
       height: auto;
       max-height: 120px;
     }
+	
+	.language-switcher {
+	  position: fixed;
+	  top: 10px;
+	  right: 10px;
+	  z-index: 9999;
+	}
+
+	.language-switcher a {
+	  margin-left: 10px;
+	}
+
+	.language-switcher img {
+	  width: 30px; /* Tamanho das bandeiras */
+	  height: auto;
+	  cursor: pointer;
+	}
 
     .container {
       display: flex;
