@@ -109,7 +109,13 @@ function enableCarouselZoom() {
         overlay.classList.add("fullscreen-overlay");
 
         const fullImg = document.createElement("img");
+        fullImg.classList.add("fullscreen-image");
+
+        const caption = document.createElement("div");
+        caption.classList.add("fullscreen-caption");
+
         overlay.appendChild(fullImg);
+        overlay.appendChild(caption);
 
         overlay.addEventListener("click", (e) => {
           if (e.target === overlay) {
@@ -120,8 +126,15 @@ function enableCarouselZoom() {
         document.body.appendChild(overlay);
       }
 
-      const fullImg = overlay.querySelector("img");
+      const fullImg = overlay.querySelector("img.fullscreen-image");
+      const caption = overlay.querySelector(".fullscreen-caption");
+
       fullImg.src = img.src;
+
+      // Pegar legenda correspondente
+      const captionText = img.closest(".carousel-image-wrapper").querySelector(".carousel-caption")?.innerText || "";
+      caption.textContent = captionText;
+
       overlay.style.display = "flex";
     });
   });
