@@ -233,6 +233,61 @@ body {
 	  text-align: center;
 	  max-width: 80%;
 	}
+	
+	.toggle-button {
+	  background: transparent;
+	  border: none;
+	  font-size: 20px;
+	  color: #444;
+	  cursor: pointer;
+	  padding: 4px 8px;
+	  border-radius: 50%;
+	  transition: background-color 0.3s ease;
+	  position: relative;
+	  line-height: 1;
+	}
+	
+	.three-dots:hover {
+	  background-color: #f0f0f0;
+	}
+
+	.toggle-button:hover::after {
+	  content: attr(title);
+	  position: absolute;
+	  top: 110%;
+	  left: 50%;
+	  transform: translateX(-50%);
+	  background: #333;
+	  color: #fff;
+	  padding: 6px 10px;
+	  font-size: 12px;
+	  border-radius: 4px;
+	  white-space: nowrap;
+	  opacity: 0;
+	  pointer-events: none;
+	  transition: opacity 0.2s ease;
+	  z-index: 100;
+	}
+	
+	.toggle-button:hover::after {
+	  opacity: 1;
+	}
+
+	.dropdown {
+	  max-height: 0;
+	  overflow: hidden;
+	  transition: max-height 0.5s ease, opacity 0.5s ease;
+	  opacity: 0;
+	}
+
+	.dropdown.show {
+	  max-height: 500px; /* Adjust based on content */
+	  opacity: 1;
+	}
+
+	.hidden {
+	  display: none; /* we override display:none to use transitions */
+	}
 
     .gallery {
       column-count: 4;
@@ -368,4 +423,4 @@ body {
     max-width: 90vw;
     max-height: 90vh;
     object-fit: contain;
-  }
+  } */
