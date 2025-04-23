@@ -137,11 +137,13 @@ body {
 
  .carousel-image-wrapper {
    position: relative;
+   width: 100%;
  }
  
  .carousel-image-wrapper img {
-   width: 100%;
-   display: block;
+  width: 100%;
+  height: auto;
+  display: block;
  }
 
  .carousel-caption {
@@ -158,8 +160,7 @@ body {
     text-align: center;
     max-width: 90%;
     line-height: 1.4;
-    font-family: inherit;  /* Add this line */
-	/* display: none;*/
+    font-family: inherit;
   }
 
     .carousel-track {
@@ -187,7 +188,7 @@ body {
 
     .carousel-nav {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     .carousel-dot {
@@ -423,4 +424,4 @@ body {
     max-width: 90vw;
     max-height: 90vh;
     object-fit: contain;
-  } */
+  } 
