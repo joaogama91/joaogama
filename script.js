@@ -1,3 +1,56 @@
+ // =============================
+// TRANSLATION PT TO EN
+// =============================	 
+  document.getElementById('pt-lang').addEventListener('click', () => {
+  setLanguage('pt');
+});
+
+document.getElementById('en-lang').addEventListener('click', () => {
+  setLanguage('en');
+});
+
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  window.location.reload();
+}
+
+function applyLanguage(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang').forEach(element => {
+    const text = element.getAttribute(`data-${lang}`);
+    if (!element.classList.contains('toggle-button')) {
+      element.textContent = text;
+    } else {
+      element.setAttribute('title', text);
+      element.setAttribute('aria-label', text);
+    }
+  });
+}
+
+window.onload = () => {
+  const language = localStorage.getItem('language') || 'pt';
+  applyLanguage(language);
+};
+	  
+// =============================
+// Da Interioridade Button MORE TEXT
+// =============================	  
+// Get references to the button and the div
+const toggleButton = document.getElementById('toggleMore');
+const contentDiv = document.getElementById('moreText');
+
+// Add an event listener to the button to toggle visibility
+toggleButton.addEventListener('click', () => {
+	// Toggle visibility of the contentDiv
+	if (contentDiv.style.display === 'block') {
+		contentDiv.style.display = 'none'; // Show the div
+		toggleButton.textContent = '⋮'; // Change button text
+	} else {
+		contentDiv.style.display = 'block'; // Hide the div
+		toggleButton.textContent = '...'; // Change button text
+	}
+});
+  
   // =============================
   // 1. Navegação entre seções
   // =============================
