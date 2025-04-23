@@ -21,9 +21,10 @@
         <li class="inicio"><a onclick="mostrarSecao('home')" class="lang" data-pt="Início" data-en="Home">Início</a></li>
         <li class="titulo"><a onclick="toggleSubmenu()" class="lang" data-pt="Projetos ▴" data-en="Projects ▴">Projetos ▴</a></li>
         <ul id="submenuProjetos">  
-          <li><a onclick="mostrarSecao('projeto1')" class="lang" data-pt="Paisagem Interior" data-en="Interior Landscape">Paisagem Interior</a></li>
+          <li><a onclick="mostrarSecao('projeto1')" class="lang" data-pt="Da Interioridade" data-en="From Within">Da Interioridade</a></li>
           <li><a onclick="mostrarSecao('projeto2')" class="lang" data-pt="Formas do Silêncio" data-en="Forms of Silence">Formas do Silêncio</a></li>
           <li><a onclick="mostrarSecao('projeto3')" class="lang" data-pt="Luz e Matéria" data-en="Light and Matter">Luz e Matéria</a></li>
+		  <li><a onclick="mostrarSecao('projeto4')" class="lang" data-pt="Brotar da terra" data-en="Rooted Bloom">Brotar da terra</a></li>
         </ul>
       </ul>
     </nav>
@@ -63,10 +64,31 @@
         </div>
       </section>
 
-      <section id="projeto1">
-        <h2 class="lang" data-pt="Paisagem Interior" data-en="Interior Landscape">Paisagem Interior</h2>
-        <div class="gallery" id="galeriaInterior"></div>
-      </section>
+	<section id="projeto1">
+	  <h2 class="lang" data-pt="Da Interioridade" data-en="From Within">Da Interioridade</h2>
+
+	  <p class="lang" data-pt="No silêncio dos lugares naturais, da contemplação e do sentido com que os recordo, emerge a geografia do invisível."
+		 data-en="In the silence of natural places, in the contemplation and the meaning I recall them with, the geography of the invisible emerges.">
+		No silêncio dos lugares naturais, da contemplação e do sentido com que os recordo, emerge a geografia do invisível.
+	  </p>
+	  	<button id="toggleMore" class="toggle-button"  data-pt="Ler mais" data-en="Read more" title="Ler mais" aria-label="Ler mais">
+			⋮
+		</button>
+	  <div id="moreText" class="hidden">
+		<p class="lang" data-pt="Na série de obras aqui reunidas sob o título &quot;Da interioridade&quot; proponho uma travessia entre a paisagem exterior e o território íntimo do meu imaginário, onde o gesto pictórico torna-se mapa de uma escuta profunda. Partindo da minha experiência sensível do mundo natural — dos seus ciclos, ritmos e silêncios —, estas obras não procuram representar, mas antes revelar: são manifestações de um espaço simbólico que habita tanto o mundo quanto o sujeito que o contempla.
+		A pintura aqui não é apenas imagem, mas processo de escavação interior. Os sonhos e os os impulsos emergem em composições que evocam uma “dupla interioridade” — um espelho entre o interior do território geográfico (Beira Interior) e o meu mundo interior. Nesta simbiose entre o íntimo e o natural, evoco a dimensão espiritual e poética da pintura, por vezes esquecida no frenesim contemporâneo. Ao habitar os lugares rurais da Beira Baixa, encontro não apenas a matéria para a minha pintura, mas também a metáfora perfeita para uma busca essencial: aquela que atravessa o visível em direção ao invisível, rumo ao sublime."
+		 data-en="In this series of works titled 'From Within', I propose a passage between the external landscape and the intimate territory of my imagination, where the pictorial gesture becomes a map for deep listening. Rooted in my sensitive experience of the natural world — its cycles, rhythms, and silences — these works do not aim to represent, but to reveal: they are manifestations of a symbolic space that inhabits both the world and the one who contemplates it.
+		Painting here is not just image, but a process of inner excavation. Dreams and impulses emerge in compositions that evoke a 'double interiority' — a mirror between the interior of the geographical territory (Beira Interior) and my inner world. In this symbiosis between the intimate and the natural, I evoke the spiritual and poetic dimension of painting, often forgotten in the contemporary frenzy. By inhabiting the rural places of Beira Baixa, I find not only the material for my painting, but the perfect metaphor for an essential search: the one that crosses the visible towards the invisible, in the direction of the sublime.">
+		  [full translated text will appear here based on language]
+		</p>
+	  </div>
+
+	
+	
+  
+
+  <div class="gallery" id="galeriaInterior"></div>
+</section>
 
       <section id="projeto2">
         <h2 class="lang" data-pt="Formas do Silêncio" data-en="Forms of Silence">Formas do Silêncio</h2>
@@ -78,6 +100,12 @@
         <h2 class="lang" data-pt="Luz e Matéria" data-en="Light and Matter">Luz e Matéria</h2>
         <img src="imagens/luz_materia1.jpg">
         <img src="imagens/luz_materia2.jpg">
+      </section>
+	  
+	  <section id="projeto4">
+        <h2 class="lang" data-pt="Brotar da terra" data-en="Rooted Bloom">Brotar da terra</h2>
+        <img src="imagens/brotar_terra1.jpg">
+        <img src="imagens/brotar_terra2.jpg">
       </section>
     </main>
   </div>
@@ -96,36 +124,6 @@
   </footer>
   
   <script src="script.js"></script>
-	<script>
-	  document.getElementById('pt-lang').addEventListener('click', function() {
-		localStorage.setItem('language', 'pt');
-		window.location.reload();
-	  });
 
-	  document.getElementById('en-lang').addEventListener('click', function() {
-		localStorage.setItem('language', 'en');
-		window.location.reload();
-	  });
-
-	  window.onload = function() {
-		var language = localStorage.getItem('language');
-		localStorage.setItem('language', 'pt');
-		if (!language) {
-		  language = 'pt'; // Default to Portuguese if no preference is stored
-		  localStorage.setItem('language', 'pt');
-		}
-		
-		document.documentElement.lang = language; // Set the HTML lang attribute
-		switchLanguage(language); // Switch the language of text
-	  };
-
-	  function switchLanguage(lang) {
-		const elements = document.querySelectorAll('.lang');
-		elements.forEach(element => {
-		  const text = element.getAttribute(`data-${lang}`);
-		  element.textContent = text;
-		});
-	  }
-	</script>
 </body>
 </html>
