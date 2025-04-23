@@ -374,20 +374,6 @@ body {
 
     /* Responsividade */
     @media (max-width: 768px) {
-      .language-switcher {
-        font-size: 12px;
-        padding: 2px 6px;
-      }
-    
-      .lang-btn {
-        padding: 3px 4px;
-        font-size: 12px;
-      }
-    
-      .lang-separator {
-        margin: 0 2px;
-        font-size: 12px;
-      }
      
       .carousel {
         max-width: 90%;  /* Adjust carousel width to fit smaller screens */
@@ -426,18 +412,16 @@ body {
     @media (max-width: 480px) {
       
       .language-switcher {
-        font-size: 12px;
-        padding: 2px 6px;
+        font-size: 13px;
+        padding: 3px 6px;
       }
     
       .lang-btn {
-        padding: 3px 4px;
-        font-size: 12px;
+        padding: 2px 4px;
       }
     
       .lang-separator {
-        margin: 0 2px;
-        font-size: 12px;
+        margin: 0 3px;
       }
 
       .gallery {
