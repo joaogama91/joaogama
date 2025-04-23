@@ -26,22 +26,35 @@ body {
       max-height: 120px;
     }
 	
-	.language-switcher {
-	  position: fixed;
-	  top: 10px;
-	  right: 10px;
-	  z-index: 9999;
-	}
-
-	.language-switcher a {
-	  margin-left: 10px;
-	}
-
-	.language-switcher img {
-	  width: 30px; /* Tamanho das bandeiras */
-	  height: auto;
-	  cursor: pointer;
-	}
+    .language-switcher {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+    }
+    
+    .lang-btn {
+      color: #333;
+      text-decoration: none;
+      padding: 5px 8px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .lang-btn:hover {
+      background-color: #eee;
+    }
+    
+    .lang-separator {
+      margin: 0 5px;
+      color: #aaa;
+      font-size: 16px;
+    }
 
     .container {
       display: flex;
