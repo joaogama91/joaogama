@@ -1,7 +1,7 @@
  // =============================
 // TRANSLATION PT TO EN
 // =============================	 
-  document.getElementById('pt-lang').addEventListener('click', () => {
+document.getElementById('pt-lang').addEventListener('click', () => {
   setLanguage('pt');
 });
 
@@ -134,16 +134,31 @@ toggleButton.addEventListener('click', () => {
   const track = document.querySelector(".carousel-track");
   const slides = Array.from(document.querySelectorAll(".carousel-slide"));
   const dots = document.querySelectorAll(".carousel-dot");
-
+  
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  
+  function goToSlide(index) {
+    slides.forEach(s => s.classList.remove("active"));
+    dots.forEach(d => d.classList.remove("active"));
+    slides[index].classList.add("active");
+    dots[index].classList.add("active");
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+  
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
-      slides.forEach(s => s.classList.remove("active"));
-      dots.forEach(d => d.classList.remove("active"));
-      slides[index].classList.add("active");
-      dot.classList.add("active");
-      track.style.transform = `translateX(-${index * 100}%)`;
+      currentIndex = index;
+      goToSlide(currentIndex);
     });
   });
+  
+  // Auto slide
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    goToSlide(currentIndex);
+  }, 5000); // every 5 seconds
+  
 
 // =============================
 // 6. Zoom nas imagens do carrossel (página inicial)
