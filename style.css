@@ -3,39 +3,79 @@
   box-sizing: border-box;
 }
 
+/* Apply consistent rounded corners to main visual elements */
+img,
+button,
+input,
+textarea,
+select,
+/*header,*/
+nav,
+main,
+section,
+footer,
+.carousel,
+.carousel-slide,
+.carousel-image-wrapper,
+.carousel-caption,
+.language-switcher,
+#lightbox,
+#lightboxImg,
+#moreText,
+.container,
+.gallery img,
+.fullscreen-overlay img,
+.fullscreen-image,
+.fullscreen-caption 
+aside,
+.layout, .wrapper, .content, .content-wrapper, .content-header, .content-body, .content-footer,
+.sidebar,
+.topbar,
+.menu{
+  border-radius: 10px;
+}
+
 body {
       margin: 0;
+      padding: 0; /* 🧼 Ensure clean edge alignment */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #F5E7DE;
+      background-color: #ffffff; /* ⬅️ White background */
       color: #333;
     }
 
     header {
       position: fixed;
-      top: 0;
+      top: 0px;
       left: 0;
-      right: 0;
-      background-color: #F5E7DE;
-      padding: 30px 10px;
+      height: 130px;
+      width: 100%;
+      background-color: #f4e4d9;
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      text-align: center;
+      padding: 0.5rem 1rem; /* ⬅️ reduced vertical padding */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
+    
     header img {
+      max-height: 120px; /* ⬅️ reduced from 120px */
       height: auto;
-      max-height: 120px;
     }
+    
 	
     .language-switcher {
       position: fixed;
-      top: 10px;
+      top: 5px;
       right: 10px;
       z-index: 9999;
       display: flex;
       align-items: center;
       font-family: 'Helvetica Neue', sans-serif;
       font-size: 14px;
-      background: rgba(255, 255, 255, 0.85);
+      background-color: #f4e4d9;
       padding: 4px 8px;
       border-radius: 6px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -61,58 +101,100 @@ body {
       font-size: 13px;
     }
 
-    .container {
+    .page-layout {
       display: flex;
-      padding-top: 130px;
-      flex-wrap: nowrap;
+      align-items: flex-start;
+      margin-top: 120px;
     }
-
-    nav {
-      width: 220px;
-      background-color: #7fa488;
+    
+    /* Sidebar */
+    .container {
+      background-color: #fceee5;
+      border-radius: 12px;
       padding: 20px;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-      height: 100vh;
-      box-sizing: border-box;
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding-top: 180px;
-      overflow-y: auto;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
       margin: 0;
-    }
-
-    nav ul li {
-      margin: 10px 0;
-      cursor: pointer;
-    }
-
-    nav ul li.titulo {
-      font-size: 1.1em;
-      color: white;
-      font-weight: bold;
+      flex-shrink: 0;
+      /* height: calc(100vh - 160px - 60px); Header + footer offset */
+      height:100vh; 
+       padding-top: 10px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
+      color: #000000;  
     }
 
-    nav ul li.inicio a {
-      font-size: 1.2em;
-    }
+    /* Remove default bullets and spacing */
+.container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    nav ul li a {
-      text-decoration: none;
-      color: #ffffff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.container li {
+  margin-bottom: 10px;
+}
 
-    nav ul li a:hover {
-      color: #e2f1e7;
+/* Top-level links */
+.container a {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer; /* 👈 This adds the hand cursor */
+}
+
+.container a:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* soft hover effect */
+}
+
+/* Submenu styling */
+.container .submenu {
+  margin-top: 5px;
+  padding-left: 15px;
+  transition: max-height 0.3s ease;
+}
+
+.container .submenu li a {
+  font-size: 0.95em;
+  padding: 6px 15px;
+  border-radius: 6px;
+  color: #eaf3ec;
+  background-color: transparent;
+}
+
+.container .submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Make submenu part of a hover group */
+.menu-group {
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-group:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Reduce the spacing between title and submenu */
+.menu-group ul {
+  margin-top: 2px; /* reduced from 5px or more */
+  padding-left: 10px;
+}
+
+/* Submenu link hover (darker) */
+.menu-group ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* darker hover on submenu */
+}
+
+    
+    /* Main content */
+    main {
+      flex-grow: 1;
+      padding: 20px;
+      margin: 0;
     }
 
     #submenuProjetos {
@@ -125,12 +207,7 @@ body {
         max-height: 500px; /* valor suficientemente grande */
       }
 
-    main {
-      flex: 1;
-      padding: 30px;
-      margin-left: 220px;
-      box-sizing: border-box;
-    }
+
 
     section {
       display: none;
@@ -155,13 +232,14 @@ body {
 
  .carousel-image-wrapper {
    position: relative;
-   width: 100%;
+   /*width: 100%;*/
  }
  
  .carousel-image-wrapper img {
   width: 100%;
   height: auto;
   display: block;
+  cursor: zoom-in;
  }
 
  .carousel-caption {
@@ -169,16 +247,13 @@ body {
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.6);
     color: #fff;
     padding: 10px 15px;
     border-radius: 8px;
-    font-size: 0.95rem;
-    font-style: italic;
-    text-align: center;
     max-width: 90%;
-    line-height: 1.4;
-    font-family: inherit;
+    font-size: 0.95rem;
+    text-align: center;
   }
 
     .carousel-track {
@@ -191,6 +266,7 @@ body {
       transition: transform 0.5s;
       opacity: 0.5;
       transform: scale(0.9);
+      transition: transform 0.5s, opacity 0.5s;
     }
 
     .carousel-slide.active {
@@ -223,6 +299,53 @@ body {
       background-color: #333;
     }
 	
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 5px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.3s;
+    }
+    
+    .carousel-arrow:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .fullscreen-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      z-index: 10000;
+      padding: 0 15px;
+    }
+    
+    .fullscreen-left {
+      left: 20px;
+    }
+    
+    .fullscreen-right {
+      right: 20px;
+    }
+
+    .left-arrow {
+      left: 10px;
+    }
+    
+    .right-arrow {
+      right: 10px;
+    }
+
 	.fullscreen-overlay {
 	  position: fixed;
 	  top: 0;
@@ -230,29 +353,33 @@ body {
 	  width: 100%;
 	  height: 100%;
 	  background: rgba(0, 0, 0, 0.9);
-	  display: none;
+	  display: flex;
 	  justify-content: center;
 	  align-items: center;
 	  flex-direction: column;
-	  z-index: 1000;
-	  padding: 20px;
-	  box-sizing: border-box;
+	  z-index: 9999;
 	}
 
-	.fullscreen-overlay img.fullscreen-image {
+  .fullscreen-image {
+    max-height: 80%;
+    max-width: 90%;
+    object-fit: contain;
+  }
+
+	.fullscreen-overlay img{
 	  max-width: 90%;
 	  max-height: 80%;
 	  margin-bottom: 20px;
 	  border: 2px solid white;
 	}
 
-	.fullscreen-caption {
-	  color: white;
-	  font-size: 1.2rem;
-	  text-align: center;
-	  max-width: 80%;
-	}
-	
+.fullscreen-caption {
+  color: white;
+  margin-top: 15px;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 90%;
+}
 	.toggle-button {
 	  background: transparent;
 	  border: none;
@@ -365,7 +492,7 @@ body {
     }
 
     footer {
-      background-color: #F2BFA4;
+      background-color: #f4e4d9;
       text-align: center;
       padding: 15px;
       font-size: 0.9em;
