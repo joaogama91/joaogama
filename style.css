@@ -502,6 +502,10 @@ body {
     /* Responsividade */
     @media (max-width: 768px) {
      
+      .page-layout {
+        flex-direction: column; /* Stack vertically */
+      }
+
       .carousel {
         max-width: 90%;  /* Adjust carousel width to fit smaller screens */
       }
@@ -521,10 +525,12 @@ body {
         padding-top: 20px;
       }
 
-      .container {
-        flex-direction: column;
-        padding-top: 160px;
-      }
+    .container {
+      width: 100%;
+      margin: 0;
+      border-radius: 0; /* Optional: square edges on mobile */
+      height: auto;
+    }
 
       main {
         margin-left: 0;
