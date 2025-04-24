@@ -3,10 +3,12 @@
 // =============================	 
 document.getElementById('pt-lang').addEventListener('click', () => {
   setLanguage('pt');
+  initializeProjetosLabel()
 });
 
 document.getElementById('en-lang').addEventListener('click', () => {
   setLanguage('en');
+  initializeProjetosLabel()
 });
 
 function setLanguage(lang) {
@@ -25,6 +27,7 @@ function applyLanguage(lang) {
       element.setAttribute('aria-label', text);
     }
   });
+  initializeProjetosLabel()
 }
 
 window.onload = () => {
@@ -65,17 +68,46 @@ toggleButton.addEventListener('click', () => {
   // 2. Toggle Submenu de Projetos
   // =============================
   function toggleSubmenu() {
-      const submenu = document.getElementById("submenuProjetos");
-      submenu.classList.toggle("open");
-      
-      const titulo = document.querySelector("li.titulo > a");
-      if (submenu.classList.contains("open")) {
-        titulo.innerHTML = "Projetos ▾";
-      } else {
-        titulo.innerHTML = "Projetos ▴";
-        
-      }
-    }
+    const submenu = document.getElementById("submenuProjetos");
+    const projetosLink = document.getElementById("projetosLink");
+  
+    // Toggle submenu visibility
+    submenu.classList.toggle("open");
+  
+    // Determine current language
+    const isEnglish = document.documentElement.lang === "en";
+    const currentLabel = isEnglish ? projetosLink.dataset.en : projetosLink.dataset.pt;
+  
+    // Set the correct arrow (▴ for open, ▾ for closed)
+    const arrow = submenu.classList.contains("open") ? "▴" : "▾";
+  
+    // Update display text without breaking language support
+    projetosLink.textContent = `${currentLabel} ${arrow}`;
+  }
+  function toggleSubmenu() {
+    const submenu = document.getElementById("submenuProjetos");
+    const projetosLink = document.getElementById("projetosLink");
+  
+    submenu.classList.toggle("open");
+  
+    const isEnglish = document.documentElement.lang === "en";
+    const currentLabel = isEnglish ? projetosLink.dataset.en : projetosLink.dataset.pt;
+  
+    const arrow = submenu.classList.contains("open") ? "▴" : "▾";
+    projetosLink.textContent = `${currentLabel} ${arrow}`;
+  }
+  
+  // ✅ Add this function right below
+  function initializeProjetosLabel() {
+    const projetosLink = document.getElementById("projetosLink");
+    const submenu = document.getElementById("submenuProjetos");
+  
+    const isEnglish = document.documentElement.lang === "en";
+    const currentLabel = isEnglish ? projetosLink.dataset.en : projetosLink.dataset.pt;
+  
+    const arrow = submenu.classList.contains("open") ? "▴" : "▾";
+    projetosLink.textContent = `${currentLabel} ${arrow}`;
+  }
 
   // =============================
   // 3. Galeria dinâmica: Paisagem Interior
