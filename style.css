@@ -539,7 +539,7 @@ body {
         font-size: 0.85rem;  /* Smaller text for better readability */
         padding: 8px 12px;   /* Adjust padding */
         max-width: 80%;      /* Ensure text doesn't overflow on smaller screens */
-	display: none;
+		display: none;
       }
       
       nav {
