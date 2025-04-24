@@ -189,6 +189,31 @@ body {
   background-color: rgba(255, 255, 255, 0.25); /* darker hover on submenu */
 }
 
+.menu-group ul li {
+  margin: 0;
+  padding: 2px 0; /* Tight vertical spacing */
+}
+
+.menu-group ul li a {
+  padding: 6px 10px; /* Reduce top/bottom padding */
+  display: block;
+}
+
+#submenuProjetos {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#submenuProjetos li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#submenuProjetos li a {
+  padding: 4px 12px !important;
+  display: block;
+  font-size: 0.9em; /* or try 14px, 13px, etc. */
+}
     
     /* Main content */
     main {
@@ -530,7 +555,7 @@ body {
       margin: 0;
       border-radius: 0; /* Optional: square edges on mobile */
       height: auto !important;
-      margin-top: 10px;
+      margin-top: 25px;
     }
 
       main {
