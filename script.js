@@ -128,45 +128,67 @@ toggleButton.addEventListener('click', () => {
     }
   });
 
-  // =============================
-  // 5. Carrossel da página inicial
-  // =============================
-  const track = document.querySelector(".carousel-track");
-  const slides = Array.from(document.querySelectorAll(".carousel-slide"));
-  const dots = document.querySelectorAll(".carousel-dot");
-  
-  let currentIndex = 0;
-  const totalSlides = slides.length;
-  
-  function goToSlide(index) {
-    slides.forEach(s => s.classList.remove("active"));
-    dots.forEach(d => d.classList.remove("active"));
-    slides[index].classList.add("active");
-    dots[index].classList.add("active");
-    track.style.transform = `translateX(-${index * 100}%)`;
-  }
-  
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      currentIndex = index;
-      goToSlide(currentIndex);
-    });
+// =============================
+// 5. Carrossel da página inicial
+// =============================
+const track = document.querySelector(".carousel-track");
+const slides = Array.from(document.querySelectorAll(".carousel-slide"));
+const dots = document.querySelectorAll(".carousel-dot");
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
+
+let currentIndex = 0;
+const totalSlides = slides.length;
+
+function goToSlide(index) {
+  slides.forEach(s => s.classList.remove("active"));
+  dots.forEach(d => d.classList.remove("active"));
+
+  slides[index].classList.add("active");
+  dots[index].classList.add("active");
+
+  track.style.transform = `translateX(-${index * 100}%)`;
+}
+
+dots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    currentIndex = index;
+    goToSlide(currentIndex);
   });
-  
-  // Auto slide
-  setInterval(() => {
+});
+
+// ✅ Only add event listeners if arrows exist
+if (leftArrow && rightArrow) {
+  leftArrow.addEventListener("click", (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    goToSlide(currentIndex);
+  });
+
+  rightArrow.addEventListener("click", (e) => {
+    e.stopPropagation();
     currentIndex = (currentIndex + 1) % totalSlides;
     goToSlide(currentIndex);
-  }, 5000); // every 5 seconds
-  
+  });
+}
+
+// Auto slide
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  goToSlide(currentIndex);
+}, 5000);
+
+goToSlide(currentIndex); // Initialize
 
 // =============================
-// 6. Zoom nas imagens do carrossel (página inicial)
+// 6. Zoom nas imagens do carrossel
 // =============================
 function enableCarouselZoom() {
-  const zoomableImages = document.querySelectorAll("#home .carousel-slide img");
+  const zoomableImages = document.querySelectorAll(".carousel-slide img");
+  let allImages = Array.from(zoomableImages);
+  let currentZoomIndex = 0;
 
-  zoomableImages.forEach(img => {
+  zoomableImages.forEach((img, index) => {
     img.classList.add("zoomable");
 
     img.addEventListener("click", () => {
@@ -182,7 +204,104 @@ function enableCarouselZoom() {
         const caption = document.createElement("div");
         caption.classList.add("fullscreen-caption");
 
+        const left = document.createElement("div");
+        left.classList.add("fullscreen-arrow", "fullscreen-left");
+        left.innerHTML = "&#10094;";
+
+        const right = document.createElement("div");
+        right.classList.add("fullscreen-arrow", "fullscreen-right");
+        right.innerHTML = "&#10095;";
+
+        overlay.appendChild(left);
         overlay.appendChild(fullImg);
+        overlay.appendChild(right);
+        overlay.appendChild(caption);
+
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) {
+            overlay.remove();
+          }
+        });
+
+        left.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentZoomIndex = (currentZoomIndex - 1 + allImages.length) % allImages.length;
+          showFullscreen(currentZoomIndex);
+        });
+
+        right.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentZoomIndex = (currentZoomIndex + 1) % allImages.length;
+          showFullscreen(currentZoomIndex);
+        });
+
+        document.body.appendChild(overlay);
+      }
+
+      currentZoomIndex = index;
+      showFullscreen(currentZoomIndex);
+    });
+  });
+
+  function showFullscreen(index) {
+    const overlay = document.querySelector(".fullscreen-overlay");
+    const fullImg = overlay.querySelector(".fullscreen-image");
+    const caption = overlay.querySelector(".fullscreen-caption");
+
+    const img = allImages[index];
+    fullImg.src = img.src;
+    caption.textContent = img.closest(".carousel-image-wrapper").querySelector(".carousel-caption")?.innerText || "";
+
+    overlay.style.display = "flex";
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const overlay = document.querySelector(".fullscreen-overlay");
+      if (overlay) overlay.remove();
+    }
+  });
+}
+
+enableCarouselZoom();
+
+
+// =============================
+// 6. Zoom nas imagens do carrossel (página inicial)
+// =============================
+function enableCarouselZoom() {
+  const zoomableImages = document.querySelectorAll("#home .carousel-slide img");
+
+  let allImages = Array.from(zoomableImages); // store globally
+  let currentZoomIndex = 0;
+
+  zoomableImages.forEach((img, index) => {
+    img.classList.add("zoomable");
+
+    img.addEventListener("click", () => {
+      let overlay = document.querySelector(".fullscreen-overlay");
+
+      if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.classList.add("fullscreen-overlay");
+
+        const fullImg = document.createElement("img");
+        fullImg.classList.add("fullscreen-image");
+
+        const caption = document.createElement("div");
+        caption.classList.add("fullscreen-caption");
+
+        const leftArrow = document.createElement("div");
+        leftArrow.classList.add("fullscreen-arrow", "left-arrow");
+        leftArrow.innerHTML = "&#10094;"; // Left arrow symbol
+
+        const rightArrow = document.createElement("div");
+        rightArrow.classList.add("fullscreen-arrow", "right-arrow");
+        rightArrow.innerHTML = "&#10095;"; // Right arrow symbol
+
+        overlay.appendChild(leftArrow);
+        overlay.appendChild(fullImg);
+        overlay.appendChild(rightArrow);
         overlay.appendChild(caption);
 
         overlay.addEventListener("click", (e) => {
@@ -192,34 +311,37 @@ function enableCarouselZoom() {
         });
 
         document.body.appendChild(overlay);
+
+        // Navigation logic
+        leftArrow.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentZoomIndex = (currentZoomIndex - 1 + allImages.length) % allImages.length;
+          showFullscreenImage(currentZoomIndex);
+        });
+
+        rightArrow.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentZoomIndex = (currentZoomIndex + 1) % allImages.length;
+          showFullscreenImage(currentZoomIndex);
+        });
       }
 
-      const fullImg = overlay.querySelector("img.fullscreen-image");
-      const caption = overlay.querySelector(".fullscreen-caption");
-
-      fullImg.src = img.src;
-
-      // Pegar legenda correspondente
-      const captionText = img.closest(".carousel-image-wrapper").querySelector(".carousel-caption")?.innerText || "";
-      caption.textContent = captionText;
-
-      overlay.style.display = "flex";
+      currentZoomIndex = index;
+      showFullscreenImage(currentZoomIndex);
     });
   });
-}
 
-// Run on page load
-enableCarouselZoom();
+  function showFullscreenImage(index) {
+    const overlay = document.querySelector(".fullscreen-overlay");
+    const fullImg = overlay.querySelector(".fullscreen-image");
+    const caption = overlay.querySelector(".fullscreen-caption");
 
-// Patch mostrarSecao to re-run zoom logic if the home section is shown again
-const originalMostrarSecao = mostrarSecao;
-mostrarSecao = function (id) {
-  originalMostrarSecao(id);
-  if (id === "home") {
-    setTimeout(enableCarouselZoom, 100); // Rebind in case DOM is refreshed
+    const img = allImages[index];
+    fullImg.src = img.src;
+    caption.textContent = img.closest(".carousel-image-wrapper").querySelector(".carousel-caption")?.innerText || "";
+    overlay.style.display = "flex";
   }
-};
-
+}
 // =============================
 // 7. Fullscreen Image View (Novas Funções)
 // =============================
