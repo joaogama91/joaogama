@@ -539,7 +539,7 @@ body {
         font-size: 0.85rem;  /* Smaller text for better readability */
         padding: 8px 12px;   /* Adjust padding */
         max-width: 80%;      /* Ensure text doesn't overflow on smaller screens */
-		display: none;
+	display: none;
       }
       
       nav {
@@ -551,11 +551,11 @@ body {
       }
 
     .container {
-      width: 100%;
-      margin: 0;
-      border-radius: 0; /* Optional: square edges on mobile */
+      width: calc(100% - 40px); /* Adds breathing space left & right */
+      margin: 10px auto;         /* Centers the menu */
+      border-radius: 10px;       /* Restores rounded edges */
       height: auto !important;
-      margin-top: 25px;
+      margin-top: 30px;
     }
 
       main {
