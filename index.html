@@ -22,10 +22,10 @@
     <div class="container">
       <ul>
         <li class="inicio"><a onclick="mostrarSecao('home')" class="lang" data-pt="Início" data-en="Home">Início</a></li>
-
+        <!-- ▴▾-->
 
         <li class="titulo">
-          <a onclick="toggleSubmenu()" class="lang" data-pt="Projetos ▴" data-en="Projects ▴">Projetos ▴</a>
+          <a onclick="toggleSubmenu()" id="projetosLink" class="lang" data-pt="Projetos" data-en="Projects">Projetos ▾</a>
           <ul id="submenuProjetos">  
             <li><a onclick="mostrarSecao('projeto1')" class="lang" data-pt="Da Interioridade" data-en="From Within">Da Interioridade</a></li>
             <li><a onclick="mostrarSecao('projeto2')" class="lang" data-pt="Formas do Silêncio" data-en="Forms of Silence">Formas do Silêncio</a></li>
@@ -122,6 +122,12 @@
   </footer>
   
   <script src="script.js"></script>
-
+  <script>
+    // all your JS functions...
+  
+    document.addEventListener("DOMContentLoaded", () => {
+      initializeProjetosLabel();
+    });
+  </script>
 </body>
 </html>
