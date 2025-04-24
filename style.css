@@ -551,10 +551,11 @@ body {
       }
 
     .container {
+      width: 100%; /* Adds breathing space left & right */
       margin: 10px auto;         /* Centers the menu */
       border-radius: 10px;       /* Restores rounded edges */
       height: auto !important;
-      margin-top: 25px;
+      margin-top: 30px;
     }
 
       main {
