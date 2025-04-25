@@ -34,25 +34,6 @@ window.onload = () => {
   const language = localStorage.getItem('language') || 'pt';
   applyLanguage(language);
 };
-	  
-// =============================
-// Da Interioridade Button MORE TEXT
-// =============================	  
-// Get references to the button and the div
-const toggleButton = document.getElementById('toggleMore');
-const contentDiv = document.getElementById('moreText');
-
-// Add an event listener to the button to toggle visibility
-toggleButton.addEventListener('click', () => {
-	// Toggle visibility of the contentDiv
-	if (contentDiv.style.display === 'block') {
-		contentDiv.style.display = 'none'; // Show the div
-		toggleButton.textContent = '⋮'; // Change button text
-	} else {
-		contentDiv.style.display = 'block'; // Hide the div
-		toggleButton.textContent = '...'; // Change button text
-	}
-});
   
   // =============================
   // 1. Navegação entre seções
@@ -110,7 +91,7 @@ toggleButton.addEventListener('click', () => {
   }
 
   // =============================
-  // 3. Galeria dinâmica: Paisagem Interior
+  // 3.1. Galeria dinâmica: Paisagem Interior
   // =============================
   const imagensInterior = [
     "0001.jpg", "0002.jpg", "0003.jpg", "0004.jpg", "0005.jpg",
@@ -129,9 +110,49 @@ toggleButton.addEventListener('click', () => {
     img.onclick = () => abrirLightbox(i);
     galeria.appendChild(img);
   });
+  
+  // =============================
+  // 3.2. Galeria dinâmica: Brotar da Terra
+  // =============================
+  const brotardaterra = [
+    "0001.jpg", "0002.jpg", "0003.jpg", "0004.jpg", "0005.jpg",
+    "0006.jpg", "0007.jpg", "0008.jpg", "0009.jpg", "0010.jpg",
+    "0011.jpg", "0012.jpg", "0013.jpg", "0014.jpg", "0015.jpg",
+    "0016.jpg", "0017.jpg", "0018.jpg", "0019.jpg"
+  ];
+
+  const galeria2 = document.getElementById("brotardaterra");
+
+  brotardaterra.forEach((nome, i) => {
+    const img = document.createElement("img");
+    img.src = `brotardaterra/${nome}`;
+    img.alt = `Brotar da Terra ${i + 1}`;
+    img.onclick = () => abrirLightbox(i);
+    galeria2.appendChild(img);
+  });
+
+// =============================
+// Da Interioridade Button MORE TEXT
+// =============================	  
+// Get references to the button and the div
+const toggleButton = document.getElementById('toggleMore');
+const contentDiv = document.getElementById('moreText');
+
+// Add an event listener to the button to toggle visibility
+toggleButton.addEventListener('click', () => {
+	// Toggle visibility of the contentDiv
+	if (contentDiv.style.display === 'block') {
+		contentDiv.style.display = 'none'; // Show the div
+		toggleButton.textContent = '⋮'; // Change button text
+	} else {
+		contentDiv.style.display = 'block'; // Hide the div
+		toggleButton.textContent = '...'; // Change button text
+	}
+});
+  
 
   // =============================
-  // 4. Lightbox para galeria
+  // 4.1 Lightbox para galeria: Paisagem Interior
   // =============================
   let indexAtual = 0;
   const lightbox = document.getElementById("lightbox");
@@ -144,7 +165,7 @@ toggleButton.addEventListener('click', () => {
   }
 
   function atualizarLightbox() {
-    lightboxImg.src = `interioridades/${imagensInterior[indexAtual]}`;
+    lightboxImg.src = `brotardaterra/${imagensInterior[indexAtual]}`;
   }
 
   function navegar(direcao) {
@@ -159,6 +180,55 @@ toggleButton.addEventListener('click', () => {
       lightbox.style.display = "none";
     }
   });
+
+    // =============================
+  // 4.2 Lightbox para galeria: Brotar da Terra
+  // =============================
+  let indexAtual1 = 0;
+  const lightbox1 = document.getElementById("lightbox");
+  const lightboxImg1 = document.getElementById("lightboxImg");
+
+  function abrirLightbox(index) {
+    indexAtual = index;
+    lightbox.style.display = "flex";
+    atualizarLightbox();
+  }
+
+  function atualizarLightbox() {
+    lightboxImg.src = `brotardaterra/${brotardaterra[indexAtual]}`;
+  }
+
+  function navegar(direcao) {
+    indexAtual = (indexAtual + direcao + brotardaterra.length) % brotardaterra.length;
+    atualizarLightbox();
+  }
+
+  // Fechar lightbox ao clicar fora da imagem
+  lightbox.addEventListener("click", (e) => {
+    // Close lightbox if the click target is the background (not the image itself)
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+    }
+  });
+
+  // =============================
+// Brotar da Terra Button MORE TEXT
+// =============================	  
+// Get references to the button and the div
+const toggleButton1 = document.getElementById('toggleMore1');
+const contentDiv1 = document.getElementById('moreText1');
+
+// Add an event listener to the button to toggle visibility
+toggleButton1.addEventListener('click', () => {
+	// Toggle visibility of the contentDiv
+	if (contentDiv1.style.display === 'block') {
+		contentDiv1.style.display = 'none'; // Show the div
+		toggleButton1.textContent = '⋮'; // Change button text
+	} else {
+		contentDiv1.style.display = 'block'; // Hide the div
+		toggleButton1.textContent = '...'; // Change button text
+	}
+});
 
 // =============================
 // 5. Carrossel da página inicial
