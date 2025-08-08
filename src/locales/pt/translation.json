@@ -1,0 +1,29 @@
+{
+  "home": {
+    "eventoTitulo": "AGORA",
+    "datas": "12 - 27 Abril",
+    "descricao": "A participar no Rallye Aïcha des Gazelles 2024",
+    "extra": "A correr para angariar fundos para o Café Joyeux"
+  },
+  "menu": {
+    "Início": "Início",
+    "Projetos": "Projetos",
+    "VerTodosProjetos": "Ver todos os projetos",
+    "VerMenosProjetos": "Ver menos projetos",
+    "NenhumProjeto": "Nenhum projeto encontrado.",
+    "Galerias": "Galerias",
+    "NenhumaGaleria": "Nenhuma galeria encontrada",
+    "VerTodasGalerias": "Ver todas as galerias",
+    "VerMenosGalerias": "Ver menos galerias",
+    "Murais": "Murais",
+    "NenhumMural": "Nenhum mural encontrado",
+    "VerTodosMurais": "Ver todos os murais",
+    "VerMenosMurais": "Ver menos murais",
+    "Sobre": "Sobre",
+    "Contactos": "Contactos"
+  },
+  "sobre": {
+  "titulo": "Sobre João",
+  "texto": "João é um artista visual português que explora o simbolismo da terra, da memória e da ancestralidade."
+}
+}
