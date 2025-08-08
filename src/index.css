@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Rosarivo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+  --color-text: 62 31 6;           /* #3e1f06 */
+  --color-background: 255 253 248; /* #FFFDF8 */
+  --color-admin: 245 238 230;      /* #f5eee6 */
+  --font-serif: "Rosarivo";
+  --font-sans: "Inter";
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.pagina-centro {
+  @apply flex flex-col items-center justify-center text-center px-4 py-10 min-h-screen;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
