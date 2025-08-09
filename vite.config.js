@@ -2,6 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/joaogama/',   // <- nome do repositório no GitHub
+  base: '/',          // <-- MUITO IMPORTANTE (antes era '/joaogama/')
   plugins: [react()],
 })
