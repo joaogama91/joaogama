@@ -92,66 +92,92 @@ export default function Contacts() {
       </div>
 
       {contact.mostrar_formulario && (
-        <form
-          action={`https://formsubmit.co/${contact.email}`}
-          method="POST"
-          className="mt-10 space-y-4"
-        >
-          <input type="hidden" name="_captcha" value="false" />
-          <input
-            type="hidden"
-            name="_subject"
-            value="Nova mensagem do site João Gama"
-          />
-
-          <div>
-            <label className="block font-semibold mb-1">
-              {lang === "pt" ? "Nome" : "Name"}
-            </label>
-            <input
-              type="text"
-              name="name"
-              required
-              className="w-full border p-2 rounded"
-            />
-          </div>
-
-          <div>
-            <label className="block font-semibold mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="w-full border p-2 rounded"
-            />
-          </div>
-
-          <div>
-            <label className="block font-semibold mb-1">
-              {lang === "pt" ? "Mensagem" : "Message"}
-            </label>
-            <textarea
-              name="message"
-              rows="4"
-              required
-              className="w-full border p-2 rounded"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="px-6 py-2 rounded border transition duration-300 shadow-sm hover:shadow-md"
-            style={{
-              backgroundColor: "var(--color-admin)",
-              color: "var(--color-texto)",
-              borderColor: "var(--color-texto)",
-              fontFamily: "var(--font-sans)",
-            }}
-          >
-            {lang === "pt" ? "Enviar mensagem" : "Send message"}
-          </button>
-        </form>
-      )}
+    <form
+      action={`https://formsubmit.co/${contact.email}`}
+      method="POST"
+      className="mt-10 space-y-4"
+    >
+      {/* ---- FormSubmit config ---- */}
+      {/* desativa CAPTCHA do FormSubmit (já tens o teu) */}
+      <input type="hidden" name="_captcha" value="false" />
+      {/* assunto do email que o teu primo recebe */}
+      <input
+        type="hidden"
+        name="_subject"
+        value={lang === "pt" ? "Novo contacto no site João Gama" : "New contact from João Gama website"}
+      />
+      {/* resposta automática para o visitante (opcional mas recomendado) */}
+      <input
+        type="hidden"
+        name="_autoresponse"
+        value={
+          lang === "pt"
+            ? "Obrigado pela sua mensagem! Vamos responder em breve."
+            : "Thanks for your message! We'll get back to you soon."
+        }
+      />
+      {/* redireciona para uma página de obrigado (troca pelo teu URL) */}
+      <input
+        type="hidden"
+        name="_next"
+        value={lang === "pt"
+          ? "https://teu-dominio/pt/obrigado"
+          : "https://teu-dominio/en/thank-you"}
+      />
+      {/* layout simpático no email recebido */}
+      <input type="hidden" name="_template" value="table" />
+      {/* honeypot anti-spam (não mostrar) */}
+      <input type="text" name="_honey" style={{ display: "none" }} tabIndex="-1" autoComplete="off" />
+  
+      {/* ---- Campos visíveis ---- */}
+      <div>
+        <label className="block font-semibold mb-1">
+          {lang === "pt" ? "Nome" : "Name"}
+        </label>
+        <input
+          type="text"
+          name="name"
+          required
+          className="w-full border p-2 rounded"
+        />
+      </div>
+  
+      <div>
+        <label className="block font-semibold mb-1">Email</label>
+        <input
+          type="email"
+          name="email"        // <- necessário para o _autoresponse ir para o visitante
+          required
+          className="w-full border p-2 rounded"
+        />
+      </div>
+  
+      <div>
+        <label className="block font-semibold mb-1">
+          {lang === "pt" ? "Mensagem" : "Message"}
+        </label>
+        <textarea
+          name="message"
+          rows="4"
+          required
+          className="w-full border p-2 rounded"
+        ></textarea>
+      </div>
+  
+      <button
+        type="submit"
+        className="px-6 py-2 rounded border transition duration-300 shadow-sm hover:shadow-md"
+        style={{
+          backgroundColor: "var(--color-admin)",
+          color: "var(--color-texto)",
+          borderColor: "var(--color-texto)",
+          fontFamily: "var(--font-sans)",
+        }}
+      >
+        {lang === "pt" ? "Enviar mensagem" : "Send message"}
+      </button>
+    </form>
+  )}
 
       {contact.mostrar_mapa && contact.google_maps_link && (
         <div className="mt-10 space-y-2 text-left">
