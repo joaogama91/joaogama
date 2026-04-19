@@ -38,6 +38,36 @@ export default function ProjectPage() {
     fetchTheme();
   }, [slug]);
 
+  const getYoutubeEmbedUrl = (url) => {
+    if (!url) return "";
+
+    try {
+      const parsedUrl = new URL(url);
+
+      if (
+        parsedUrl.hostname.includes("youtube.com") &&
+        parsedUrl.searchParams.get("v")
+      ) {
+        return `https://www.youtube.com/embed/${parsedUrl.searchParams.get("v")}`;
+      }
+
+      if (parsedUrl.hostname.includes("youtu.be")) {
+        const videoId = parsedUrl.pathname.split("/").filter(Boolean)[0];
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+
+      if (parsedUrl.pathname.includes("/embed/")) {
+        return url;
+      }
+
+      return "";
+    } catch {
+      return "";
+    }
+  };
+
   if (!project) return <div className="text-center mt-10">Carregando...</div>;
 
   const galleryImages = Array.from({ length: 15 }, (_, i) => {
@@ -71,6 +101,19 @@ export default function ProjectPage() {
         <p className="mt-6 mb-6 text-sm leading-relaxed whitespace-pre-line">
           {project[`description_${lang}`]}
         </p>
+
+        {getYoutubeEmbedUrl(project.video_url) && (
+          <div className="mb-8 w-full overflow-hidden rounded-2xl shadow-lg aspect-video">
+            <iframe
+              className="w-full h-full"
+              src={getYoutubeEmbedUrl(project.video_url)}
+              title={project[`title_${lang}`] || "Vídeo"}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        )}
 
         <LightboxGallery
           mode="multiple"
