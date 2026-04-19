@@ -12,10 +12,28 @@ export default function Murais() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("murals_content")
-        .select("*")
-        .order("updated_at", { ascending: false });
+      const { data: themeData } = await supabase
+        .from("theme_config")
+        .select("murals_order")
+        .order("updated_at", { ascending: false })
+        .limit(1)
+        .single();
+
+      const muralsOrder = themeData?.murals_order || "updated_desc";
+
+      let query = supabase.from("murals_content").select("*");
+
+      if (muralsOrder === "updated_asc") {
+        query = query.order("updated_at", { ascending: true });
+      } else if (muralsOrder === "title_asc") {
+        query = query.order("title_pt", { ascending: true });
+      } else if (muralsOrder === "title_desc") {
+        query = query.order("title_pt", { ascending: false });
+      } else {
+        query = query.order("updated_at", { ascending: false });
+      }
+
+      const { data, error } = await query;
 
       if (!error) setMurais(data || []);
     };
