@@ -16,6 +16,7 @@ export default function AdminMuralsEditor() {
   const [imagemAviso, setImagemAviso] = useState("");
   const [loading, setLoading] = useState(false);
   const [murais, setMurais] = useState([]);
+  const [muralsOrder, setMuralsOrder] = useState("updated_desc");
   const fileInputRef = useRef(null);
 
   const getYoutubeEmbedUrl = (url) => {
@@ -56,8 +57,22 @@ export default function AdminMuralsEditor() {
     if (!error) setMurais(data);
   };
 
+  const fetchMuralsOrder = async () => {
+    const { data, error } = await supabase
+      .from("theme_config")
+      .select("id, murals_order")
+      .order("updated_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    if (!error && data) {
+      setMuralsOrder(data.murals_order || "updated_desc");
+    }
+  };
+
   useEffect(() => {
     fetchMurais();
+    fetchMuralsOrder();
   }, []);
 
   const generateSlug = (text) =>
@@ -131,6 +146,35 @@ export default function AdminMuralsEditor() {
       };
       reader.readAsDataURL(file);
     });
+
+  const handleSaveMuralsOrder = async () => {
+    const { data: existingConfig, error: fetchError } = await supabase
+      .from("theme_config")
+      .select("id")
+      .order("updated_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    if (fetchError || !existingConfig?.id) {
+      alert("Erro ao guardar a ordenação.");
+      return;
+    }
+
+    const { error } = await supabase
+      .from("theme_config")
+      .update({
+        murals_order: muralsOrder,
+        updated_at: new Date()
+      })
+      .eq("id", existingConfig.id);
+
+    if (error) {
+      alert("Erro ao guardar a ordenação.");
+      console.error(error);
+    } else {
+      alert("Ordenação dos murais guardada com sucesso!");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -331,6 +375,28 @@ export default function AdminMuralsEditor() {
           {loading ? "A guardar..." : form.id ? "Atualizar Mural" : "Guardar Mural"}
         </button>
       </form>
+
+      <div className="my-8 border rounded p-4 bg-white text-black">
+        <label className="block font-semibold mb-2">Ordenação dos Murais</label>
+        <select
+          value={muralsOrder}
+          onChange={(e) => setMuralsOrder(e.target.value)}
+          className="border p-2 rounded w-full mb-3"
+        >
+          <option value="updated_desc">Mais recentes primeiro</option>
+          <option value="updated_asc">Mais antigos primeiro</option>
+          <option value="title_asc">Título A-Z</option>
+          <option value="title_desc">Título Z-A</option>
+        </select>
+
+        <button
+          type="button"
+          onClick={handleSaveMuralsOrder}
+          className="bg-texto text-admin px-4 py-2 rounded hover:bg-gray-800"
+        >
+          Guardar ordenação
+        </button>
+      </div>
 
       <hr className="my-8" />
       <h2 className="text-lg font-bold mb-4">Murais Existentes</h2>
