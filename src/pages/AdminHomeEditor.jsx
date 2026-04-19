@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export default function AdminHomeEditor() {
   const [form, setForm] = useState({
@@ -14,11 +14,42 @@ export default function AdminHomeEditor() {
     extra_pt: "",
     extra_en: "",
     image_url: "",
+    video_url: "",
   });
   const [preview, setPreview] = useState(null);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [eventos, setEventos] = useState([]);
+
+  const getYoutubeEmbedUrl = (url) => {
+    if (!url) return "";
+
+    try {
+      const parsedUrl = new URL(url);
+
+      if (
+        parsedUrl.hostname.includes("youtube.com") &&
+        parsedUrl.searchParams.get("v")
+      ) {
+        return `https://www.youtube.com/embed/${parsedUrl.searchParams.get("v")}`;
+      }
+
+      if (parsedUrl.hostname.includes("youtu.be")) {
+        const videoId = parsedUrl.pathname.split("/").filter(Boolean)[0];
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+
+      if (parsedUrl.pathname.includes("/embed/")) {
+        return url;
+      }
+
+      return "";
+    } catch {
+      return "";
+    }
+  };
 
   const fetchEventos = async () => {
     const { data, error } = await supabase
@@ -96,6 +127,7 @@ export default function AdminHomeEditor() {
         extra_pt: "",
         extra_en: "",
         image_url: "",
+        video_url: "",
       });
       setPreview(null);
       setFile(null);
@@ -104,7 +136,10 @@ export default function AdminHomeEditor() {
   };
 
   const handleEdit = (evento) => {
-    setForm(evento);
+    setForm({
+      ...evento,
+      video_url: evento.video_url || "",
+    });
     setPreview(evento.image_url);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -122,46 +157,96 @@ export default function AdminHomeEditor() {
 
   return (
     <div className="max-w-3xl mx-auto font-sans text-texto bg-admin p-6 rounded shadow">
-      <h2 className="text-xl font-bold mb-4">{form.id ? "Editar Evento" : "Adicionar Evento à Página Inicial"}</h2>
+      <h2 className="text-xl font-bold mb-4">
+        {form.id ? "Editar Evento" : "Adicionar Evento à Página Inicial"}
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block font-semibold mb-1">Título (PT)</label>
-            <input type="text" name="titulo_pt" value={form.titulo_pt} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              type="text"
+              name="titulo_pt"
+              value={form.titulo_pt}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
           </div>
           <div>
             <label className="block font-semibold mb-1">Título (EN)</label>
-            <input type="text" name="titulo_en" value={form.titulo_en} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              type="text"
+              name="titulo_en"
+              value={form.titulo_en}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
           </div>
           <div>
             <label className="block font-semibold mb-1">Datas (PT)</label>
-            <input type="text" name="datas_pt" value={form.datas_pt} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              type="text"
+              name="datas_pt"
+              value={form.datas_pt}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
           </div>
           <div>
             <label className="block font-semibold mb-1">Datas (EN)</label>
-            <input type="text" name="datas_en" value={form.datas_en} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              type="text"
+              name="datas_en"
+              value={form.datas_en}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block font-semibold mb-1">Descrição (PT)</label>
-            <textarea name="descricao_pt" value={form.descricao_pt} onChange={handleChange} className="w-full border p-2 rounded" rows={4} />
+            <textarea
+              name="descricao_pt"
+              value={form.descricao_pt}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              rows={4}
+            />
           </div>
           <div>
             <label className="block font-semibold mb-1">Descrição (EN)</label>
-            <textarea name="descricao_en" value={form.descricao_en} onChange={handleChange} className="w-full border p-2 rounded" rows={4} />
+            <textarea
+              name="descricao_en"
+              value={form.descricao_en}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              rows={4}
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block font-semibold mb-1">Extra (PT)</label>
-            <input type="text" name="extra_pt" value={form.extra_pt} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              type="text"
+              name="extra_pt"
+              value={form.extra_pt}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
           </div>
           <div>
             <label className="block font-semibold mb-1">Extra (EN)</label>
-            <input type="text" name="extra_en" value={form.extra_en} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              type="text"
+              name="extra_en"
+              value={form.extra_en}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
           </div>
         </div>
 
@@ -169,14 +254,51 @@ export default function AdminHomeEditor() {
           <label className="block font-semibold mb-1">Imagem</label>
           <label className="inline-block bg-texto text-admin px-4 py-2 rounded cursor-pointer hover:bg-gray-800">
             Escolher ficheiro
-            <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
           </label>
           {preview && (
-            <img src={preview} alt="Pré-visualização" className="mt-2 w-full max-h-64 object-cover rounded" />
+            <img
+              src={preview}
+              alt="Pré-visualização"
+              className="mt-2 w-full max-h-64 object-cover rounded"
+            />
           )}
         </div>
 
-        <button type="submit" disabled={loading} className="bg-texto text-admin px-4 py-2 rounded hover:bg-gray-800">
+        <div>
+          <label className="block font-semibold mb-1">URL do vídeo (YouTube)</label>
+          <input
+            type="text"
+            name="video_url"
+            value={form.video_url}
+            onChange={handleChange}
+            className="w-full border p-2 rounded"
+            placeholder="https://www.youtube.com/watch?v=..."
+          />
+          {getYoutubeEmbedUrl(form.video_url) && (
+            <div className="mt-4 aspect-video w-full overflow-hidden rounded">
+              <iframe
+                className="w-full h-full"
+                src={getYoutubeEmbedUrl(form.video_url)}
+                title="Pré-visualização do vídeo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-texto text-admin px-4 py-2 rounded hover:bg-gray-800"
+        >
           {loading ? "A guardar..." : form.id ? "Atualizar" : "Guardar alterações"}
         </button>
       </form>
@@ -190,7 +312,23 @@ export default function AdminHomeEditor() {
             <p className="font-serif text-lg font-bold">{ev.titulo_pt}</p>
             <p className="text-sm italic mb-2">{ev.datas_pt}</p>
             {ev.image_url && (
-              <img src={ev.image_url} alt="Evento" className="mb-4 w-full max-h-64 object-cover rounded" />
+              <img
+                src={ev.image_url}
+                alt="Evento"
+                className="mb-4 w-full max-h-64 object-cover rounded"
+              />
+            )}
+            {getYoutubeEmbedUrl(ev.video_url) && (
+              <div className="mb-4 aspect-video w-full overflow-hidden rounded">
+                <iframe
+                  className="w-full h-full"
+                  src={getYoutubeEmbedUrl(ev.video_url)}
+                  title="Vídeo do evento"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
             )}
             <div className="flex gap-4 pt-2">
               <button
