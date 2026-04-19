@@ -95,7 +95,7 @@ export default function ProjectPage() {
           className="mt-4 text-lg md:text-xl mb-6 tracking-widest"
           style={{ fontFamily: "var(--font-serif)" }}
         >
-          {project[`title_${lang}`]}
+          TESTE PROJECT PAGE
         </h1>
 
         <p className="mt-6 mb-6 text-sm leading-relaxed whitespace-pre-line">
