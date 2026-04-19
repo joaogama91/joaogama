@@ -9,13 +9,44 @@ export default function AdminProjectsEditor() {
     title_en: "",
     description_pt: "",
     description_en: "",
-    slug: ""
+    slug: "",
+    video_url: ""
   });
   const [imagens, setImagens] = useState([]);
   const [imagemAviso, setImagemAviso] = useState("");
   const [loading, setLoading] = useState(false);
   const [projetos, setProjetos] = useState([]);
   const fileInputRef = useRef(null);
+
+  const getYoutubeEmbedUrl = (url) => {
+    if (!url) return "";
+
+    try {
+      const parsedUrl = new URL(url);
+
+      if (
+        parsedUrl.hostname.includes("youtube.com") &&
+        parsedUrl.searchParams.get("v")
+      ) {
+        return `https://www.youtube.com/embed/${parsedUrl.searchParams.get("v")}`;
+      }
+
+      if (parsedUrl.hostname.includes("youtu.be")) {
+        const videoId = parsedUrl.pathname.split("/").filter(Boolean)[0];
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+
+      if (parsedUrl.pathname.includes("/embed/")) {
+        return url;
+      }
+
+      return "";
+    } catch {
+      return "";
+    }
+  };
 
   const fetchProjetos = async () => {
     const { data, error } = await supabase
@@ -165,6 +196,7 @@ export default function AdminProjectsEditor() {
       description_pt: form.description_pt,
       description_en: form.description_en,
       slug,
+      video_url: form.video_url,
       updated_at: new Date(),
       published: true,
       ...imagesData
@@ -184,7 +216,8 @@ export default function AdminProjectsEditor() {
         title_en: "",
         description_pt: "",
         description_en: "",
-        slug: ""
+        slug: "",
+        video_url: ""
       });
       setImagens([]);
       setImagemAviso("");
@@ -199,7 +232,8 @@ export default function AdminProjectsEditor() {
       title_en: proj.title_en,
       description_pt: proj.description_pt,
       description_en: proj.description_en,
-      slug: proj.slug
+      slug: proj.slug,
+      video_url: proj.video_url || ""
     });
 
     const imgs = Array.from({ length: 15 }, (_, i) => {
@@ -271,6 +305,30 @@ export default function AdminProjectsEditor() {
           ))}
         </div>
 
+        <div>
+          <label className="block font-semibold mb-1">URL do vídeo (YouTube)</label>
+          <input
+            type="text"
+            name="video_url"
+            value={form.video_url}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            placeholder="https://www.youtube.com/watch?v=..."
+          />
+          {getYoutubeEmbedUrl(form.video_url) && (
+            <div className="mt-4 aspect-video w-full overflow-hidden rounded">
+              <iframe
+                className="w-full h-full"
+                src={getYoutubeEmbedUrl(form.video_url)}
+                title="Pré-visualização do vídeo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          )}
+        </div>
+
         <button type="submit" disabled={loading} className="bg-texto text-admin px-4 py-2 rounded hover:bg-gray-800">
           {loading ? "A guardar..." : form.id ? "Atualizar Projeto" : "Guardar Projeto"}
         </button>
@@ -284,6 +342,18 @@ export default function AdminProjectsEditor() {
             <p className="font-serif text-lg font-bold">{proj.title_pt}</p>
             {proj.image1_url && (
               <img src={proj.image1_url} alt="thumb" className="mb-4 w-full max-h-64 object-cover rounded" />
+            )}
+            {getYoutubeEmbedUrl(proj.video_url) && (
+              <div className="mb-4 aspect-video w-full overflow-hidden rounded">
+                <iframe
+                  className="w-full h-full"
+                  src={getYoutubeEmbedUrl(proj.video_url)}
+                  title="Vídeo do projeto"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
             )}
             <div className="flex gap-4">
               <button onClick={() => handleEdit(proj)} className="bg-texto text-admin px-4 py-2 rounded hover:bg-gray-800">Editar</button>
